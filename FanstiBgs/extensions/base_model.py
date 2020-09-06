@@ -23,14 +23,17 @@ class Column(_Column):
 
 class Base(db.Model):
     __abstract__ = True
-    isdelete = Column(Boolean, default=False, comment='是否删除')
-    createtime = Column(DateTime, default=datetime.now, comment='创建时间')
-    updatetime = Column(DateTime, default=datetime.now, onupdate=datetime.now, comment='更新时间')
+    #isdelete = Column(Boolean, default=False, comment='是否删除')
+    #createtime = Column(DateTime, default=datetime.now, comment='创建时间')
+    #updatetime = Column(DateTime, default=datetime.now, onupdate=datetime.now, comment='更新时间')
 
+    """
     @orm.reconstructor
     def __init__(self):
         self.fields = '__all__'
         self.hide('isdelete', 'createtime', 'updatetime')
+        
+    """
 
     def keys(self):
         return self.fields
