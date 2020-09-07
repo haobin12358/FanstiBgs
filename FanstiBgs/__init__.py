@@ -5,6 +5,7 @@ from flask_cors import CORS
 
 
 from .api.AHello import AHello
+from .api.AUser import AUser
 
 from .extensions.request_handler import error_handler, request_first_handler
 from .config.secret import DefaltSettig
@@ -16,6 +17,7 @@ from FanstiBgs.extensions.base_request import Request
 def register(app):
     bp = Blueprint(__name__, 'bp', url_prefix='/api')
     bp.add_url_rule('/hello/<string:hello>', view_func=AHello.as_view('hello'))
+    bp.add_url_rule('/user/<string:user>', view_func=AUser.as_view("user"))
     app.register_blueprint(bp)
 
 
