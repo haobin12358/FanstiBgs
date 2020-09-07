@@ -14,7 +14,8 @@ class AUser(Resource):
 
     def post(self, user):
         apis = {
-            "user_login": self.cuser.user_login
+            "user_login": self.cuser.user_login,
+            "user_password_repeat": self.cuser.user_password_repeat
         }
 
         return apis

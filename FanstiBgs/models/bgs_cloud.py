@@ -60,6 +60,22 @@ class t_bgs_odd_number(Base):
     odd_number = Column(String(50), comment="分单号")
     master_number = Column(String(40), comment="对应的主单号")
 
+class t_bgs_un(Base):
+    """un与主分单对应表"""
+    id = Column(String(40), primary_key=True)
+    UN_NUMBER = Column(String(255), comment="UN编号")
+    packaging_instruction = Column(String(255), comment="包装指导")
+    packaging_grade = Column(String(255), comment="包装等级")
+    packaging_category = Column(String(255), comment="包装类别")
+    product_Name = Column(String(255), comment="品名")
+    introduce = Column(String(255), comment="说明")
+    MAIN_DANGEROUS_ID = Column(Integer, comment="主要危险品id")
+    SECOND_DANGEROUS_IDA = Column(String(255), comment="次要危险品ida")
+    SECOND_DANGEROUS_IDB = Column(String(255), comment="次要危险品idb")
+    odd_number = Column(String(40), comment="分单号")
+    master_number = Column(String(255), comment="主单号")
+    packagingInstruction = Column(String(255), comment="包装指导")
+
 class t_bgs_packing_dictionaries(Base):
     """
     包装名称表
