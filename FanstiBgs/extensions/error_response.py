@@ -88,63 +88,7 @@ class ApiError(BaseError):
     message = "接口未注册"
 
 
-class TimeError(BaseError):
+class NoPreservationError(BaseError):
     status = 405
-    status_code = 405009
-    message = "有效时间有误"
-
-
-class PoorScore(BaseError):
-    status = 405
-    status_code = 405010
-    message = '课时余额不足'
-
-
-class StatusError(BaseError):
-    status = 405
-    status_code = 405011
-    message = '状态不正确'
-
-
-class WXLoginError(BaseError):
-    status = 405
-    status_code = 405012
-    message = '微信登录失败'
-
-
-class InsufficientConditionsError(BaseError):
-    status = 405
-    status_code = 40513
-    message = '条件不足'
-
-
-class NeedPhone(BaseError):
-    status = 405
-    status_code = 405014
-    message = '为获得更优质的服务，请允许授权您的手机号码'
-
-
-class DingtalkError(BaseError):
-    status = 405
-    status_code = 405045
-    message = '钉钉登录失败'
-
-class UserInfoError(BaseError):
-    status = 405
-    status_code = 405302
-    message = '请先完善个人信息'
-
-class CourseStatusError(BaseError):
-    status = 405
-    status_code = 405303
-    message = '课程状态异常'
-
-class PointError(BaseError):
-    status = 405
-    status_code = 405304
-    message = '存在重叠分数区间'
-
-class EvaluationNumError(BaseError):
-    status = 405
-    status_code = 405305
-    message = "有未完成题目"
+    status_code = 405101
+    message = "请直接输入板号查询"

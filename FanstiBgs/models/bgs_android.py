@@ -71,6 +71,7 @@ class an_area(Base):
     区域
     """
     __tablename__ = "an_area"
+    isdelete = Column(Boolean, default=0)
     id = Column(String(40), primary_key=True)
     area_name = Column(String(128), comment="区域名称")
 
@@ -79,6 +80,7 @@ class an_storing_location(Base):
     仓位
     """
     __tablename__ = "an_storing_location"
+    isdelete = Column(Boolean, default=0)
     id = Column(String(40), primary_key=True)
     area_id = Column(String(40), comment="区域id")
     storing_location_name = Column(String(128), comment="仓位名称")
@@ -88,6 +90,7 @@ class an_preservation_type(Base):
     类别
     """
     __tablename__ = "an_preservation_type"
+    isdelete = Column(Boolean, default=0)
     id = Column(String(40), primary_key=True)
     storing_id = Column(String(40), comment="仓位id")
     preservation_type_name = Column(String(128), comment="类别名称")
