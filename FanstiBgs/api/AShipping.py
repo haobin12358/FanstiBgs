@@ -9,13 +9,14 @@ class AShipping(Resource):
     def get(self, shipping):
         apis = {
             'list': self.cshipping.list,
-            "get": self.cshipping.get
+            "get": self.cshipping.get,
+            "get_photos": self.cshipping.get_photos
         }
         return apis
 
     def post(self, shipping):
         apis = {
-
+            "upload_photos": self.cshipping.upload_photos
         }
 
         return apis
