@@ -28,6 +28,12 @@ class CShipping:
             filter_args.append(t_bgs_main_single_number.master_number.like("%{0}%".format(request.args.get("master_number"))))
         if request.args.get("destination_port"):
             filter_args.append(t_bgs_main_single_number.destination_port == request.args.get("destination_port"))
+
+        # 获取三天以内数据， 精确到天就好 2020/9/14中午增加需求
+        three_days_ago = datetime.datetime.now() + datetime.timedelta(days=-3)
+        order_time = datetime.datetime(three_days_ago.year, three_days_ago.month, three_days_ago.day, 0, 0, 0)
+        filter_args.append(t_bgs_main_single_number.order_time > order_time)
+
         main_port = t_bgs_main_single_number.query.filter(*filter_args).all_with_page()
         page_num = request.args.get("page_num") or 1
         page_size = request.args.get("page_size") or 15

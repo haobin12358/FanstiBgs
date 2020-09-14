@@ -64,6 +64,11 @@ class CProcedure:
             procedure = an_procedure.query.filter(an_procedure.procedure_type == args.get("procedure_type"),
                                                   an_procedure.id == args.get("id"))\
                 .first_("未找到该单据")
+            history_list = self._get_history_list(procedure)
+            procedure_picture_list = an_procedure_picture.query.filter(
+                an_procedure_picture.procedure_id == args.get("id")).all()
+            procedure.fill("history_list", history_list)
+            procedure.fill("picture_list", procedure_picture_list)
             return Success(data=procedure)
         elif args.get("master_number"):
             procedure_dict = {}
@@ -88,12 +93,71 @@ class CProcedure:
                 db.session.add(procedure_instance)
 
             procedure = an_procedure.query.filter(an_procedure.id == id).first()
-            # TODO 需要增加图片list
-            # TODO 历史操作封装为list方便android端处理
-
+            procedure.fill("picture_list", [])
+            history_list = self._get_history_list(procedure)
+            procedure.fill("history_list", history_list)
             return Success(data=procedure)
         else:
             return ParamsError()
+
+    def _get_history_list(self, procedure):
+        history_list = []
+        if procedure.handover_inputer_id:
+            history_dict = {}
+            user = an_user.query.filter(an_user.user_id == procedure.handover_inputer_id).first()
+            history_dict["procedure_status"] = "已入库"
+            history_dict["area_name"] = procedure.preservation_area
+            history_dict["storing_name"] = procedure.storing_location
+            if procedure.storing_location in ["大货区", "锂电池暂存区", "ETV区", "Stacker区"]:
+                history_dict["preservation_type_name"] = None
+                history_dict["board_no"] = procedure.board_no
+            else:
+                history_dict["preservation_type_name"] = procedure.preservation_type
+                history_dict["board_no"] = None
+            history_dict["product_number"] = procedure.product_number
+            history_dict["weight"] = procedure.weight
+            history_dict["inputer_time"] = procedure.handover_time
+            history_dict["inputer_name"] = user.user_truename
+            history_dict["inputer_card_no"] = user.cardno
+            history_list.append(history_dict)
+        if procedure.delivery_inputer_id:
+            history_dict = {}
+            user = an_user.query.filter(an_user.user_id == procedure.delivery_inputer_id).first()
+            history_dict["procedure_status"] = "已出库"
+            history_dict["area_name"] = procedure.preservation_area
+            history_dict["storing_name"] = procedure.storing_location
+            if procedure.storing_location in ["大货区", "锂电池暂存区", "ETV区", "Stacker区"]:
+                history_dict["preservation_type_name"] = None
+                history_dict["board_no"] = procedure.board_no
+            else:
+                history_dict["preservation_type_name"] = procedure.preservation_type
+                history_dict["board_no"] = None
+            history_dict["product_number"] = procedure.product_number
+            history_dict["weight"] = procedure.weight
+            history_dict["inputer_time"] = procedure.delivery_time
+            history_dict["inputer_name"] = user.user_truename
+            history_dict["inputer_card_no"] = user.cardno
+            history_list.append(history_dict)
+        if procedure.repeat_warehousing_inputer_id:
+            history_dict = {}
+            user = an_user.query.filter(an_user.user_id == procedure.repeat_warehousing_inputer_id).first()
+            history_dict["procedure_status"] = "已重新入库"
+            history_dict["area_name"] = procedure.preservation_area
+            history_dict["storing_name"] = procedure.storing_location
+            if procedure.storing_location in ["大货区", "锂电池暂存区", "ETV区", "Stacker区"]:
+                history_dict["preservation_type_name"] = None
+                history_dict["board_no"] = procedure.board_no
+            else:
+                history_dict["preservation_type_name"] = procedure.preservation_type
+                history_dict["board_no"] = None
+            history_dict["product_number"] = procedure.product_number
+            history_dict["weight"] = procedure.weight
+            history_dict["inputer_time"] = procedure.repeat_warehousing_time
+            history_dict["inputer_name"] = user.user_truename
+            history_dict["inputer_card_no"] = user.cardno
+            history_list.append(history_dict)
+
+        return history_list
 
     def list(self):
         """
@@ -167,6 +231,8 @@ class CProcedure:
         procedure_dict["handover_name"] = data.get("handover_name")
         procedure_dict["handover_card_no"] = data.get("handover_card_no")
         procedure_dict["handover_time"] = datetime.datetime.now()
+        procedure_dict["handover_inputer_id"] = getattr(request, "user").id
+        procedure_dict["handover_inputer_name"] = getattr(request, "user").username
 
         if data.get("preservation_id"):
             preservation = an_preservation_type.query.filter(an_preservation_type.id == data.get("preservation_id")) \
@@ -206,6 +272,17 @@ class CProcedure:
 
         # TODO 图片上传
 
+        if data.get("picture_list"):
+            for row in data.get("picture_list"):
+                url_instance = an_procedure_picture.query.filter(an_procedure_picture.file_url == row)\
+                    .first_("该图片未上传成功， 请重新上传")
+                with db.auto_commit():
+                    url_instance.update({
+                        "procedure_id": data.get("procedure_id")
+                    }, null="not")
+                    db.session.add(url_instance)
+
+
         with db.auto_commit():
             procedure_instance.update(procedure_dict, null="not")
             db.session.add(procedure_instance)
@@ -216,7 +293,6 @@ class CProcedure:
         """
         出库
         """
-        # TODO 是否存在非同一人操作
         data = parameter_required(("delivery_name", "delivery_card_no", "procedure_id"))
         procedure_instance = an_procedure.query.filter(an_procedure.id == data.get("procedure_id")).first()
         procedure_dict = {}
@@ -224,6 +300,8 @@ class CProcedure:
         procedure_dict["delivery_card_no"] = data.get("delivery_card_no")
         procedure_dict["delivery_time"] = datetime.datetime.now()
         procedure_dict["preservation"] = "out"
+        procedure_dict["delivery_inputer_id"] = getattr(request, "user").id
+        procedure_dict["delivery_inputer_name"] = getattr(request, "user").username
 
         with db.auto_commit():
             procedure_instance.update(procedure_dict, null="not")
@@ -242,6 +320,8 @@ class CProcedure:
         procedure_dict["repeat_warehousing_card_no"] = data.get("delivery_card_no")
         procedure_dict["repeat_warehousing_time"] = datetime.datetime.now()
         procedure_dict["preservation"] = "repeat"
+        procedure_dict["repeat_warehousing_inputer_id"] = getattr(request, "user").id
+        procedure_dict["repeat_warehousing_inputer_name"] = getattr(request, "user").username
 
         with db.auto_commit():
             procedure_instance.update(procedure_dict, null="not")
