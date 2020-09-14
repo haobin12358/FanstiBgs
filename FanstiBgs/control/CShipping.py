@@ -13,7 +13,7 @@ from FanstiBgs.extensions.request_handler import token_to_user_
 from FanstiBgs.extensions.token_handler import usid_to_token
 from FanstiBgs.extensions.register_ext import db
 from FanstiBgs.extensions.success_response import Success
-from FanstiBgs.models.bgs_android import an_procedure
+from FanstiBgs.models.bgs_android import an_procedure, an_procedure_picture
 from FanstiBgs.models.bgs_cloud import t_bgs_main_single_number, t_bgs_un, t_bgs_shipper_consignee_info
 
 class CShipping:
@@ -142,3 +142,113 @@ class CShipping:
         main_port.fill("sender", sender)
         return Success(data=main_port)
 
+    def upload_photos(self):
+        """
+        上传货运图片
+        """
+        data = parameter_required(("shipping_front", "shipping_diaforward", "shipping_diaback", "shipping_back", "whole"))
+
+        for url in data.get("shipping_front"):
+            with db.auto_commit():
+                url_instance = an_procedure_picture.query.filter(an_procedure_picture.file_url == url) \
+                    .first_("该图片未上传成功， 请重新上传")
+                url_instance.update({
+                    "procedure_id": request.args.get("id")
+                }, null="not")
+
+        for url in data.get("shipping_diaforward"):
+            with db.auto_commit():
+                url_instance = an_procedure_picture.query.filter(an_procedure_picture.file_url == url) \
+                    .first_("该图片未上传成功， 请重新上传")
+                url_instance.update({
+                    "procedure_id": request.args.get("id")
+                }, null="not")
+
+        for url in data.get("shipping_diaback"):
+            with db.auto_commit():
+                url_instance = an_procedure_picture.query.filter(an_procedure_picture.file_url == url) \
+                    .first_("该图片未上传成功， 请重新上传")
+                url_instance.update({
+                    "procedure_id": request.args.get("id")
+                }, null="not")
+
+        for url in data.get("shipping_back"):
+            with db.auto_commit():
+                url_instance = an_procedure_picture.query.filter(an_procedure_picture.file_url == url) \
+                    .first_("该图片未上传成功， 请重新上传")
+                url_instance.update({
+                    "procedure_id": request.args.get("id")
+                }, null="not")
+
+        for url in data.get("whole"):
+            with db.auto_commit():
+                url_instance = an_procedure_picture.query.filter(an_procedure_picture.file_url == url) \
+                    .first_("该图片未上传成功， 请重新上传")
+                url_instance.update({
+                    "procedure_id": request.args.get("id")
+                }, null="not")
+
+        return Success(message="上传成功")
+
+    def get_photos(self):
+        """
+        获取货运图片
+        """
+        args = parameter_required(("id", "token"))
+        main_port = t_bgs_main_single_number.query.filter(t_bgs_main_single_number.id == args.get("id")).first()
+        response = {}
+        response["master_number"] = main_port.master_number
+        response["port_of_departure"] = main_port.port_of_departure
+        response["picture_list"] = {}
+        response["picture_list"]["shipping_front"] = {}
+        response["picture_list"]["shipping_diaforward"] = {}
+        response["picture_list"]["shipping_diaback"] = {}
+        response["picture_list"]["shipping_back"] = {}
+        response["picture_list"]["whole"] = {}
+        # 正面
+        shipping_front = an_procedure_picture.query.filter(an_procedure_picture.type == "shipping_front",
+                                                           an_procedure_picture.procedure_id == args.get("id")).all()
+        url_list = []
+        for url in shipping_front:
+            response["picture_list"]["shipping_front"]["user_name"] = url.user_truename
+            response["picture_list"]["shipping_front"]["createtime"] = url.createtime
+            url_list.append(url.file_url)
+        response["picture_list"]["shipping_front"]["url_list"] = url_list
+        # 斜前
+        shipping_front = an_procedure_picture.query.filter(an_procedure_picture.type == "shipping_diaforward",
+                                                           an_procedure_picture.procedure_id == args.get("id")).all()
+        url_list = []
+        for url in shipping_front:
+            response["picture_list"]["shipping_diaforward"]["user_name"] = url.user_truename
+            response["picture_list"]["shipping_diaforward"]["createtime"] = url.createtime
+            url_list.append(url.file_url)
+        response["picture_list"]["shipping_diaforward"]["url_list"] = url_list
+        # 斜后
+        shipping_front = an_procedure_picture.query.filter(an_procedure_picture.type == "shipping_diaback",
+                                                           an_procedure_picture.procedure_id == args.get("id")).all()
+        url_list = []
+        for url in shipping_front:
+            response["picture_list"]["shipping_diaback"]["user_name"] = url.user_truename
+            response["picture_list"]["shipping_diaback"]["createtime"] = url.createtime
+            url_list.append(url.file_url)
+        response["picture_list"]["shipping_diaback"]["url_list"] = url_list
+        # 后面
+        shipping_front = an_procedure_picture.query.filter(an_procedure_picture.type == "shipping_back",
+                                                           an_procedure_picture.procedure_id == args.get("id")).all()
+        url_list = []
+        for url in shipping_front:
+            response["picture_list"]["shipping_back"]["user_name"] = url.user_truename
+            response["picture_list"]["shipping_back"]["createtime"] = url.createtime
+            url_list.append(url.file_url)
+        response["picture_list"]["shipping_back"]["url_list"] = url_list
+        # 整体
+        shipping_front = an_procedure_picture.query.filter(an_procedure_picture.type == "whole",
+                                                           an_procedure_picture.procedure_id == args.get("id")).all()
+        url_list = []
+        for url in shipping_front:
+            response["picture_list"]["whole"]["user_name"] = url.user_truename
+            response["picture_list"]["whole"]["createtime"] = url.createtime
+            url_list.append(url.file_url)
+        response["picture_list"]["whole"]["url_list"] = url_list
+
+        return Success(data=response)

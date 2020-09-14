@@ -71,6 +71,10 @@ class an_procedure_picture(Base):
     file_name = Column(String(100), comment="图片名")
     file_src = Column(String(255), comment="图片路径")
     file_url = Column(String(255), comment="图片路由")
+    user_id = Column(String(40), comment="用户id")
+    user_name = Column(String(50), comment="用户名")
+    createtime = Column(DateTime, comment="创建时间")
+    type = Column(String(255), comment="图片类型stork入库shipping_front正面shipping_diaforward斜前shipping_diaback斜后shipping_back后面whole整体")
 
 class an_area(Base):
     """
