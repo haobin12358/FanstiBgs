@@ -8,6 +8,7 @@ from .api.AHello import AHello
 from .api.AUser import AUser
 from .api.AShipping import AShipping
 from .api.AProcedure import AProcedure
+from .api.ACommon import ACommon
 
 from .extensions.request_handler import error_handler, request_first_handler
 from .config.secret import DefaltSettig
@@ -22,6 +23,7 @@ def register(app):
     bp.add_url_rule('/user/<string:user>', view_func=AUser.as_view("user"))
     bp.add_url_rule('/shipping/<string:shipping>', view_func=AShipping.as_view("shipping"))
     bp.add_url_rule('/procedure/<string:procedure>', view_func=AProcedure.as_view("procedure"))
+    bp.add_url_rule('/common/<string:common>', view_func=ACommon.as_view("common"))
     app.register_blueprint(bp)
 
 
