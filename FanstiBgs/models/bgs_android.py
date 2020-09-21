@@ -104,3 +104,53 @@ class an_preservation_type(Base):
     id = Column(String(40), primary_key=True)
     storing_id = Column(String(40), comment="仓位id")
     preservation_type_name = Column(String(128), comment="类别名称")
+
+class an_merchandise_inventory_main(Base):
+    """
+    盘库记录主单
+    """
+    __tablename__ = "an_merchandise_inventory_main"
+    id = Column(String(40), primary_key=True)
+    stork_user_id = Column(String(40), nullable=False)
+    stork_user_name = Column(String(50), nullable=False)
+    createtime = Column(DateTime, default=datetime.datetime.now())
+
+class an_master_number_remark(Base):
+    """
+    盘库备注
+    """
+    __tablename__ = "an_master_number_remark"
+    id = Column(String(40), primary_key=True)
+    master_number_id = Column(String(40), comment="进出港主单id")
+    message = Column(String(255), comment="备注")
+    createtime = Column(String(255), comment="备注时间")
+    user_id = Column(String(40), comment="备注人")
+
+class an_mechandise_inventory_part(Base):
+    """
+    盘库记录分单
+    """
+    __tablename__ = "an_mechandise_inventory_part"
+    id = Column(String(40), primary_key=True)
+    main_id = Column(String(40), comment="盘库记录主单id")
+    master_id = Column(String(40), comment="进出港id")
+    master_number = Column(String(40), comment="主单号")
+    createtime = Column(DateTime, default=datetime.datetime.now())
+    preservation_area = Column(String(128), comment="区域")
+    storing_location = Column(String(128), comment="仓位")
+    preservation_type = Column(String(128), comment="类别")
+    board_no = Column(String(255), comment="板号")
+
+class an_mechandis_inventory_time(Base):
+    """
+    盘库时间
+    """
+    __tablename__ = "an_mechandis_inventory_time"
+    id = Column(String(40), primary_key=True)
+    start_time_hour = Column(String(10), nullable=False, default=0)
+    start_time_minute = Column(String(10), default=0)
+    start_time_second = Column(String(10), default=0)
+    end_time_hour = Column(String(10), nullable=False, default=12)
+    end_time_minute = Column(String(10), default=0)
+    end_time_second = Column(String(10), default=0)
+    times = Column(Integer, comment="次数1or2")

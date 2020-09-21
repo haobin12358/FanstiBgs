@@ -6,13 +6,7 @@ os.environ['NLS_LANG'] = 'SIMPLIFIED CHINESE_CHINA.UTF8'
 import uuid, datetime, re, xlrd
 from flask import request
 from html.parser import HTMLParser
-from FanstiBgs.config.response import SYSTEM_ERROR, PARAMS_MISS
-from FanstiBgs.common.import_status import import_status
-from FanstiBgs.common.Log import make_log, judge_keys
-from FanstiBgs.common.TransformToList import add_model
-from FanstiBgs.common.get_model_return_list import get_model_return_dict, get_model_return_list
-from FanstiBgs.common.timeformate import get_db_time_str, format_forweb_no_second
-
+from FanstiBgs.extensions.params_validates import parameter_required
 
 class MyHTMLParser(HTMLParser):
 
@@ -40,131 +34,15 @@ class Cscrapy():
         from Fansti.services.Sscrapy import Sscrapy
         self.sscrapy = Sscrapy()
 
-    def get_hs(self):
-        args = request.args.to_dict()
-        make_log("args", args)
-        true_keys = ["login_name", "hs_name", "openid"]
-        if judge_keys(true_keys, args.keys()) != 200:
-            return judge_keys(true_keys, args.keys())
-        if args["login_name"] == "" and self.get_count("HScode", args["openid"]) >= 10:
-            return import_status("ERROR_GET_SCRAPY", "FANSTI_ERROR", "ERROR_GET_SCRAPY")
-
-        args["hs_name"] = str(args["hs_name"]).upper()
-        new_info = add_model("SELECT_INFO",
-                             **{
-                                 "id": str(uuid.uuid4()),
-                                 "login_name": args["login_name"],
-                                 "select_name": "HScode",
-                                 "select_value": args["hs_name"],
-                                 "openid": args["openid"],
-                                 "create_time": str(datetime.datetime.now().date()).replace("-", "")
-                             })
-        if not new_info:
-            return SYSTEM_ERROR
-        try:
-            import urllib.request
-            url = "https://www.hsbianma.com/Code/{0}.html".format(args["hs_name"])
-            req = urllib.request.urlopen(url)
-            strResult = req.read()
-            parser = MyHTMLParser2()
-            parser.feed(strResult.decode(encoding="utf-8"))
-            length = len(parser.text)
-
-            while length >= 0:
-                parser.text[length - 1] = parser.text[length - 1].replace(" ", "").replace("b\'", "").replace("\r", "").replace("\n", "").replace("[", "")
-                if parser.text[length - 1] in ["b\'\r\n ", "\\r\\n\\r\\n", "\\r\\n\\r\\n\\r\\n", "]", "?", ""]:
-                    parser.text.remove(parser.text[length - 1])
-                length = length - 1
-            print(parser.text)
-            data = [
-                {
-                    "name": "基本信息",
-                    "value": []
-                },
-                {
-                    "name": "所属章节",
-                    "value": []
-                },
-                {
-                    "name": "税率信息",
-                    "value": []
-                },
-                {
-                    "name": "申报要素",
-                    "value": []
-                },
-                {
-                    "name": "监管条件",
-                    "value": []
-                },
-                {
-                    "name": "检验检疫类别",
-                    "value": []
-                }
-            ]
-            first_key = ["基本信息", "所属章节", "税率信息", "申报要素", "监管条件", "检验检疫类别"]
-            for row in parser.text:
-                print(row)
-                if row in first_key:
-                    key_index = first_key.index(row)
-                    row_index = parser.text.index(row)
-                    while True:
-                        print(self.title.format(""))
-                        print(parser.text[row_index + 1])
-                        print("分享")
-                        print("分享" == parser.text[row_index + 1])
-                        print(self.title.format(""))
-                        a = {}
-                        if parser.text[row_index + 1] in first_key or parser.text[row_index + 1] == "无" or parser.text[
-                            row_index + 1] == "分享" or parser.text[row_index + 1] == "上一条:" or parser.text[row_index + 1] == "网站声明":
-                            break
-                        if parser.text[row_index + 2] == "编码状态":
-                            a["name"] = parser.text[row_index + 1]
-                            row_index = row_index + 1
-                            a["value"] = ""
-                        if parser.text[row_index + 1] == "CIQ代码(13位海关编码)":
-                            a["name"] = parser.text[row_index + 1]
-                            row_index = row_index + 1
-                            a["value"] = parser.text[row_index + 2]
-                            break
-                        elif parser.text[row_index + 1] == "暂定税率" and parser.text[row_index + 2] == "进口普通税率":
-                            a["name"] = parser.text[row_index + 1]
-                            row_index = row_index + 1
-                            a["value"] = ""
-                        else:
-                            a["name"] = parser.text[row_index + 1]
-                            a["value"] = parser.text[row_index + 2].replace(" [", "")
-                            row_index = row_index + 2
-                        data[key_index]["value"].append(a)
-
-            response = import_status("SUCCESS_GET_INFO", "OK")
-            response["data"] = data
-            return response
-        except Exception as e:
-            print(e)
-            return SYSTEM_ERROR
-
     def get_cas(self):
+        """
+        获取cas
+        """
         try:
-            args = request.args.to_dict()
-            make_log("args", args)
+            args = parameter_required(("login_name", "cas_name", "openid"))
             true_keys = ["login_name", "cas_name", "openid"]
-            if judge_keys(true_keys, args.keys()) != 200:
-                return judge_keys(true_keys, args.keys())
-            if args["login_name"] == "" and self.get_count("cas", args["openid"]) >= 10:
-                return import_status("ERROR_GET_SCRAPY", "FANSTI_ERROR", "ERROR_GET_SCRAPY")
+
             args["cas_name"] = str(args.get("cas_name")).upper()
-            new_info = add_model("SELECT_INFO",
-                                 **{
-                                     "id": str(uuid.uuid4()),
-                                     "login_name": args["login_name"],
-                                     "select_name": "cas",
-                                     "select_value": args["cas_name"],
-                                     "openid": args["openid"],
-                                     "create_time": str(datetime.datetime.now().date()).replace("-", "")
-                                 })
-            if not new_info:
-                return SYSTEM_ERROR
             import urllib.request
             url = "http://www.ichemistry.cn/chemistry/{0}.htm".format(args["cas_name"])
             headers = {'Content-Type': 'application/xml'}
@@ -255,7 +133,7 @@ class Cscrapy():
             return response
         except Exception as e:
             print(e)
-            return SYSTEM_ERROR
+            return
 
     def get_jd(self):
         args = request.args.to_dict()
