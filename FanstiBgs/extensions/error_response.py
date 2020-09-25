@@ -92,3 +92,8 @@ class NoPreservationError(BaseError):
     status = 405
     status_code = 405101
     message = "请直接输入板号查询"
+
+class ErrorGetNetwork(BaseError):
+    status = 405
+    status_code = 405102
+    message = "爬虫获取cas失败"

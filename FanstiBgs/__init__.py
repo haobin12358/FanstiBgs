@@ -10,6 +10,7 @@ from .api.AShipping import AShipping
 from .api.AProcedure import AProcedure
 from .api.ACommon import ACommon
 from .api.AMechandis import AMechandis
+from .api.AScrapy import AScrapy
 
 from .extensions.request_handler import error_handler, request_first_handler
 from .config.secret import DefaltSettig
@@ -26,6 +27,7 @@ def register(app):
     bp.add_url_rule('/procedure/<string:procedure>', view_func=AProcedure.as_view("procedure"))
     bp.add_url_rule('/common/<string:common>', view_func=ACommon.as_view("common"))
     bp.add_url_rule('/mechandis/<string:mechandis>', view_func=AMechandis.as_view("mechandis"))
+    bp.add_url_rule('/scrapy/<string:scrapy>', view_func=AScrapy.as_view("scrapy"))
     app.register_blueprint(bp)
 
 

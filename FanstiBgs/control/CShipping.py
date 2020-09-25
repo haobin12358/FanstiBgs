@@ -13,7 +13,7 @@ from FanstiBgs.extensions.request_handler import token_to_user_
 from FanstiBgs.extensions.token_handler import usid_to_token
 from FanstiBgs.extensions.register_ext import db
 from FanstiBgs.extensions.success_response import Success
-from FanstiBgs.models.bgs_android import an_procedure, an_procedure_picture
+from FanstiBgs.models.bgs_android import an_procedure, an_procedure_picture, an_checklist
 from FanstiBgs.models.bgs_cloud import t_bgs_main_single_number, t_bgs_un, t_bgs_shipper_consignee_info
 
 class CShipping:
@@ -252,3 +252,34 @@ class CShipping:
         response["picture_list"]["whole"]["url_list"] = url_list
 
         return Success(data=response)
+
+    def get_checklist_type(self):
+
+        data = [
+            {
+                "type": "radioactivity",
+                "is_next": 1,
+                "next": ["radioactive", "nonradiative"]
+            },
+            {
+                "type": "dry ice",
+                "is_next": 0
+            },
+            {
+                "type": "lithium cell",
+                "is_next": 0
+            }
+        ]
+        return Success(data=data)
+
+    def get_checklist_item(self):
+
+        args = parameter_required(("token", "check_type"))
+
+        items = an_checklist.query.filter(an_checklist.check_type == args.get("check_type"))\
+            .order_by(an_checklist.check_no.asc()).all_with_page()
+
+        for item in items:
+            item.fill("check_topic", "【{0}】{1}".format(item.check_genre, item.check_item))
+
+        return Success(data=items)
