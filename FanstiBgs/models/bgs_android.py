@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from sqlalchemy import Integer, String, Text, DateTime, orm, Boolean
+from sqlalchemy import Integer, String, Text, DateTime, orm, Boolean, Float
 from FanstiBgs.extensions.base_model import Base, Column
 import datetime
 
@@ -154,3 +154,14 @@ class an_mechandis_inventory_time(Base):
     end_time_minute = Column(String(10), default=0)
     end_time_second = Column(String(10), default=0)
     times = Column(Integer, comment="次数1or2")
+
+class an_checklist(Base):
+    """
+    检查单
+    """
+    __tablename__ = "an_checklist"
+    id = Column(String(40), primary_key=True)
+    check_no = Column(Float, nullable=False, comment="题号")
+    check_item = Column(Text, nullable=False, comment="题目内容")
+    check_genre = Column(String(200), nullable=False, comment="题目标签")
+    check_type = Column(String(50), nullable=False, comment="检查单类型")

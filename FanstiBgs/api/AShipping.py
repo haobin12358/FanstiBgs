@@ -10,7 +10,9 @@ class AShipping(Resource):
         apis = {
             'list': self.cshipping.list,
             "get": self.cshipping.get,
-            "get_photos": self.cshipping.get_photos
+            "get_photos": self.cshipping.get_photos,
+            "get_checklist_type": self.cshipping.get_checklist_type,
+            "get_checklist_item": self.cshipping.get_checklist_item
         }
         return apis
 

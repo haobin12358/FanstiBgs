@@ -10,6 +10,7 @@ class AScrapy(Resource):
         apis = {
             'get_cas': self.cscrapy.get_cas,
             'get_flyno': self.cscrapy.get_flyno,
-            'get_dgr': self.cscrapy.get_dgr
+            'get_dgr': self.cscrapy.get_dgr,
+            'add_checklist': self.cscrapy.add_checklist
         }
         return apis
