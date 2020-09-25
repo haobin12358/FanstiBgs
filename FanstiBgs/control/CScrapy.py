@@ -303,3 +303,8 @@ class CScrapy():
                 db.session.add(checklist_instance)
 
         return Success()
+
+    def get_jdun(self):
+        """
+        获取un信息中英文品名
+        """

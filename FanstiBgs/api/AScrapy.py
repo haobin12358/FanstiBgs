@@ -11,6 +11,7 @@ class AScrapy(Resource):
             'get_cas': self.cscrapy.get_cas,
             'get_flyno': self.cscrapy.get_flyno,
             'get_dgr': self.cscrapy.get_dgr,
-            'add_checklist': self.cscrapy.add_checklist
+            'add_checklist': self.cscrapy.add_checklist,
+            'get_jdun': self.cscrapy.get_jdun
         }
         return apis

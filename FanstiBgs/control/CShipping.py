@@ -255,6 +255,10 @@ class CShipping:
 
     def get_checklist_type(self):
 
+        """
+        获取检查单类型
+        """
+
         data = [
             {
                 "type": "radioactivity",
@@ -274,6 +278,10 @@ class CShipping:
 
     def get_checklist_item(self):
 
+        """
+        获取检查单题目
+        """
+
         args = parameter_required(("token", "check_type"))
 
         items = an_checklist.query.filter(an_checklist.check_type == args.get("check_type"))\
@@ -281,5 +289,18 @@ class CShipping:
 
         for item in items:
             item.fill("check_topic", "【{0}】{1}".format(item.check_genre, item.check_item))
+            # TODO 需要检查情况，对于对应题目，需要写入默认填写内容并返回
 
         return Success(data=items)
+
+    def make_checklist_history(self):
+        """
+        提交检查单结果
+        """
+
+        data = parameter_required(("token", "master_id", "check_type", "item_list"))
+
+    def get_checklist_message(self):
+        """
+        获取检查单详情
+        """

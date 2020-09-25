@@ -165,3 +165,29 @@ class an_checklist(Base):
     check_item = Column(Text, nullable=False, comment="题目内容")
     check_genre = Column(String(200), nullable=False, comment="题目标签")
     check_type = Column(String(50), nullable=False, comment="检查单类型")
+
+class an_check_history(Base):
+    """
+    检查历史
+    """
+    __tablename__ = "an_check_history"
+    id = Column(String(40), primary_key=True)
+    check_type = Column(String(50), nullable=False, comment="检查单类型")
+    user_id = Column(String(40), nullable=False, comment="操作人")
+    user_name = Column(String(50), nullable=False, comment="操作人姓名")
+    createtime = Column(DateTime, default=datetime.datetime.now(), comment="操作时间")
+    master_id = Column(String(40), comment="主单id")
+    times = Column(String(10), comment="次数first第一次second第二次")
+
+class an_check_history_item(Base):
+    """
+    检查结果
+    """
+    __tablename__ = "an_check_history_item"
+    id = Column(String(40), primary_key=True)
+    check_id = Column(String(40), comment="检查单题目id")
+    history_id = Column(String(40), comment="检查历史id")
+    check_no = Column(Float, nullable=False, comment="题号")
+    check_item = Column(Text, nullable=False, comment="题目内容")
+    check_genre = Column(String(200), nullable=False, comment="题目标签")
+    check_answer = Column(String(10), comment="结果YES NO N/A")
