@@ -9,7 +9,8 @@ from FanstiBgs.extensions.register_ext import db
 from FanstiBgs.extensions.params_validates import parameter_required
 from FanstiBgs.extensions.success_response import Success
 from FanstiBgs.extensions.error_response import ParamsError, AuthorityError, ErrorGetNetwork
-from FanstiBgs.models.bgs_scrapy import air_hwys_lines, air_hwys_dgr, air_hwys_dgr_container, air_hwys_dgr_level
+from FanstiBgs.models.bgs_scrapy import air_hwys_lines, air_hwys_dgr, air_hwys_dgr_container, air_hwys_dgr_level, \
+    air_hwys_jd, t_bgs_un_dictionaries
 from FanstiBgs.models.bgs_android import an_checklist
 
 class MyHTMLParser(HTMLParser):
@@ -146,18 +147,11 @@ class CScrapy():
 
     def get_dgr(self):
         args = parameter_required(("token", "dgr_name"))
-        args['dgr_name'] = str(args.get("dgr_name")).upper()
-        dgr = air_hwys_dgr.query.filter(air_hwys_dgr.unno == args["dgr_name"]).all()
-        dgr_list = []
-        for raw in dgr:
-            dgr_type = air_hwys_dgr_level.query.filter(air_hwys_dgr_level.dgr_id == raw["id"]).all()
-            for row in dgr_type:
-                dgr_con = air_hwys_dgr_container.query.filter(air_hwys_dgr_container.dgr_level_id == row["id"]).all()
-                row["dgr_con"] = dgr_con
-            raw["dgr_type"] = dgr_type
-            dgr_list.append(raw)
+        args['dgr_name'] = str(args.get("dgr_name"))
+        dgr = t_bgs_un_dictionaries.query.filter(t_bgs_un_dictionaries.ProperShippingNameB == args["dgr_name"])\
+            .first_("未找到")
 
-        return Success(data=dgr_list)
+        return Success(data=dgr)
 
     def add_checklist(self):
         dict = {
@@ -304,7 +298,71 @@ class CScrapy():
 
         return Success()
 
-    def get_jdun(self):
+    def get_jd(self):
         """
-        获取un信息中英文品名
+        获取鉴定信息
         """
+        args = parameter_required(("token", "jd_name"))
+
+        jd_report = air_hwys_jd.query.filter(air_hwys_jd.chinesename.like("%{0}%".format(args.get("jd_name").upper()))).all()
+
+        for key in jd_report.keys():
+            if not jd_report[key]:
+                if key != "appearance" and key != "appearance2":
+                    jd_report[key] = "暂无信息"
+        if not jd_report["appearance"]:
+            if not jd_report["appearance2"]:
+                appearance = "暂无信息"
+            else:
+                appearance = jd_report["appearance2"]
+        else:
+            if not jd_report["appearance2"]:
+                appearance = jd_report["appearance"]
+            else:
+                appearance = jd_report["appearance"] \
+                             + jd_report["appearance2"]
+        if jd_report["endtime"]:
+            endtime = str(jd_report["endtime"].year) + "/" + str(jd_report["endtime"].month) + "/" + str(
+                jd_report["endtime"].day)
+        else:
+            endtime = "暂无出鉴定日期"
+        data = [
+            {
+                "name": "中文品名",
+                "value": jd_report["chinesename"]
+            },
+            {
+                "name": "英文品名",
+                "value": jd_report["englishname"]
+            },
+            {
+                "name": "UN信息",
+                "value": jd_report["unno"]
+            },
+            {
+                "name": "颜色状态",
+                "value": appearance
+            },
+            {
+                "name": "委托公司",
+                "value": jd_report["principal"]
+            },
+            {
+                "name": "鉴定机构",
+                "value": jd_report["identificationunits"]
+            },
+            {
+                "name": "出鉴定日期",
+                "value": endtime
+            }
+        ]
+        return Success(data=data)
+
+    def get_jd_names(self):
+        args = parameter_required(("token", "jd_name"))
+        jds = air_hwys_jd.query.filter(air_hwys_jd.chinesename.like("%{0}%".format(args.get("jd_name")))).all()
+        jd_name_list = [jd.get("chinesename") for jd in jds]
+        response = {}
+        response['data'] = jd_name_list
+        response["total"] = len(jd_name_list)
+        return Success(data=response)
