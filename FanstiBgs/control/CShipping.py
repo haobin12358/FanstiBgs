@@ -85,6 +85,14 @@ class CShipping:
         else:
             main_port.fill("statement_url", "")
 
+        # 包装性能单改url-2020/10/10逻辑
+        bgs_file2 = t_bgs_file.query.filter(t_bgs_file.f_id == name_picture_id,
+                                           t_bgs_file.file_class == "performanceSheet").first()
+        if bgs_file2:
+            main_port.fill("packaging_url", bgs_file.file_src)
+        else:
+            main_port.fill("packaging_url", "")
+
         un_list = t_bgs_un.query.filter(t_bgs_un.master_number == args.get("id")).all()
         odd_number_list = []
         for un in un_list:
