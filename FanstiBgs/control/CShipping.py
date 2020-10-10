@@ -8,13 +8,11 @@ import hashlib, datetime, requests
 from flask import request, current_app
 
 from FanstiBgs.extensions.params_validates import parameter_required
-from FanstiBgs.extensions.error_response import ParamsError, AuthorityError
 from FanstiBgs.extensions.request_handler import token_to_user_
-from FanstiBgs.extensions.token_handler import usid_to_token
 from FanstiBgs.extensions.register_ext import db
 from FanstiBgs.extensions.success_response import Success
 from FanstiBgs.models.bgs_android import an_procedure, an_procedure_picture, an_checklist
-from FanstiBgs.models.bgs_cloud import t_bgs_main_single_number, t_bgs_un, t_bgs_shipper_consignee_info
+from FanstiBgs.models.bgs_cloud import t_bgs_main_single_number, t_bgs_un, t_bgs_shipper_consignee_info, t_bgs_file
 
 class CShipping:
 
@@ -35,8 +33,8 @@ class CShipping:
         filter_args.append(t_bgs_main_single_number.order_time > order_time)
 
         main_port = t_bgs_main_single_number.query.filter(*filter_args).all_with_page()
-        page_num = request.args.get("page_num") or 1
-        page_size = request.args.get("page_size") or 15
+        page_num = int(request.args.get("page_num")) or 1
+        page_size = int(request.args.get("page_size")) or 15
         i = 1
         for port in main_port:
             un_list = t_bgs_un.query.filter(t_bgs_un.master_number == port.id).all()
@@ -78,7 +76,15 @@ class CShipping:
         args = parameter_required(("token", "id"))
         main_port = t_bgs_main_single_number.query.filter(t_bgs_main_single_number.id == args.get("id"))\
             .first_("未找到该单据")
-        # TODO 签名图片需要改为url
+
+        # 签名图片改为url-2020/10/9逻辑
+        name_picture_id = main_port.name_image_file
+        bgs_file = t_bgs_file.query.filter(t_bgs_file.f_id == name_picture_id, t_bgs_file.file_class == "signature").first()
+        if bgs_file:
+            main_port.fill("statement_url", bgs_file.file_src)
+        else:
+            main_port.fill("statement_url", "")
+
         un_list = t_bgs_un.query.filter(t_bgs_un.master_number == args.get("id")).all()
         odd_number_list = []
         for un in un_list:

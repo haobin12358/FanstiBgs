@@ -31,6 +31,7 @@ class t_bgs_file(Base):
     f_id = Column(String(40), comment="关联外键")
     file_suffix = Column(String(20), comment="文件后缀")
     create_time = Column(DateTime, default=datetime.datetime.now())
+    file_class = Column(String(100), comment="标记")
 
 class t_bgs_main_single_number(Base):
     """
