@@ -215,7 +215,7 @@ class CProcedure:
         for procedure in procedure_list:
             if not procedure.product_number:
                 procedure.product_number = 0
-            procedure.fill("procedure_no", page_size * (page_num - 1) + i)
+            procedure.fill("procedure_no", int(page_size) * (int(page_num) - 1) + i)
             i = i + 1
 
         return Success(data=procedure_list)
