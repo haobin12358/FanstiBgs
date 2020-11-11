@@ -263,7 +263,11 @@ class CMechandis:
         main_id = str(uuid.uuid1())
         with db.auto_commit():
             for mechandise in data:
-                print(mechandise)
+                if "board_no" in mechandise.keys():
+                    board_no = mechandise["board_no"]
+                else:
+                    board_no = None
+                
                 mechandise_dict = {
                     "id": str(uuid.uuid1()),
                     "main_id": main_id,
@@ -273,7 +277,7 @@ class CMechandis:
                     "preservation_area": mechandise["preservation_area"],
                     "storing_location": mechandise["storing_location"],
                     "preservation_type": mechandise["preservation_type"],
-                    "board_no": mechandise["board_no"]
+                    "board_no": board_no
                 }
                 mechandise_inventory_part_instance = an_mechandise_inventory_part.create(mechandise_dict)
                 db.session.add(mechandise_inventory_part_instance)
