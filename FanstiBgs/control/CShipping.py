@@ -391,7 +391,7 @@ class CShipping:
         """
         提交检查单结果
         """
-        args = parameter_required(("token", "master_id", "check_type"))
+        args = request.args.to_dict()
         data = json.loads(request.data)
         user = token_to_user_(args.get("token"))
         user_id = user.id
@@ -421,8 +421,11 @@ class CShipping:
                 "message": "题目提交不完整"
             }
         else:
+            check_no_list = []
             with db.auto_commit():
                 for item in data:
+                    if item.get("check_no") not in check_no_list:
+                        check_no_list.append(item.get("check_no"))
                     if not item.get("answer"):
                         return {
                             "status": 405,
@@ -440,6 +443,12 @@ class CShipping:
                     }
                     history_item_instance = an_check_history_item.create(history_item_dict)
                     db.session.add(history_item_instance)
+                if len(check_list_items) != len(check_no_list):
+                    return {
+                        "status": 405,
+                        "status_code": 405009,
+                        "message": "题目提交不完整"
+                    }
                 history_instance = an_check_history.create(history_dict)
                 db.session.add(history_instance)
             return Success(message="提交成功")
