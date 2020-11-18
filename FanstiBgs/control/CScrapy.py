@@ -1,8 +1,4 @@
-# *- coding:utf8 *-
-import sys
-import os
-sys.path.append(os.path.dirname(os.getcwd()))
-os.environ['NLS_LANG'] = 'SIMPLIFIED CHINESE_CHINA.UTF8'
+# -*- coding: utf-8 -*-
 import uuid, datetime, re, xlrd, requests
 from html.parser import HTMLParser
 from FanstiBgs.extensions.register_ext import db
@@ -12,6 +8,7 @@ from FanstiBgs.extensions.error_response import ParamsError, AuthorityError, Err
 from FanstiBgs.models.bgs_scrapy import air_hwys_lines, air_hwys_dgr, air_hwys_dgr_container, air_hwys_dgr_level, \
     air_hwys_jd, t_bgs_un_dictionaries
 from FanstiBgs.models.bgs_android import an_checklist
+from flask import current_app
 
 class MyHTMLParser(HTMLParser):
 
@@ -51,6 +48,7 @@ class CScrapy():
             url = "http://www.ichemistry.cn/chemistry/{0}.htm".format(args["cas_name"])
             headers = {'Content-Type': 'application/xml'}
             req = requests.get(url)
+            req.encoding = "utf-8"
             strResult = req.text
             parser = MyHTMLParser()
             parser.feed(strResult)
@@ -83,9 +81,12 @@ class CScrapy():
                 }
             ]
             keys = ["基本信息", "物理化学性质", "安全信息", "其他信息"]
+            dict = []
             for row in parser.text:
                 row_index = parser.text.index(row)
-                if "基本信息" in row:
+                dict.append(row)
+                if "基本信息" in str(row):
+                    current_app.logger.info(">>>>>>>>>>>make info:基本信息")
                     index = 0
                     item = {}
                     while True:
@@ -102,6 +103,7 @@ class CScrapy():
                             else:
                                 item["value"].append(parser.text[row_index + index + 1])
                         index += 1
+                    current_app.logger.info(">>>>>>>>>>data:" + str(data))
                 elif row in keys:
                     key_index = keys.index(row)
                     index = 0
@@ -123,7 +125,10 @@ class CScrapy():
                             else:
                                 item["value"].append(parser.text[row_index + index + 1])
                         index += 1
-            # print(data)
+            current_app.logger.info(dict)
+            for row in dict:
+                if "基本信息" in row:
+                    current_app.logger.info(">>>>>>>>>>>>>>>>>>>>give me five>>>>>>>>>>>>>")
             while True:
                 length = len(data[1]["value"])
                 if data[1]["value"][length - 1]["name"] == "密度:":
@@ -163,12 +168,15 @@ class CScrapy():
         """
         args = parameter_required(("token", "jd_name"))
 
-        jd_report = air_hwys_jd.query.filter(air_hwys_jd.chinesename.like("%{0}%".format(args.get("jd_name").upper()))).all()
+        jd_report = air_hwys_jd.query.filter(air_hwys_jd.chinesename.like("%{0}%".format(args.get("jd_name").upper()))).first()
 
-        for key in jd_report.keys():
-            if not jd_report[key]:
-                if key != "appearance" and key != "appearance2":
-                    jd_report[key] = "暂无信息"
+        if not jd_report:
+            return {
+                "status": 405,
+                "status_code": 405102,
+                "message": "未查询到鉴定信息"
+            }
+
         if not jd_report["appearance"]:
             if not jd_report["appearance2"]:
                 appearance = "暂无信息"
