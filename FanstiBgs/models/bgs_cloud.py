@@ -97,6 +97,31 @@ class t_bgs_un(Base):
     productNameSelect = Column(String(255), comment="两个特殊下拉项")
     difference = Column(String(255))
 
+class t_bgs_un_pack(Base):
+    """
+    包装详情
+    """
+    __tablename__ = "t_bgs_un_pack"
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    status = Column(String(255), comment="打包状态")
+    packInfo = Column(String(255), comment="打包信息")
+    Qnumber = Column(Integer)
+    meterial = Column(String(255))
+    introduceX = Column(String(255))
+    packNumber = Column(String(255))
+    unit = Column(String(255), comment="单位")
+    oddNumberId = Column(String(255), comment="分单号id")
+    oddNumber = Column(String(255), comment="分单号")
+    masterNumber = Column(String(255), comment="主单号id")
+    unNumber = Column(String(255), comment="UN编号")
+    unNumberId = Column(String(255), comment="UN编号id")
+    MAIN_DANGEROUS_ID = Column(Integer, comment="主要危险品ID")
+    packaging_category = Column(String(255), comment="包装类别")
+    product_name = Column(String(255), comment="品名")
+    TechnicalName = Column(String(255), comment="技术名称")
+    productNameSelect = Column(String(255), comment="两个特殊下拉项")
+    difference = Column(String(255))
+
 class t_bgs_packing_dictionaries(Base):
     """
     包装名称表

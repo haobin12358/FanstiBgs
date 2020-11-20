@@ -355,8 +355,10 @@ class CShipping:
             check_no = item.check_no
             if str(check_no).split(".")[-1] == "0":
                 check_no = str(int(check_no))
+                item.check_no = str(int(check_no))
             else:
                 check_no = str(check_no)
+                item.check_no = str(check_no)
 
             check_message_dict = self.get_checklist_abo(check_no, check_type, args.get("master_id"))
             if check_message_dict["result"]:
@@ -432,11 +434,15 @@ class CShipping:
                             "status_code": 405010,
                             "message": "第{0}项未选择".format(item.get("check_no"))
                         }
+                    if len(item.get("check_no").split(".")) == 2:
+                        check_no = float(item.get("check_no"))
+                    else:
+                        check_no = int(item.get("check_no"))
                     history_item_dict = {
                         "id": str(uuid.uuid1()),
                         "check_id": item.get("id"),
                         "history_id": history_id,
-                        "check_no": item.get("check_no"),
+                        "check_no": check_no,
                         "check_item": item.get("check_item"),
                         "check_genre": item.get("check_genre"),
                         "check_answer": item.get("answer")
@@ -858,6 +864,11 @@ class CShipping:
                 return {
                     "result": None,
                     "message": message_dep + "<br/>" + message_tra
+                }
+            else:
+                return {
+                    "result": None,
+                    "message": None
                 }
         else:
             return {
