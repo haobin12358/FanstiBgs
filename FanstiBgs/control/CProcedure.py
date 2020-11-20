@@ -87,7 +87,8 @@ class CProcedure:
             if main_port:
                 procedure_dict["port_of_departure"] = main_port.port_of_departure
                 procedure_dict["destination_port"] = main_port.destination_port
-                procedure_dict["product_number"] = main_port.packNumber
+                # TODO 数量需要等甲方确认逻辑
+                procedure_dict["product_number"] = 0
             with db.auto_commit():
                 procedure_instance = an_procedure.create(procedure_dict)
                 db.session.add(procedure_instance)
