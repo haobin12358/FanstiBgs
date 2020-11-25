@@ -537,6 +537,2392 @@ class CShipping:
                     }
                 history_instance = an_check_history.create(history_dict)
                 db.session.add(history_instance)
+            with db.auto_commit():
+                if times == "second":
+                    # TODO 替换正常格式的html_body
+                    html_body = ""
+                    if args.get("check_type") == "nonradiative":
+                        with open("../non-radioactive.html", 'r', encoding='utf-8') as f:
+                            html_body = f.read()
+                        check_history = an_check_history.query.filter(
+                            an_check_history.master_id == args.get("master_id"),
+                            an_check_history.times == "second") \
+                            .first_("数据库异常")
+                        history_id = check_history.id
+                        main_port = t_bgs_main_single_number.query.filter(
+                            t_bgs_main_single_number.id == args.get("master_id")).first()
+                        title_0 = datetime.datetime.now().year
+                        title_1 = datetime.datetime.now().year - 2020 + 61
+                        title_2 = datetime.datetime.now().year
+                        title_3 = main_port.master_number
+                        title_4 = main_port.port_of_departure or "PEK"
+                        title_5 = main_port.destination_port or "No Available"
+
+                        item_1 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 1).first()
+                        if item_1.check_answer == "YES":
+                            title_6 = "√"
+                            title_7 = "<br/>"
+                            title_8 = "<br/>"
+                        elif item_1.check_answer == "NO":
+                            title_6 = "<br/>"
+                            title_7 = "√"
+                            title_8 = "<br/>"
+                        else:
+                            title_6 = "<br/>"
+                            title_7 = "<br/>"
+                            title_8 = "√"
+
+                        item_2 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 2).first()
+                        if item_2.check_answer == "YES":
+                            title_9 = "√"
+                            title_10 = "<br/>"
+                            title_11 = "<br/>"
+                        elif item_2.check_answer == "NO":
+                            title_9 = "<br/>"
+                            title_10 = "√"
+                            title_11 = "<br/>"
+                        else:
+                            title_9 = "<br/>"
+                            title_10 = "<br/>"
+                            title_11 = "√"
+
+                        item_3 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 3).first()
+                        if item_3.check_answer == "YES":
+                            title_12 = "√"
+                            title_13 = "<br/>"
+                            title_14 = "<br/>"
+                        elif item_3.check_answer == "NO":
+                            title_12 = "<br/>"
+                            title_13 = "√"
+                            title_14 = "<br/>"
+                        else:
+                            title_12 = "<br/>"
+                            title_13 = "<br/>"
+                            title_14 = "√"
+
+                        item_4 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 4).first()
+                        if item_4.check_answer == "YES":
+                            title_15 = "√"
+                            title_16 = "<br/>"
+                            title_17 = "<br/>"
+                        elif item_4.check_answer == "NO":
+                            title_15 = "<br/>"
+                            title_16 = "√"
+                            title_17 = "<br/>"
+                        else:
+                            title_15 = "<br/>"
+                            title_16 = "<br/>"
+                            title_17 = "√"
+
+                        item_5 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 5).first()
+                        if item_5.check_answer == "YES":
+                            title_18 = "√"
+                            title_19 = "<br/>"
+                            title_20 = "<br/>"
+                        elif item_5.check_answer == "NO":
+                            title_18 = "<br/>"
+                            title_19 = "√"
+                            title_20 = "<br/>"
+                        else:
+                            title_18 = "<br/>"
+                            title_19 = "<br/>"
+                            title_20 = "√"
+
+                        item_6 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 6).first()
+                        if item_6.check_answer == "YES":
+                            title_21 = "√"
+                            title_22 = "<br/>"
+                            title_23 = "<br/>"
+                        elif item_6.check_answer == "NO":
+                            title_21 = "<br/>"
+                            title_22 = "√"
+                            title_23 = "<br/>"
+                        else:
+                            title_21 = "<br/>"
+                            title_22 = "<br/>"
+                            title_23 = "√"
+
+                        item_7 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 7).first()
+                        if item_7.check_answer == "YES":
+                            title_24 = "√"
+                            title_25 = "<br/>"
+                            title_16 = "<br/>"
+                        elif item_7.check_answer == "NO":
+                            title_24 = "<br/>"
+                            title_25 = "√"
+                            title_26 = "<br/>"
+                        else:
+                            title_24 = "<br/>"
+                            title_25 = "<br/>"
+                            title_26 = "√"
+
+                        item_8 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 8).first()
+                        if item_8.check_answer == "YES":
+                            title_27 = "√"
+                            title_28 = "<br/>"
+                            title_29 = "<br/>"
+                        elif item_8.check_answer == "NO":
+                            title_27 = "<br/>"
+                            title_28 = "√"
+                            title_29 = "<br/>"
+                        else:
+                            title_27 = "<br/>"
+                            title_28 = "<br/>"
+                            title_29 = "√"
+
+                        item_9 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 9).first()
+                        if item_9.check_answer == "YES":
+                            title_30 = "√"
+                            title_31 = "<br/>"
+                            title_32 = "<br/>"
+                        elif item_9.check_answer == "NO":
+                            title_30 = "<br/>"
+                            title_31 = "√"
+                            title_32 = "<br/>"
+                        else:
+                            title_30 = "<br/>"
+                            title_31 = "<br/>"
+                            title_32 = "√"
+
+                        item_10 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 10).first()
+                        if item_10.check_answer == "YES":
+                            title_33 = "√"
+                            title_34 = "<br/>"
+                            title_35 = "<br/>"
+                        elif item_10.check_answer == "NO":
+                            title_33 = "<br/>"
+                            title_34 = "√"
+                            title_35 = "<br/>"
+                        else:
+                            title_33 = "<br/>"
+                            title_34 = "<br/>"
+                            title_35 = "√"
+
+                        item_11 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 11).first()
+                        if item_11.check_answer == "YES":
+                            title_36 = "√"
+                            title_37 = "<br/>"
+                            title_38 = "<br/>"
+                        elif item_11.check_answer == "NO":
+                            title_36 = "<br/>"
+                            title_37 = "√"
+                            title_38 = "<br/>"
+                        else:
+                            title_36 = "<br/>"
+                            title_37 = "<br/>"
+                            title_38 = "√"
+
+                        item_12 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 12).first()
+                        if item_12.check_answer == "YES":
+                            title_39 = "√"
+                            title_40 = "<br/>"
+                            title_41 = "<br/>"
+                        elif item_12.check_answer == "NO":
+                            title_39 = "<br/>"
+                            title_40 = "√"
+                            title_41 = "<br/>"
+                        else:
+                            title_39 = "<br/>"
+                            title_40 = "<br/>"
+                            title_41 = "√"
+
+                        item_13 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 13).first()
+                        if item_13.check_answer == "YES":
+                            title_42 = "√"
+                            title_43 = "<br/>"
+                            title_44 = "<br/>"
+                        elif item_13.check_answer == "NO":
+                            title_42 = "<br/>"
+                            title_43 = "√"
+                            title_44 = "<br/>"
+                        else:
+                            title_42 = "<br/>"
+                            title_43 = "<br/>"
+                            title_44 = "√"
+
+                        item_14 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 14).first()
+                        if item_14.check_answer == "YES":
+                            title_45 = "√"
+                            title_46 = "<br/>"
+                            title_47 = "<br/>"
+                        elif item_14.check_answer == "NO":
+                            title_45 = "<br/>"
+                            title_46 = "√"
+                            title_47 = "<br/>"
+                        else:
+                            title_45 = "<br/>"
+                            title_46 = "<br/>"
+                            title_47 = "√"
+
+                        item_15 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 15).first()
+                        if item_15.check_answer == "YES":
+                            title_48 = "√"
+                            title_49 = "<br/>"
+                            title_50 = "<br/>"
+                        elif item_15.check_answer == "NO":
+                            title_48 = "<br/>"
+                            title_49 = "√"
+                            title_50 = "<br/>"
+                        else:
+                            title_48 = "<br/>"
+                            title_49 = "<br/>"
+                            title_50 = "√"
+
+                        item_16 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 16.1).first()
+                        if item_16.check_answer == "YES":
+                            title_51 = "√"
+                            title_52 = "<br/>"
+                            title_53 = "<br/>"
+                        elif item_16.check_answer == "NO":
+                            title_51 = "<br/>"
+                            title_52 = "√"
+                            title_53 = "<br/>"
+                        else:
+                            title_51 = "<br/>"
+                            title_52 = "<br/>"
+                            title_53 = "√"
+
+                        item_17 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 16.2).first()
+                        if item_17.check_answer == "YES":
+                            title_54 = "√"
+                            title_55 = "<br/>"
+                            title_56 = "<br/>"
+                        elif item_17.check_answer == "NO":
+                            title_54 = "<br/>"
+                            title_55 = "√"
+                            title_56 = "<br/>"
+                        else:
+                            title_54 = "<br/>"
+                            title_55 = "<br/>"
+                            title_56 = "√"
+
+                        item_18 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 16.3).first()
+                        if item_18.check_answer == "YES":
+                            title_57 = "√"
+                            title_58 = "<br/>"
+                            title_59 = "<br/>"
+                        elif item_18.check_answer == "NO":
+                            title_57 = "<br/>"
+                            title_58 = "√"
+                            title_59 = "<br/>"
+                        else:
+                            title_57 = "<br/>"
+                            title_58 = "<br/>"
+                            title_59 = "√"
+
+                        item_19 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 16.4).first()
+                        if item_19.check_answer == "YES":
+                            title_60 = "√"
+                            title_61 = "<br/>"
+                            title_62 = "<br/>"
+                        elif item_19.check_answer == "NO":
+                            title_60 = "<br/>"
+                            title_61 = "√"
+                            title_62 = "<br/>"
+                        else:
+                            title_60 = "<br/>"
+                            title_61 = "<br/>"
+                            title_62 = "√"
+
+                        item_20 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 17.1).first()
+                        if item_20.check_answer == "YES":
+                            title_63 = "√"
+                            title_64 = "<br/>"
+                            title_65 = "<br/>"
+                        elif item_20.check_answer == "NO":
+                            title_63 = "<br/>"
+                            title_64 = "√"
+                            title_65 = "<br/>"
+                        else:
+                            title_63 = "<br/>"
+                            title_64 = "<br/>"
+                            title_65 = "√"
+
+                        item_21 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 17.2).first()
+                        if item_21.check_answer == "YES":
+                            title_66 = "√"
+                            title_67 = "<br/>"
+                            title_68 = "<br/>"
+                        elif item_21.check_answer == "NO":
+                            title_66 = "<br/>"
+                            title_67 = "√"
+                            title_68 = "<br/>"
+                        else:
+                            title_66 = "<br/>"
+                            title_67 = "<br/>"
+                            title_68 = "√"
+
+                        item_22 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 17.3).first()
+                        if item_22.check_answer == "YES":
+                            title_69 = "√"
+                            title_70 = "<br/>"
+                            title_71 = "<br/>"
+                        elif item_22.check_answer == "NO":
+                            title_69 = "<br/>"
+                            title_70 = "√"
+                            title_71 = "<br/>"
+                        else:
+                            title_69 = "<br/>"
+                            title_70 = "<br/>"
+                            title_71 = "√"
+
+                        item_23 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 18).first()
+                        if item_23.check_answer == "YES":
+                            title_72 = "√"
+                            title_73 = "<br/>"
+                            title_74 = "<br/>"
+                        elif item_23.check_answer == "NO":
+                            title_72 = "<br/>"
+                            title_73 = "√"
+                            title_74 = "<br/>"
+                        else:
+                            title_72 = "<br/>"
+                            title_73 = "<br/>"
+                            title_74 = "√"
+
+                        item_24 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 19).first()
+                        if item_24.check_answer == "YES":
+                            title_75 = "√"
+                            title_76 = "<br/>"
+                            title_77 = "<br/>"
+                        elif item_24.check_answer == "NO":
+                            title_75 = "<br/>"
+                            title_76 = "√"
+                            title_77 = "<br/>"
+                        else:
+                            title_75 = "<br/>"
+                            title_76 = "<br/>"
+                            title_77 = "√"
+
+                        item_25 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 20).first()
+                        if item_25.check_answer == "YES":
+                            title_78 = "√"
+                            title_79 = "<br/>"
+                            title_80 = "<br/>"
+                        elif item_25.check_answer == "NO":
+                            title_78 = "<br/>"
+                            title_79 = "√"
+                            title_80 = "<br/>"
+                        else:
+                            title_78 = "<br/>"
+                            title_79 = "<br/>"
+                            title_80 = "√"
+
+                        item_26 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 21).first()
+                        if item_26.check_answer == "YES":
+                            title_81 = "√"
+                            title_82 = "<br/>"
+                            title_83 = "<br/>"
+                        elif item_26.check_answer == "NO":
+                            title_81 = "<br/>"
+                            title_82 = "√"
+                            title_83 = "<br/>"
+                        else:
+                            title_81 = "<br/>"
+                            title_82 = "<br/>"
+                            title_83 = "√"
+
+                        item_27 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 22).first()
+                        if item_27.check_answer == "YES":
+                            title_84 = "√"
+                            title_85 = "<br/>"
+                            title_86 = "<br/>"
+                        elif item_27.check_answer == "NO":
+                            title_84 = "<br/>"
+                            title_85 = "√"
+                            title_86 = "<br/>"
+                        else:
+                            title_84 = "<br/>"
+                            title_85 = "<br/>"
+                            title_86 = "√"
+
+                        item_28 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 23).first()
+                        if item_28.check_answer == "YES":
+                            title_87 = "√"
+                            title_88 = "<br/>"
+                            title_89 = "<br/>"
+                        elif item_28.check_answer == "NO":
+                            title_87 = "<br/>"
+                            title_88 = "√"
+                            title_89 = "<br/>"
+                        else:
+                            title_87 = "<br/>"
+                            title_88 = "<br/>"
+                            title_89 = "√"
+
+                        item_29 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 24).first()
+                        if item_29.check_answer == "YES":
+                            title_90 = "√"
+                            title_91 = "<br/>"
+                            title_92 = "<br/>"
+                        elif item_29.check_answer == "NO":
+                            title_90 = "<br/>"
+                            title_91 = "√"
+                            title_92 = "<br/>"
+                        else:
+                            title_90 = "<br/>"
+                            title_91 = "<br/>"
+                            title_92 = "√"
+
+                        item_30 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 25).first()
+                        if item_30.check_answer == "YES":
+                            title_93 = "√"
+                            title_94 = "<br/>"
+                            title_95 = "<br/>"
+                        elif item_30.check_answer == "NO":
+                            title_93 = "<br/>"
+                            title_94 = "√"
+                            title_95 = "<br/>"
+                        else:
+                            title_93 = "<br/>"
+                            title_94 = "<br/>"
+                            title_95 = "√"
+
+                        item_31 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 26).first()
+                        if item_31.check_answer == "YES":
+                            title_96 = "√"
+                            title_97 = "<br/>"
+                            title_98 = "<br/>"
+                        elif item_31.check_answer == "NO":
+                            title_96 = "<br/>"
+                            title_97 = "√"
+                            title_98 = "<br/>"
+                        else:
+                            title_96 = "<br/>"
+                            title_97 = "<br/>"
+                            title_98 = "√"
+
+                        item_32 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 27).first()
+                        if item_32.check_answer == "YES":
+                            title_99 = "√"
+                            title_100 = "<br/>"
+                            title_101 = "<br/>"
+                        elif item_32.check_answer == "NO":
+                            title_99 = "<br/>"
+                            title_100 = "√"
+                            title_101 = "<br/>"
+                        else:
+                            title_99 = "<br/>"
+                            title_100 = "<br/>"
+                            title_101 = "√"
+
+                        item_33 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 28).first()
+                        if item_33.check_answer == "YES":
+                            title_102 = "√"
+                            title_103 = "<br/>"
+                            title_104 = "<br/>"
+                        elif item_33.check_answer == "NO":
+                            title_102 = "<br/>"
+                            title_103 = "√"
+                            title_104 = "<br/>"
+                        else:
+                            title_102 = "<br/>"
+                            title_103 = "<br/>"
+                            title_104 = "√"
+
+                        item_34 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 29).first()
+                        if item_34.check_answer == "YES":
+                            title_105 = "√"
+                            title_106 = "<br/>"
+                            title_107 = "<br/>"
+                        elif item_34.check_answer == "NO":
+                            title_105 = "<br/>"
+                            title_106 = "√"
+                            title_107 = "<br/>"
+                        else:
+                            title_105 = "<br/>"
+                            title_106 = "<br/>"
+                            title_107 = "√"
+
+                        item_35 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 30).first()
+                        if item_35.check_answer == "YES":
+                            title_108 = "√"
+                            title_109 = "<br/>"
+                            title_110 = "<br/>"
+                        elif item_35.check_answer == "NO":
+                            title_108 = "<br/>"
+                            title_109 = "√"
+                            title_110 = "<br/>"
+                        else:
+                            title_108 = "<br/>"
+                            title_109 = "<br/>"
+                            title_110 = "√"
+
+                        item_36 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 31.1).first()
+                        if item_36.check_answer == "YES":
+                            title_111 = "√"
+                            title_112 = "<br/>"
+                            title_113 = "<br/>"
+                        elif item_36.check_answer == "NO":
+                            title_111 = "<br/>"
+                            title_112 = "√"
+                            title_113 = "<br/>"
+                        else:
+                            title_111 = "<br/>"
+                            title_112 = "<br/>"
+                            title_113 = "√"
+
+                        item_37 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 31.2).first()
+                        if item_37.check_answer == "YES":
+                            title_114 = "√"
+                            title_115 = "<br/>"
+                            title_116 = "<br/>"
+                        elif item_37.check_answer == "NO":
+                            title_114 = "<br/>"
+                            title_115 = "√"
+                            title_116 = "<br/>"
+                        else:
+                            title_114 = "<br/>"
+                            title_115 = "<br/>"
+                            title_116 = "√"
+
+                        item_38 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 31.3).first()
+                        if item_38.check_answer == "YES":
+                            title_117 = "√"
+                            title_118 = "<br/>"
+                            title_119 = "<br/>"
+                        elif item_38.check_answer == "NO":
+                            title_117 = "<br/>"
+                            title_118 = "√"
+                            title_119 = "<br/>"
+                        else:
+                            title_117 = "<br/>"
+                            title_118 = "<br/>"
+                            title_119 = "√"
+
+                        item_39 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 31.4).first()
+                        if item_39.check_answer == "YES":
+                            title_120 = "√"
+                            title_121 = "<br/>"
+                            title_122 = "<br/>"
+                        elif item_39.check_answer == "NO":
+                            title_120 = "<br/>"
+                            title_121 = "√"
+                            title_122 = "<br/>"
+                        else:
+                            title_120 = "<br/>"
+                            title_121 = "<br/>"
+                            title_122 = "√"
+
+                        item_40 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 31.5).first()
+                        if item_40.check_answer == "YES":
+                            title_123 = "√"
+                            title_124 = "<br/>"
+                            title_125 = "<br/>"
+                        elif item_40.check_answer == "NO":
+                            title_123 = "<br/>"
+                            title_124 = "√"
+                            title_125 = "<br/>"
+                        else:
+                            title_123 = "<br/>"
+                            title_124 = "<br/>"
+                            title_125 = "√"
+
+                        item_41 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 32).first()
+                        if item_41.check_answer == "YES":
+                            title_126 = "√"
+                            title_127 = "<br/>"
+                            title_128 = "<br/>"
+                        elif item_41.check_answer == "NO":
+                            title_126 = "<br/>"
+                            title_127 = "√"
+                            title_128 = "<br/>"
+                        else:
+                            title_126 = "<br/>"
+                            title_127 = "<br/>"
+                            title_128 = "√"
+
+                        item_42 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 33).first()
+                        if item_42.check_answer == "YES":
+                            title_129 = "√"
+                            title_130 = "<br/>"
+                            title_131 = "<br/>"
+                        elif item_42.check_answer == "NO":
+                            title_129 = "<br/>"
+                            title_130 = "√"
+                            title_131 = "<br/>"
+                        else:
+                            title_129 = "<br/>"
+                            title_130 = "<br/>"
+                            title_131 = "√"
+
+                        item_43 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 34).first()
+                        if item_43.check_answer == "YES":
+                            title_132 = "√"
+                            title_133 = "<br/>"
+                            title_134 = "<br/>"
+                        elif item_43.check_answer == "NO":
+                            title_132 = "<br/>"
+                            title_133 = "√"
+                            title_134 = "<br/>"
+                        else:
+                            title_132 = "<br/>"
+                            title_133 = "<br/>"
+                            title_134 = "√"
+
+                        item_44 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 35).first()
+                        if item_44.check_answer == "YES":
+                            title_135 = "√"
+                            title_136 = "<br/>"
+                            title_137 = "<br/>"
+                        elif item_44.check_answer == "NO":
+                            title_135 = "<br/>"
+                            title_136 = "√"
+                            title_137 = "<br/>"
+                        else:
+                            title_135 = "<br/>"
+                            title_136 = "<br/>"
+                            title_137 = "√"
+
+                        item_45 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 36).first()
+                        if item_45.check_answer == "YES":
+                            title_138 = "√"
+                            title_139 = "<br/>"
+                            title_140 = "<br/>"
+                        elif item_45.check_answer == "NO":
+                            title_138 = "<br/>"
+                            title_139 = "√"
+                            title_140 = "<br/>"
+                        else:
+                            title_138 = "<br/>"
+                            title_139 = "<br/>"
+                            title_140 = "√"
+
+                        item_46 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 37).first()
+                        if item_46.check_answer == "YES":
+                            title_141 = "√"
+                            title_142 = "<br/>"
+                            title_143 = "<br/>"
+                        elif item_46.check_answer == "NO":
+                            title_141 = "<br/>"
+                            title_142 = "√"
+                            title_143 = "<br/>"
+                        else:
+                            title_141 = "<br/>"
+                            title_142 = "<br/>"
+                            title_143 = "√"
+
+                        item_47 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 38).first()
+                        if item_47.check_answer == "YES":
+                            title_144 = "√"
+                            title_145 = "<br/>"
+                            title_146 = "<br/>"
+                        elif item_47.check_answer == "NO":
+                            title_144 = "<br/>"
+                            title_145 = "√"
+                            title_146 = "<br/>"
+                        else:
+                            title_144 = "<br/>"
+                            title_145 = "<br/>"
+                            title_146 = "√"
+
+                        item_48 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 39).first()
+                        if item_48.check_answer == "YES":
+                            title_147 = "√"
+                            title_148 = "<br/>"
+                            title_149 = "<br/>"
+                        elif item_48.check_answer == "NO":
+                            title_147 = "<br/>"
+                            title_148 = "√"
+                            title_149 = "<br/>"
+                        else:
+                            title_147 = "<br/>"
+                            title_148 = "<br/>"
+                            title_149 = "√"
+
+                        item_49 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 40).first()
+                        if item_49.check_answer == "YES":
+                            title_150 = "√"
+                            title_151 = "<br/>"
+                            title_152 = "<br/>"
+                        elif item_49.check_answer == "NO":
+                            title_150 = "<br/>"
+                            title_151 = "√"
+                            title_152 = "<br/>"
+                        else:
+                            title_150 = "<br/>"
+                            title_151 = "<br/>"
+                            title_152 = "√"
+
+                        item_50 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 41).first()
+                        if item_50.check_answer == "YES":
+                            title_153 = "√"
+                            title_154 = "<br/>"
+                            title_155 = "<br/>"
+                        elif item_50.check_answer == "NO":
+                            title_153 = "<br/>"
+                            title_154 = "√"
+                            title_155 = "<br/>"
+                        else:
+                            title_153 = "<br/>"
+                            title_154 = "<br/>"
+                            title_155 = "√"
+
+                        item_51 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 42).first()
+                        if item_51.check_answer == "YES":
+                            title_156 = "√"
+                            title_157 = "<br/>"
+                            title_158 = "<br/>"
+                        elif item_51.check_answer == "NO":
+                            title_156 = "<br/>"
+                            title_157 = "√"
+                            title_158 = "<br/>"
+                        else:
+                            title_156 = "<br/>"
+                            title_157 = "<br/>"
+                            title_158 = "√"
+
+                        item_52 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 43).first()
+                        if item_52.check_answer == "YES":
+                            title_159 = "√"
+                            title_160 = "<br/>"
+                            title_161 = "<br/>"
+                        elif item_52.check_answer == "NO":
+                            title_159 = "<br/>"
+                            title_160 = "√"
+                            title_161 = "<br/>"
+                        else:
+                            title_159 = "<br/>"
+                            title_160 = "<br/>"
+                            title_161 = "√"
+
+                        item_53 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 44).first()
+                        if item_53.check_answer == "YES":
+                            title_162 = "√"
+                            title_163 = "<br/>"
+                            title_164 = "<br/>"
+                        elif item_53.check_answer == "NO":
+                            title_162 = "<br/>"
+                            title_163 = "√"
+                            title_164 = "<br/>"
+                        else:
+                            title_162 = "<br/>"
+                            title_163 = "<br/>"
+                            title_164 = "√"
+
+                        item_54 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 45).first()
+                        if item_54.check_answer == "YES":
+                            title_165 = "√"
+                            title_166 = "<br/>"
+                            title_167 = "<br/>"
+                        elif item_54.check_answer == "NO":
+                            title_165 = "<br/>"
+                            title_166 = "√"
+                            title_167 = "<br/>"
+                        else:
+                            title_165 = "<br/>"
+                            title_166 = "<br/>"
+                            title_167 = "√"
+
+                        item_55 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 46).first()
+                        if item_55.check_answer == "YES":
+                            title_168 = "√"
+                            title_169 = "<br/>"
+                            title_170 = "<br/>"
+                        elif item_55.check_answer == "NO":
+                            title_168 = "<br/>"
+                            title_169 = "√"
+                            title_170 = "<br/>"
+                        else:
+                            title_168 = "<br/>"
+                            title_169 = "<br/>"
+                            title_170 = "√"
+
+                        item_56 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 47).first()
+                        if item_56.check_answer == "YES":
+                            title_171 = "√"
+                            title_172 = "<br/>"
+                            title_173 = "<br/>"
+                        elif item_56.check_answer == "NO":
+                            title_171 = "<br/>"
+                            title_172 = "√"
+                            title_173 = "<br/>"
+                        else:
+                            title_171 = "<br/>"
+                            title_172 = "<br/>"
+                            title_173 = "√"
+
+                        item_57 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 48).first()
+                        if item_57.check_answer == "YES":
+                            title_174 = "√"
+                            title_175 = "<br/>"
+                            title_176 = "<br/>"
+                        elif item_57.check_answer == "NO":
+                            title_174 = "<br/>"
+                            title_175 = "√"
+                            title_176 = "<br/>"
+                        else:
+                            title_174 = "<br/>"
+                            title_175 = "<br/>"
+                            title_176 = "√"
+
+                        item_58 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 49).first()
+                        if item_58.check_answer == "YES":
+                            title_177 = "√"
+                            title_178 = "<br/>"
+                            title_179 = "<br/>"
+                        elif item_58.check_answer == "NO":
+                            title_177 = "<br/>"
+                            title_178 = "√"
+                            title_179 = "<br/>"
+                        else:
+                            title_177 = "<br/>"
+                            title_178 = "<br/>"
+                            title_179 = "√"
+
+                        item_59 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 50).first()
+                        if item_59.check_answer == "YES":
+                            title_180 = "√"
+                            title_181 = "<br/>"
+                            title_182 = "<br/>"
+                        elif item_59.check_answer == "NO":
+                            title_180 = "<br/>"
+                            title_181 = "√"
+                            title_182 = "<br/>"
+                        else:
+                            title_180 = "<br/>"
+                            title_181 = "<br/>"
+                            title_182 = "√"
+
+                        item_60 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 51).first()
+                        if item_60.check_answer == "YES":
+                            title_183 = "√"
+                            title_184 = "<br/>"
+                            title_185 = "<br/>"
+                        elif item_60.check_answer == "NO":
+                            title_183 = "<br/>"
+                            title_184 = "√"
+                            title_185 = "<br/>"
+                        else:
+                            title_183 = "<br/>"
+                            title_184 = "<br/>"
+                            title_185 = "√"
+
+                        item_61 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 52).first()
+                        if item_61.check_answer == "YES":
+                            title_186 = "√"
+                            title_187 = "<br/>"
+                            title_188 = "<br/>"
+                        elif item_61.check_answer == "NO":
+                            title_186 = "<br/>"
+                            title_187 = "√"
+                            title_188 = "<br/>"
+                        else:
+                            title_186 = "<br/>"
+                            title_187 = "<br/>"
+                            title_188 = "√"
+
+                        item_62 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 53).first()
+                        if item_62.check_answer == "YES":
+                            title_189 = "√"
+                            title_190 = "<br/>"
+                            title_191 = "<br/>"
+                        elif item_62.check_answer == "NO":
+                            title_189 = "<br/>"
+                            title_190 = "√"
+                            title_191 = "<br/>"
+                        else:
+                            title_189 = "<br/>"
+                            title_190 = "<br/>"
+                            title_191 = "√"
+
+                        title_192 = check_history.user_name
+                        title_193 = main_port.port_of_departure or "PEK"
+                        title_194 = check_history.user_name
+                        title_195 = str(check_history.createtime.year) + "/" + str(check_history.createtime.month) + "/" \
+                                    + str(check_history.createtime.day)
+                        title_196 = str(check_history.createtime.hour) + ":" + str(check_history.createtime.minute) + ":" \
+                                    + str(check_history.createtime.second)
+                        html_body.format(
+                            title_0, title_1, title_2, title_3, title_4, title_5, title_6, title_7, title_8, title_9,
+                            title_10, title_11, title_12, title_13, title_14, title_15, title_16, title_17, title_18, title_19,
+                            title_20, title_21, title_22, title_23, title_24, title_25, title_26, title_27, title_28, title_29,
+                            title_30, title_31, title_32, title_33, title_34, title_35, title_36, title_37, title_38, title_39,
+                            title_40, title_41, title_42, title_43, title_44, title_45, title_46, title_47, title_48, title_49,
+                            title_50, title_51, title_52, title_53, title_54, title_55, title_56, title_57, title_58, title_59,
+                            title_60, title_61, title_62, title_63, title_64, title_65, title_66, title_67, title_68, title_69,
+                            title_70, title_71, title_72, title_73, title_74, title_75, title_76, title_77, title_78, title_79,
+                            title_80, title_81, title_82, title_83, title_84, title_85, title_86, title_87, title_88, title_89,
+                            title_90, title_91, title_92, title_93, title_94, title_95, title_96, title_97, title_98, title_99,
+                            title_100, title_101, title_102, title_103, title_104, title_105, title_106, title_107, title_108, title_109,
+                            title_110, title_111, title_112, title_113, title_114, title_115, title_116, title_117, title_118, title_119,
+                            title_120, title_121, title_122, title_123, title_124, title_125, title_126, title_127, title_128, title_129,
+                            title_130, title_131, title_132, title_133, title_134, title_135, title_136, title_137, title_138, title_139,
+                            title_140, title_141, title_142, title_143, title_144, title_145, title_146, title_147, title_148, title_149,
+                            title_150, title_151, title_152, title_153, title_154, title_155, title_156, title_157, title_158, title_159,
+                            title_160, title_161, title_162, title_163, title_164, title_165, title_166, title_167, title_168, title_169,
+                            title_170, title_171, title_172, title_173, title_174, title_175, title_176, title_177, title_178, title_179,
+                            title_180, title_181, title_182, title_183, title_184, title_185, title_186, title_187, title_188, title_189,
+                            title_190, title_191, title_192, title_193, title_194, title_195, title_196
+                        )
+                    elif args.get("check_type") == "lithium cell":
+                        with open("../lithium.html", 'r', encoding='utf-8') as f:
+                            html_body = f.read()
+                        check_history = an_check_history.query.filter(
+                            an_check_history.master_id == args.get("master_id"),
+                            an_check_history.times == "second") \
+                            .first_("数据库异常")
+                        history_id = check_history.id
+                        main_port = t_bgs_main_single_number.query.filter(
+                            t_bgs_main_single_number.id == args.get("master_id")).first()
+                        title_0 = main_port.master_number
+                        title_43 = main_port.master_number
+                        count_no = 0
+                        item_1 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 1).first()
+                        if item_1.check_answer == "YES":
+                            title_1 = "√"
+                            title_2 = "<br/>"
+                            title_3 = "<br/>"
+                        elif item_1.check_answer == "NO":
+                            title_1 = "<br/>"
+                            title_2 = "√"
+                            title_3 = "<br/>"
+                            count_no += 1
+                        else:
+                            title_1 = "<br/>"
+                            title_2 = "<br/>"
+                            title_3 = "√"
+                        item_2 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 2).first()
+                        if item_2.check_answer == "YES":
+                            title_4 = "√"
+                            title_5 = "<br/>"
+                            title_6 = "<br/>"
+                        elif item_2.check_answer == "NO":
+                            title_4 = "<br/>"
+                            title_5 = "√"
+                            title_6 = "<br/>"
+                            count_no += 1
+                        else:
+                            title_4 = "<br/>"
+                            title_5 = "<br/>"
+                            title_6 = "√"
+                        item_3 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 3).first()
+                        if item_3.check_answer == "YES":
+                            title_7 = "√"
+                            title_8 = "<br/>"
+                            title_9 = "<br/>"
+                        elif item_3.check_answer == "NO":
+                            title_7 = "<br/>"
+                            title_8 = "√"
+                            title_9 = "<br/>"
+                            count_no += 1
+                        else:
+                            title_7 = "<br/>"
+                            title_8 = "<br/>"
+                            title_9 = "√"
+                        item_4 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 4).first()
+                        if item_4.check_answer == "YES":
+                            title_10 = "√"
+                            title_11 = "<br/>"
+                            title_12 = "<br/>"
+                        elif item_4.check_answer == "NO":
+                            title_10 = "<br/>"
+                            title_11 = "√"
+                            title_12 = "<br/>"
+                            count_no += 1
+                        else:
+                            title_10 = "<br/>"
+                            title_11 = "<br/>"
+                            title_12 = "√"
+                        item_5 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 5).first()
+                        if item_5.check_answer == "YES":
+                            title_13 = "√"
+                            title_14 = "<br/>"
+                            title_15 = "<br/>"
+                        elif item_5.check_answer == "NO":
+                            title_13 = "<br/>"
+                            title_14 = "√"
+                            title_15 = "<br/>"
+                            count_no += 1
+                        else:
+                            title_13 = "<br/>"
+                            title_14 = "<br/>"
+                            title_15 = "√"
+                        item_6 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 6).first()
+                        if item_6.check_answer == "YES":
+                            title_16 = "√"
+                            title_17 = "<br/>"
+                            title_18 = "<br/>"
+                        elif item_6.check_answer == "NO":
+                            title_16 = "<br/>"
+                            title_17 = "√"
+                            title_18 = "<br/>"
+                            count_no += 1
+                        else:
+                            title_16 = "<br/>"
+                            title_17 = "<br/>"
+                            title_18 = "√"
+                        item_7 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 7).first()
+                        if item_7.check_answer == "YES":
+                            title_19 = "√"
+                            title_20 = "<br/>"
+                            title_21 = "<br/>"
+                        elif item_7.check_answer == "NO":
+                            title_19 = "<br/>"
+                            title_20 = "√"
+                            title_21 = "<br/>"
+                            count_no += 1
+                        else:
+                            title_19 = "<br/>"
+                            title_20 = "<br/>"
+                            title_21 = "√"
+                        item_8 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 8).first()
+                        if item_8.check_answer == "YES":
+                            title_22 = "√"
+                            title_23 = "<br/>"
+                            title_24 = "<br/>"
+                        elif item_8.check_answer == "NO":
+                            title_22 = "<br/>"
+                            title_23 = "√"
+                            title_24 = "<br/>"
+                            count_no += 1
+                        else:
+                            title_22 = "<br/>"
+                            title_23 = "<br/>"
+                            title_24 = "√"
+                        item_9 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 9).first()
+                        if item_9.check_answer == "YES":
+                            title_25 = "√"
+                            title_26 = "<br/>"
+                            title_27 = "<br/>"
+                        elif item_9.check_answer == "NO":
+                            title_25 = "<br/>"
+                            title_26 = "√"
+                            title_27 = "<br/>"
+                            count_no += 1
+                        else:
+                            title_25 = "<br/>"
+                            title_26 = "<br/>"
+                            title_27 = "√"
+                        item_10 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                     an_check_history_item.check_no == 10).first()
+                        if item_10.check_answer == "YES":
+                            title_28 = "√"
+                            title_29 = "<br/>"
+                            title_30 = "<br/>"
+                        elif item_10.check_answer == "NO":
+                            title_28 = "<br/>"
+                            title_29 = "√"
+                            title_30 = "<br/>"
+                            count_no += 1
+                        else:
+                            title_28 = "<br/>"
+                            title_29 = "<br/>"
+                            title_30 = "√"
+                        item_11 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                     an_check_history_item.check_no == 11).first()
+                        if item_11.check_answer == "YES":
+                            title_31 = "√"
+                            title_32 = "<br/>"
+                            title_33 = "<br/>"
+                        elif item_11.check_answer == "NO":
+                            title_31 = "<br/>"
+                            title_32 = "√"
+                            title_33 = "<br/>"
+                            count_no += 1
+                        else:
+                            title_31 = "<br/>"
+                            title_32 = "<br/>"
+                            title_33 = "√"
+                        item_12 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                     an_check_history_item.check_no == 12).first()
+                        if item_12.check_answer == "YES":
+                            title_34 = "√"
+                            title_35 = "<br/>"
+                            title_36 = "<br/>"
+                        elif item_12.check_answer == "NO":
+                            title_34 = "<br/>"
+                            title_35 = "√"
+                            title_36 = "<br/>"
+                            count_no += 1
+                        else:
+                            title_34 = "<br/>"
+                            title_35 = "<br/>"
+                            title_36 = "√"
+                        item_13 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                     an_check_history_item.check_no == 13).first()
+                        if item_13.check_answer == "YES":
+                            title_37 = "√"
+                            title_38 = "<br/>"
+                            title_39 = "<br/>"
+                        elif item_13.check_answer == "NO":
+                            title_37 = "<br/>"
+                            title_38 = "√"
+                            title_39 = "<br/>"
+                            count_no += 1
+                        else:
+                            title_37 = "<br/>"
+                            title_38 = "<br/>"
+                            title_39 = "√"
+                        item_14 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                     an_check_history_item.check_no == 14).first()
+                        if item_14.check_answer == "YES":
+                            title_40 = "√"
+                            title_41 = "<br/>"
+                            title_42 = "<br/>"
+                        elif item_14.check_answer == "NO":
+                            title_40 = "<br/>"
+                            title_41 = "√"
+                            title_42 = "<br/>"
+                            count_no += 1
+                        else:
+                            title_40 = "<br/>"
+                            title_41 = "<br/>"
+                            title_42 = "√"
+
+                        if count_no > 0:
+                            title_55 = "□"
+                            title_56 = "√"
+                        else:
+                            title_56 = "□"
+                            title_55 = "√"
+                        title_58 = check_history.user_name
+                        title_59 = str(check_history.createtime.year) + "/" + str(
+                            check_history.createtime.month) + "/" + str(check_history.createtime.day)
+                        title_61 = str(check_history.createtime.hour) + ":" + str(
+                            check_history.createtime.minute) + ":" + str(check_history.createtime.second)
+                        title_60 = check_history.user_name
+
+                        html_body = html_body.format(title_0, title_43, title_1, title_2, title_3, title_4, title_5, title_6,
+                                                     title_7, title_8, title_9, title_10, title_11, title_12, title_13,
+                                                     title_14, title_15, title_16, title_17, title_18, title_19,
+                                                     title_20, title_21, title_22, title_23, title_24, title_25,
+                                                     title_26, title_27, title_28, title_29, title_30, title_31,
+                                                     title_32, title_33, title_34, title_35, title_36, title_37,
+                                                     title_38, title_39, title_40, title_41, title_42, title_55,
+                                                     title_56, title_58, title_59, title_60, title_61)
+                    elif args.get("check_type") == "dry ice":
+                        with open("../dry_ice.html", 'r', encoding='utf-8') as f:
+                            html_body = f.read()
+                        check_history = an_check_history.query.filter(an_check_history.master_id == args.get("master_id"),
+                                                                      an_check_history.times == "second")\
+                            .first_("数据库异常")
+                        history_id = check_history.id
+                        title_0 = datetime.datetime.now().year
+                        item_1 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 1).first()
+                        if item_1.check_answer == "YES":
+                            title_1 = "√"
+                            title_2 = "<br/>"
+                            title_3 = "<br/>"
+                        elif item_1.check_answer == "NO":
+                            title_1 = "<br/>"
+                            title_2 = "√"
+                            title_3 = "<br/>"
+                        else:
+                            title_1 = "<br/>"
+                            title_2 = "<br/>"
+                            title_3 = "√"
+                        item_2 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 2).first()
+                        if item_2.check_answer == "YES":
+                            title_4 = "√"
+                            title_5 = "<br/>"
+                            title_6 = "<br/>"
+                        elif item_2.check_answer == "NO":
+                            title_4 = "<br/>"
+                            title_5 = "√"
+                            title_6 = "<br/>"
+                        else:
+                            title_4 = "<br/>"
+                            title_5 = "<br/>"
+                            title_6 = "√"
+                        item_3 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 3).first()
+                        if item_3.check_answer == "YES":
+                            title_7 = "√"
+                            title_8 = "<br/>"
+                            title_9 = "<br/>"
+                        elif item_3.check_answer == "NO":
+                            title_7 = "<br/>"
+                            title_8 = "√"
+                            title_9 = "<br/>"
+                        else:
+                            title_7 = "<br/>"
+                            title_8 = "<br/>"
+                            title_9 = "√"
+                        item_4 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 4).first()
+                        if item_4.check_answer == "YES":
+                            title_10 = "√"
+                            title_11 = "<br/>"
+                            title_12 = "<br/>"
+                        elif item_4.check_answer == "NO":
+                            title_10 = "<br/>"
+                            title_11 = "√"
+                            title_12 = "<br/>"
+                        else:
+                            title_10 = "<br/>"
+                            title_11 = "<br/>"
+                            title_12 = "√"
+                        item_5 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 5).first()
+                        if item_5.check_answer == "YES":
+                            title_13 = "√"
+                            title_14 = "<br/>"
+                            title_15 = "<br/>"
+                        elif item_5.check_answer == "NO":
+                            title_13 = "<br/>"
+                            title_14 = "√"
+                            title_15 = "<br/>"
+                        else:
+                            title_13 = "<br/>"
+                            title_14 = "<br/>"
+                            title_15 = "√"
+                        item_6 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 6).first()
+                        if item_6.check_answer == "YES":
+                            title_16 = "√"
+                            title_17 = "<br/>"
+                            title_18 = "<br/>"
+                        elif item_6.check_answer == "NO":
+                            title_16 = "<br/>"
+                            title_17 = "√"
+                            title_18 = "<br/>"
+                        else:
+                            title_16 = "<br/>"
+                            title_17 = "<br/>"
+                            title_18 = "√"
+                        item_7 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 7).first()
+                        if item_7.check_answer == "YES":
+                            title_19 = "√"
+                            title_20 = "<br/>"
+                            title_21 = "<br/>"
+                        elif item_7.check_answer == "NO":
+                            title_19 = "<br/>"
+                            title_20 = "√"
+                            title_21 = "<br/>"
+                        else:
+                            title_19 = "<br/>"
+                            title_20 = "<br/>"
+                            title_21 = "√"
+                        item_8 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 8).first()
+                        if item_8.check_answer == "YES":
+                            title_22 = "√"
+                            title_23 = "<br/>"
+                            title_24 = "<br/>"
+                        elif item_8.check_answer == "NO":
+                            title_22 = "<br/>"
+                            title_23 = "√"
+                            title_24 = "<br/>"
+                        else:
+                            title_22 = "<br/>"
+                            title_23 = "<br/>"
+                            title_24 = "√"
+                        item_9 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 9).first()
+                        if item_9.check_answer == "YES":
+                            title_25 = "√"
+                            title_26 = "<br/>"
+                            title_27 = "<br/>"
+                        elif item_9.check_answer == "NO":
+                            title_25 = "<br/>"
+                            title_26 = "√"
+                            title_27 = "<br/>"
+                        else:
+                            title_25 = "<br/>"
+                            title_26 = "<br/>"
+                            title_27 = "√"
+                        item_10 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 10).first()
+                        if item_10.check_answer == "YES":
+                            title_28 = "√"
+                            title_29 = "<br/>"
+                            title_30 = "<br/>"
+                        elif item_10.check_answer == "NO":
+                            title_28 = "<br/>"
+                            title_29 = "√"
+                            title_30 = "<br/>"
+                        else:
+                            title_28 = "<br/>"
+                            title_29 = "<br/>"
+                            title_30 = "√"
+                        item_11 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 11).first()
+                        if item_11.check_answer == "YES":
+                            title_31 = "√"
+                            title_32 = "<br/>"
+                            title_33 = "<br/>"
+                        elif item_11.check_answer == "NO":
+                            title_31 = "<br/>"
+                            title_32 = "√"
+                            title_33 = "<br/>"
+                        else:
+                            title_31 = "<br/>"
+                            title_32 = "<br/>"
+                            title_33 = "√"
+                        item_12 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 12).first()
+                        if item_12.check_answer == "YES":
+                            title_34 = "√"
+                            title_35 = "<br/>"
+                            title_36 = "<br/>"
+                        elif item_12.check_answer == "NO":
+                            title_34 = "<br/>"
+                            title_35 = "√"
+                            title_36 = "<br/>"
+                        else:
+                            title_34 = "<br/>"
+                            title_35 = "<br/>"
+                            title_36 = "√"
+                        item_13 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 13).first()
+                        if item_13.check_answer == "YES":
+                            title_37 = "√"
+                            title_38 = "<br/>"
+                            title_39 = "<br/>"
+                        elif item_13.check_answer == "NO":
+                            title_37 = "<br/>"
+                            title_38 = "√"
+                            title_39 = "<br/>"
+                        else:
+                            title_37 = "<br/>"
+                            title_38 = "<br/>"
+                            title_39 = "√"
+                        item_14 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 14).first()
+                        if item_14.check_answer == "YES":
+                            title_40 = "√"
+                            title_41 = "<br/>"
+                            title_42 = "<br/>"
+                        elif item_14.check_answer == "NO":
+                            title_40 = "<br/>"
+                            title_41 = "√"
+                            title_42 = "<br/>"
+                        else:
+                            title_40 = "<br/>"
+                            title_41 = "<br/>"
+                            title_42 = "√"
+                        item_15 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 15).first()
+                        if item_15.check_answer == "YES":
+                            title_43 = "√"
+                            title_44 = "<br/>"
+                            title_45 = "<br/>"
+                        elif item_15.check_answer == "NO":
+                            title_43 = "<br/>"
+                            title_44 = "√"
+                            title_45 = "<br/>"
+                        else:
+                            title_43 = "<br/>"
+                            title_44 = "<br/>"
+                            title_45 = "√"
+                        item_16 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 16).first()
+                        if item_16.check_answer == "YES":
+                            title_46 = "√"
+                            title_47 = "<br/>"
+                            title_48 = "<br/>"
+                        elif item_16.check_answer == "NO":
+                            title_46 = "<br/>"
+                            title_47 = "√"
+                            title_48 = "<br/>"
+                        else:
+                            title_46 = "<br/>"
+                            title_47 = "<br/>"
+                            title_48 = "√"
+                        item_17 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 17).first()
+                        if item_17.check_answer == "YES":
+                            title_49 = "√"
+                            title_50 = "<br/>"
+                            title_51 = "<br/>"
+                        elif item_17.check_answer == "NO":
+                            title_49 = "<br/>"
+                            title_50 = "√"
+                            title_51 = "<br/>"
+                        else:
+                            title_49 = "<br/>"
+                            title_50 = "<br/>"
+                            title_51 = "√"
+                        item_18 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 18).first()
+                        if item_18.check_answer == "YES":
+                            title_52 = "√"
+                            title_53 = "<br/>"
+                            title_54 = "<br/>"
+                        elif item_18.check_answer == "NO":
+                            title_52 = "<br/>"
+                            title_53 = "√"
+                            title_54 = "<br/>"
+                        else:
+                            title_52 = "<br/>"
+                            title_53 = "<br/>"
+                            title_54 = "√"
+
+                        title_55 = check_history.user_name
+                        main_port = t_bgs_main_single_number.query.filter(t_bgs_main_single_number.id == args.get("master_id")).first()
+                        title_56 = main_port.port_of_departure or "PEK"
+                        title_57 = main_port.destination_port or "暂无"
+                        title_58 = str(check_history.createtime.year) + "/" + str(check_history.createtime.month) + "/" + str(check_history.createtime.day)
+                        title_59 = str(check_history.createtime.hour) + ":" + str(check_history.createtime.minute) + ":" + str(check_history.createtime.second)
+                        title_60 = datetime.datetime.now().year - 2020 + 61
+                        title_61 = datetime.datetime.now().year
+
+                        html_body = html_body.format(title_0, title_1, title_2, title_3, title_4, title_5, title_6,
+                                                     title_7, title_8, title_9, title_10, title_11, title_12, title_13,
+                                                     title_14, title_15, title_16, title_17, title_18, title_19,
+                                                     title_20, title_21, title_22, title_23, title_24, title_25,
+                                                     title_26, title_27, title_28, title_29, title_30, title_31,
+                                                     title_32, title_33, title_34, title_35, title_36, title_37,
+                                                     title_38, title_39, title_40, title_41, title_42, title_43,
+                                                     title_44, title_45, title_46, title_47, title_48, title_49,
+                                                     title_50, title_51, title_52, title_53, title_54, title_55,
+                                                     title_56, title_57, title_58, title_59, title_60, title_61)
+                    elif args.get("check_type") == "radioactive":
+                        with open("../radioactive.html", 'r', encoding='utf-8') as f:
+                            html_body = f.read()
+
+                        check_history = an_check_history.query.filter(
+                            an_check_history.master_id == args.get("master_id"),
+                            an_check_history.times == "second") \
+                            .first_("数据库异常")
+                        history_id = check_history.id
+                        main_port = t_bgs_main_single_number.query.filter(
+                            t_bgs_main_single_number.id == args.get("master_id")).first()
+                        title_0 = datetime.datetime.now().year
+                        title_1 = datetime.datetime.now().year - 2020 + 61
+                        title_2 = datetime.datetime.now().year
+                        title_3 = main_port.master_number
+                        title_4 = main_port.port_of_departure or "PEK"
+                        title_5 = main_port.destination_port or "No Available"
+
+                        item_1 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 1).first()
+                        if item_1.check_answer == "YES":
+                            title_6 = "√"
+                            title_7 = "<br/>"
+                            title_8 = "<br/>"
+                        elif item_1.check_answer == "NO":
+                            title_6 = "<br/>"
+                            title_7 = "√"
+                            title_8 = "<br/>"
+                        else:
+                            title_6 = "<br/>"
+                            title_7 = "<br/>"
+                            title_8 = "√"
+
+                        item_2 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 2).first()
+                        if item_2.check_answer == "YES":
+                            title_9 = "√"
+                            title_10 = "<br/>"
+                            title_11 = "<br/>"
+                        elif item_2.check_answer == "NO":
+                            title_9 = "<br/>"
+                            title_10 = "√"
+                            title_11 = "<br/>"
+                        else:
+                            title_9 = "<br/>"
+                            title_10 = "<br/>"
+                            title_11 = "√"
+
+                        item_3 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 3).first()
+                        if item_3.check_answer == "YES":
+                            title_12 = "√"
+                            title_13 = "<br/>"
+                            title_14 = "<br/>"
+                        elif item_3.check_answer == "NO":
+                            title_12 = "<br/>"
+                            title_13 = "√"
+                            title_14 = "<br/>"
+                        else:
+                            title_12 = "<br/>"
+                            title_13 = "<br/>"
+                            title_14 = "√"
+
+                        item_4 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 4).first()
+                        if item_4.check_answer == "YES":
+                            title_15 = "√"
+                            title_16 = "<br/>"
+                            title_17 = "<br/>"
+                        elif item_4.check_answer == "NO":
+                            title_15 = "<br/>"
+                            title_16 = "√"
+                            title_17 = "<br/>"
+                        else:
+                            title_15 = "<br/>"
+                            title_16 = "<br/>"
+                            title_17 = "√"
+
+                        item_5 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 5).first()
+                        if item_5.check_answer == "YES":
+                            title_18 = "√"
+                            title_19 = "<br/>"
+                            title_20 = "<br/>"
+                        elif item_5.check_answer == "NO":
+                            title_18 = "<br/>"
+                            title_19 = "√"
+                            title_20 = "<br/>"
+                        else:
+                            title_18 = "<br/>"
+                            title_19 = "<br/>"
+                            title_20 = "√"
+
+                        item_6 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 6).first()
+                        if item_6.check_answer == "YES":
+                            title_21 = "√"
+                            title_22 = "<br/>"
+                            title_23 = "<br/>"
+                        elif item_6.check_answer == "NO":
+                            title_21 = "<br/>"
+                            title_22 = "√"
+                            title_23 = "<br/>"
+                        else:
+                            title_21 = "<br/>"
+                            title_22 = "<br/>"
+                            title_23 = "√"
+
+                        item_7 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 7).first()
+                        if item_7.check_answer == "YES":
+                            title_24 = "√"
+                            title_25 = "<br/>"
+                            title_16 = "<br/>"
+                        elif item_7.check_answer == "NO":
+                            title_24 = "<br/>"
+                            title_25 = "√"
+                            title_26 = "<br/>"
+                        else:
+                            title_24 = "<br/>"
+                            title_25 = "<br/>"
+                            title_26 = "√"
+
+                        item_8 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 8).first()
+                        if item_8.check_answer == "YES":
+                            title_27 = "√"
+                            title_28 = "<br/>"
+                            title_29 = "<br/>"
+                        elif item_8.check_answer == "NO":
+                            title_27 = "<br/>"
+                            title_28 = "√"
+                            title_29 = "<br/>"
+                        else:
+                            title_27 = "<br/>"
+                            title_28 = "<br/>"
+                            title_29 = "√"
+
+                        item_9 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                    an_check_history_item.check_no == 9).first()
+                        if item_9.check_answer == "YES":
+                            title_30 = "√"
+                            title_31 = "<br/>"
+                            title_32 = "<br/>"
+                        elif item_9.check_answer == "NO":
+                            title_30 = "<br/>"
+                            title_31 = "√"
+                            title_32 = "<br/>"
+                        else:
+                            title_30 = "<br/>"
+                            title_31 = "<br/>"
+                            title_32 = "√"
+
+                        item_10 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                     an_check_history_item.check_no == 10).first()
+                        if item_10.check_answer == "YES":
+                            title_33 = "√"
+                            title_34 = "<br/>"
+                            title_35 = "<br/>"
+                        elif item_10.check_answer == "NO":
+                            title_33 = "<br/>"
+                            title_34 = "√"
+                            title_35 = "<br/>"
+                        else:
+                            title_33 = "<br/>"
+                            title_34 = "<br/>"
+                            title_35 = "√"
+
+                        item_11 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                     an_check_history_item.check_no == 11).first()
+                        if item_11.check_answer == "YES":
+                            title_36 = "√"
+                            title_37 = "<br/>"
+                            title_38 = "<br/>"
+                        elif item_11.check_answer == "NO":
+                            title_36 = "<br/>"
+                            title_37 = "√"
+                            title_38 = "<br/>"
+                        else:
+                            title_36 = "<br/>"
+                            title_37 = "<br/>"
+                            title_38 = "√"
+
+                        item_12 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                     an_check_history_item.check_no == 12).first()
+                        if item_12.check_answer == "YES":
+                            title_39 = "√"
+                            title_40 = "<br/>"
+                            title_41 = "<br/>"
+                        elif item_12.check_answer == "NO":
+                            title_39 = "<br/>"
+                            title_40 = "√"
+                            title_41 = "<br/>"
+                        else:
+                            title_39 = "<br/>"
+                            title_40 = "<br/>"
+                            title_41 = "√"
+
+                        item_13 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                     an_check_history_item.check_no == 13).first()
+                        if item_13.check_answer == "YES":
+                            title_42 = "√"
+                            title_43 = "<br/>"
+                            title_44 = "<br/>"
+                        elif item_13.check_answer == "NO":
+                            title_42 = "<br/>"
+                            title_43 = "√"
+                            title_44 = "<br/>"
+                        else:
+                            title_42 = "<br/>"
+                            title_43 = "<br/>"
+                            title_44 = "√"
+
+                        item_14 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                     an_check_history_item.check_no == 14).first()
+                        if item_14.check_answer == "YES":
+                            title_45 = "√"
+                            title_46 = "<br/>"
+                            title_47 = "<br/>"
+                        elif item_14.check_answer == "NO":
+                            title_45 = "<br/>"
+                            title_46 = "√"
+                            title_47 = "<br/>"
+                        else:
+                            title_45 = "<br/>"
+                            title_46 = "<br/>"
+                            title_47 = "√"
+
+                        item_15 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                     an_check_history_item.check_no == 15).first()
+                        if item_15.check_answer == "YES":
+                            title_48 = "√"
+                            title_49 = "<br/>"
+                            title_50 = "<br/>"
+                        elif item_15.check_answer == "NO":
+                            title_48 = "<br/>"
+                            title_49 = "√"
+                            title_50 = "<br/>"
+                        else:
+                            title_48 = "<br/>"
+                            title_49 = "<br/>"
+                            title_50 = "√"
+
+                        item_16 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                     an_check_history_item.check_no == 16).first()
+                        if item_16.check_answer == "YES":
+                            title_51 = "√"
+                            title_52 = "<br/>"
+                            title_53 = "<br/>"
+                        elif item_16.check_answer == "NO":
+                            title_51 = "<br/>"
+                            title_52 = "√"
+                            title_53 = "<br/>"
+                        else:
+                            title_51 = "<br/>"
+                            title_52 = "<br/>"
+                            title_53 = "√"
+
+                        item_17 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                     an_check_history_item.check_no == 17).first()
+                        if item_17.check_answer == "YES":
+                            title_54 = "√"
+                            title_55 = "<br/>"
+                            title_56 = "<br/>"
+                        elif item_17.check_answer == "NO":
+                            title_54 = "<br/>"
+                            title_55 = "√"
+                            title_56 = "<br/>"
+                        else:
+                            title_54 = "<br/>"
+                            title_55 = "<br/>"
+                            title_56 = "√"
+
+                        item_18 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                     an_check_history_item.check_no == 18).first()
+                        if item_18.check_answer == "YES":
+                            title_57 = "√"
+                            title_58 = "<br/>"
+                            title_59 = "<br/>"
+                        elif item_18.check_answer == "NO":
+                            title_57 = "<br/>"
+                            title_58 = "√"
+                            title_59 = "<br/>"
+                        else:
+                            title_57 = "<br/>"
+                            title_58 = "<br/>"
+                            title_59 = "√"
+
+                        item_19 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                     an_check_history_item.check_no == 19).first()
+                        if item_19.check_answer == "YES":
+                            title_60 = "√"
+                            title_61 = "<br/>"
+                            title_62 = "<br/>"
+                        elif item_19.check_answer == "NO":
+                            title_60 = "<br/>"
+                            title_61 = "√"
+                            title_62 = "<br/>"
+                        else:
+                            title_60 = "<br/>"
+                            title_61 = "<br/>"
+                            title_62 = "√"
+
+                        item_20 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                     an_check_history_item.check_no == 20).first()
+                        if item_20.check_answer == "YES":
+                            title_63 = "√"
+                            title_64 = "<br/>"
+                            title_65 = "<br/>"
+                        elif item_20.check_answer == "NO":
+                            title_63 = "<br/>"
+                            title_64 = "√"
+                            title_65 = "<br/>"
+                        else:
+                            title_63 = "<br/>"
+                            title_64 = "<br/>"
+                            title_65 = "√"
+
+                        item_21 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                     an_check_history_item.check_no == 21).first()
+                        if item_21.check_answer == "YES":
+                            title_66 = "√"
+                            title_67 = "<br/>"
+                            title_68 = "<br/>"
+                        elif item_21.check_answer == "NO":
+                            title_66 = "<br/>"
+                            title_67 = "√"
+                            title_68 = "<br/>"
+                        else:
+                            title_66 = "<br/>"
+                            title_67 = "<br/>"
+                            title_68 = "√"
+
+                        item_22 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                     an_check_history_item.check_no == 22.1).first()
+                        if item_22.check_answer == "YES":
+                            title_69 = "√"
+                            title_70 = "<br/>"
+                            title_71 = "<br/>"
+                        elif item_22.check_answer == "NO":
+                            title_69 = "<br/>"
+                            title_70 = "√"
+                            title_71 = "<br/>"
+                        else:
+                            title_69 = "<br/>"
+                            title_70 = "<br/>"
+                            title_71 = "√"
+
+                        item_23 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                     an_check_history_item.check_no == 22.2).first()
+                        if item_23.check_answer == "YES":
+                            title_72 = "√"
+                            title_73 = "<br/>"
+                            title_74 = "<br/>"
+                        elif item_23.check_answer == "NO":
+                            title_72 = "<br/>"
+                            title_73 = "√"
+                            title_74 = "<br/>"
+                        else:
+                            title_72 = "<br/>"
+                            title_73 = "<br/>"
+                            title_74 = "√"
+
+                        item_24 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                     an_check_history_item.check_no == 22.3).first()
+                        if item_24.check_answer == "YES":
+                            title_75 = "√"
+                            title_76 = "<br/>"
+                            title_77 = "<br/>"
+                        elif item_24.check_answer == "NO":
+                            title_75 = "<br/>"
+                            title_76 = "√"
+                            title_77 = "<br/>"
+                        else:
+                            title_75 = "<br/>"
+                            title_76 = "<br/>"
+                            title_77 = "√"
+
+                        item_25 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                     an_check_history_item.check_no == 23).first()
+                        if item_25.check_answer == "YES":
+                            title_78 = "√"
+                            title_79 = "<br/>"
+                            title_80 = "<br/>"
+                        elif item_25.check_answer == "NO":
+                            title_78 = "<br/>"
+                            title_79 = "√"
+                            title_80 = "<br/>"
+                        else:
+                            title_78 = "<br/>"
+                            title_79 = "<br/>"
+                            title_80 = "√"
+
+                        item_26 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                     an_check_history_item.check_no == 24).first()
+                        if item_26.check_answer == "YES":
+                            title_81 = "√"
+                            title_82 = "<br/>"
+                            title_83 = "<br/>"
+                        elif item_26.check_answer == "NO":
+                            title_81 = "<br/>"
+                            title_82 = "√"
+                            title_83 = "<br/>"
+                        else:
+                            title_81 = "<br/>"
+                            title_82 = "<br/>"
+                            title_83 = "√"
+
+                        item_27 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                     an_check_history_item.check_no == 25).first()
+                        if item_27.check_answer == "YES":
+                            title_84 = "√"
+                            title_85 = "<br/>"
+                            title_86 = "<br/>"
+                        elif item_27.check_answer == "NO":
+                            title_84 = "<br/>"
+                            title_85 = "√"
+                            title_86 = "<br/>"
+                        else:
+                            title_84 = "<br/>"
+                            title_85 = "<br/>"
+                            title_86 = "√"
+
+                        item_28 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                     an_check_history_item.check_no == 26).first()
+                        if item_28.check_answer == "YES":
+                            title_87 = "√"
+                            title_88 = "<br/>"
+                            title_89 = "<br/>"
+                        elif item_28.check_answer == "NO":
+                            title_87 = "<br/>"
+                            title_88 = "√"
+                            title_89 = "<br/>"
+                        else:
+                            title_87 = "<br/>"
+                            title_88 = "<br/>"
+                            title_89 = "√"
+
+                        item_29 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                     an_check_history_item.check_no == 27).first()
+                        if item_29.check_answer == "YES":
+                            title_90 = "√"
+                            title_91 = "<br/>"
+                            title_92 = "<br/>"
+                        elif item_29.check_answer == "NO":
+                            title_90 = "<br/>"
+                            title_91 = "√"
+                            title_92 = "<br/>"
+                        else:
+                            title_90 = "<br/>"
+                            title_91 = "<br/>"
+                            title_92 = "√"
+
+                        item_30 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                     an_check_history_item.check_no == 28).first()
+                        if item_30.check_answer == "YES":
+                            title_93 = "√"
+                            title_94 = "<br/>"
+                            title_95 = "<br/>"
+                        elif item_30.check_answer == "NO":
+                            title_93 = "<br/>"
+                            title_94 = "√"
+                            title_95 = "<br/>"
+                        else:
+                            title_93 = "<br/>"
+                            title_94 = "<br/>"
+                            title_95 = "√"
+
+                        item_31 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                     an_check_history_item.check_no == 29).first()
+                        if item_31.check_answer == "YES":
+                            title_96 = "√"
+                            title_97 = "<br/>"
+                            title_98 = "<br/>"
+                        elif item_31.check_answer == "NO":
+                            title_96 = "<br/>"
+                            title_97 = "√"
+                            title_98 = "<br/>"
+                        else:
+                            title_96 = "<br/>"
+                            title_97 = "<br/>"
+                            title_98 = "√"
+
+                        item_32 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                     an_check_history_item.check_no == 30).first()
+                        if item_32.check_answer == "YES":
+                            title_99 = "√"
+                            title_100 = "<br/>"
+                            title_101 = "<br/>"
+                        elif item_32.check_answer == "NO":
+                            title_99 = "<br/>"
+                            title_100 = "√"
+                            title_101 = "<br/>"
+                        else:
+                            title_99 = "<br/>"
+                            title_100 = "<br/>"
+                            title_101 = "√"
+
+                        item_33 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                     an_check_history_item.check_no == 31).first()
+                        if item_33.check_answer == "YES":
+                            title_102 = "√"
+                            title_103 = "<br/>"
+                            title_104 = "<br/>"
+                        elif item_33.check_answer == "NO":
+                            title_102 = "<br/>"
+                            title_103 = "√"
+                            title_104 = "<br/>"
+                        else:
+                            title_102 = "<br/>"
+                            title_103 = "<br/>"
+                            title_104 = "√"
+
+                        item_34 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                     an_check_history_item.check_no == 32).first()
+                        if item_34.check_answer == "YES":
+                            title_105 = "√"
+                            title_106 = "<br/>"
+                            title_107 = "<br/>"
+                        elif item_34.check_answer == "NO":
+                            title_105 = "<br/>"
+                            title_106 = "√"
+                            title_107 = "<br/>"
+                        else:
+                            title_105 = "<br/>"
+                            title_106 = "<br/>"
+                            title_107 = "√"
+
+                        item_35 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                     an_check_history_item.check_no == 33).first()
+                        if item_35.check_answer == "YES":
+                            title_108 = "√"
+                            title_109 = "<br/>"
+                            title_110 = "<br/>"
+                        elif item_35.check_answer == "NO":
+                            title_108 = "<br/>"
+                            title_109 = "√"
+                            title_110 = "<br/>"
+                        else:
+                            title_108 = "<br/>"
+                            title_109 = "<br/>"
+                            title_110 = "√"
+
+                        item_36 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                     an_check_history_item.check_no == 34).first()
+                        if item_36.check_answer == "YES":
+                            title_111 = "√"
+                            title_112 = "<br/>"
+                            title_113 = "<br/>"
+                        elif item_36.check_answer == "NO":
+                            title_111 = "<br/>"
+                            title_112 = "√"
+                            title_113 = "<br/>"
+                        else:
+                            title_111 = "<br/>"
+                            title_112 = "<br/>"
+                            title_113 = "√"
+
+                        item_37 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                     an_check_history_item.check_no == 35).first()
+                        if item_37.check_answer == "YES":
+                            title_114 = "√"
+                            title_115 = "<br/>"
+                            title_116 = "<br/>"
+                        elif item_37.check_answer == "NO":
+                            title_114 = "<br/>"
+                            title_115 = "√"
+                            title_116 = "<br/>"
+                        else:
+                            title_114 = "<br/>"
+                            title_115 = "<br/>"
+                            title_116 = "√"
+
+                        item_38 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                     an_check_history_item.check_no == 36).first()
+                        if item_38.check_answer == "YES":
+                            title_117 = "√"
+                            title_118 = "<br/>"
+                            title_119 = "<br/>"
+                        elif item_38.check_answer == "NO":
+                            title_117 = "<br/>"
+                            title_118 = "√"
+                            title_119 = "<br/>"
+                        else:
+                            title_117 = "<br/>"
+                            title_118 = "<br/>"
+                            title_119 = "√"
+
+                        item_39 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                     an_check_history_item.check_no == 37).first()
+                        if item_39.check_answer == "YES":
+                            title_120 = "√"
+                            title_121 = "<br/>"
+                            title_122 = "<br/>"
+                        elif item_39.check_answer == "NO":
+                            title_120 = "<br/>"
+                            title_121 = "√"
+                            title_122 = "<br/>"
+                        else:
+                            title_120 = "<br/>"
+                            title_121 = "<br/>"
+                            title_122 = "√"
+
+                        item_40 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                     an_check_history_item.check_no == 38.1).first()
+                        if item_40.check_answer == "YES":
+                            title_123 = "√"
+                            title_124 = "<br/>"
+                            title_125 = "<br/>"
+                        elif item_40.check_answer == "NO":
+                            title_123 = "<br/>"
+                            title_124 = "√"
+                            title_125 = "<br/>"
+                        else:
+                            title_123 = "<br/>"
+                            title_124 = "<br/>"
+                            title_125 = "√"
+
+                        item_41 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                     an_check_history_item.check_no == 38.2).first()
+                        if item_41.check_answer == "YES":
+                            title_126 = "√"
+                            title_127 = "<br/>"
+                            title_128 = "<br/>"
+                        elif item_41.check_answer == "NO":
+                            title_126 = "<br/>"
+                            title_127 = "√"
+                            title_128 = "<br/>"
+                        else:
+                            title_126 = "<br/>"
+                            title_127 = "<br/>"
+                            title_128 = "√"
+
+                        item_42 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                     an_check_history_item.check_no == 38.3).first()
+                        if item_42.check_answer == "YES":
+                            title_129 = "√"
+                            title_130 = "<br/>"
+                            title_131 = "<br/>"
+                        elif item_42.check_answer == "NO":
+                            title_129 = "<br/>"
+                            title_130 = "√"
+                            title_131 = "<br/>"
+                        else:
+                            title_129 = "<br/>"
+                            title_130 = "<br/>"
+                            title_131 = "√"
+
+                        item_43 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                     an_check_history_item.check_no == 39).first()
+                        if item_43.check_answer == "YES":
+                            title_132 = "√"
+                            title_133 = "<br/>"
+                            title_134 = "<br/>"
+                        elif item_43.check_answer == "NO":
+                            title_132 = "<br/>"
+                            title_133 = "√"
+                            title_134 = "<br/>"
+                        else:
+                            title_132 = "<br/>"
+                            title_133 = "<br/>"
+                            title_134 = "√"
+
+                        item_44 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                     an_check_history_item.check_no == 40).first()
+                        if item_44.check_answer == "YES":
+                            title_135 = "√"
+                            title_136 = "<br/>"
+                            title_137 = "<br/>"
+                        elif item_44.check_answer == "NO":
+                            title_135 = "<br/>"
+                            title_136 = "√"
+                            title_137 = "<br/>"
+                        else:
+                            title_135 = "<br/>"
+                            title_136 = "<br/>"
+                            title_137 = "√"
+
+                        item_45 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                     an_check_history_item.check_no == 41).first()
+                        if item_45.check_answer == "YES":
+                            title_138 = "√"
+                            title_139 = "<br/>"
+                            title_140 = "<br/>"
+                        elif item_45.check_answer == "NO":
+                            title_138 = "<br/>"
+                            title_139 = "√"
+                            title_140 = "<br/>"
+                        else:
+                            title_138 = "<br/>"
+                            title_139 = "<br/>"
+                            title_140 = "√"
+
+                        item_46 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                     an_check_history_item.check_no == 42).first()
+                        if item_46.check_answer == "YES":
+                            title_141 = "√"
+                            title_142 = "<br/>"
+                            title_143 = "<br/>"
+                        elif item_46.check_answer == "NO":
+                            title_141 = "<br/>"
+                            title_142 = "√"
+                            title_143 = "<br/>"
+                        else:
+                            title_141 = "<br/>"
+                            title_142 = "<br/>"
+                            title_143 = "√"
+
+                        item_47 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                     an_check_history_item.check_no == 43).first()
+                        if item_47.check_answer == "YES":
+                            title_144 = "√"
+                            title_145 = "<br/>"
+                            title_146 = "<br/>"
+                        elif item_47.check_answer == "NO":
+                            title_144 = "<br/>"
+                            title_145 = "√"
+                            title_146 = "<br/>"
+                        else:
+                            title_144 = "<br/>"
+                            title_145 = "<br/>"
+                            title_146 = "√"
+
+                        item_48 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                     an_check_history_item.check_no == 44).first()
+                        if item_48.check_answer == "YES":
+                            title_147 = "√"
+                            title_148 = "<br/>"
+                            title_149 = "<br/>"
+                        elif item_48.check_answer == "NO":
+                            title_147 = "<br/>"
+                            title_148 = "√"
+                            title_149 = "<br/>"
+                        else:
+                            title_147 = "<br/>"
+                            title_148 = "<br/>"
+                            title_149 = "√"
+
+                        item_49 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                     an_check_history_item.check_no == 45).first()
+                        if item_49.check_answer == "YES":
+                            title_150 = "√"
+                            title_151 = "<br/>"
+                            title_152 = "<br/>"
+                        elif item_49.check_answer == "NO":
+                            title_150 = "<br/>"
+                            title_151 = "√"
+                            title_152 = "<br/>"
+                        else:
+                            title_150 = "<br/>"
+                            title_151 = "<br/>"
+                            title_152 = "√"
+
+                        item_50 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                     an_check_history_item.check_no == 46).first()
+                        if item_50.check_answer == "YES":
+                            title_153 = "√"
+                            title_154 = "<br/>"
+                            title_155 = "<br/>"
+                        elif item_50.check_answer == "NO":
+                            title_153 = "<br/>"
+                            title_154 = "√"
+                            title_155 = "<br/>"
+                        else:
+                            title_153 = "<br/>"
+                            title_154 = "<br/>"
+                            title_155 = "√"
+
+                        item_51 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                     an_check_history_item.check_no == 47).first()
+                        if item_51.check_answer == "YES":
+                            title_156 = "√"
+                            title_157 = "<br/>"
+                            title_158 = "<br/>"
+                        elif item_51.check_answer == "NO":
+                            title_156 = "<br/>"
+                            title_157 = "√"
+                            title_158 = "<br/>"
+                        else:
+                            title_156 = "<br/>"
+                            title_157 = "<br/>"
+                            title_158 = "√"
+
+                        item_52 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                     an_check_history_item.check_no == 48).first()
+                        if item_52.check_answer == "YES":
+                            title_159 = "√"
+                            title_160 = "<br/>"
+                            title_161 = "<br/>"
+                        elif item_52.check_answer == "NO":
+                            title_159 = "<br/>"
+                            title_160 = "√"
+                            title_161 = "<br/>"
+                        else:
+                            title_159 = "<br/>"
+                            title_160 = "<br/>"
+                            title_161 = "√"
+
+                        item_53 = an_check_history_item.query.filter(an_check_history_item.history_id == history_id,
+                                                                     an_check_history_item.check_no == 49).first()
+                        if item_53.check_answer == "YES":
+                            title_162 = "√"
+                            title_163 = "<br/>"
+                            title_164 = "<br/>"
+                        elif item_53.check_answer == "NO":
+                            title_162 = "<br/>"
+                            title_163 = "√"
+                            title_164 = "<br/>"
+                        else:
+                            title_162 = "<br/>"
+                            title_163 = "<br/>"
+                            title_164 = "√"
+
+                        title_192 = check_history.user_name
+                        title_193 = main_port.port_of_departure or "PEK"
+                        title_194 = check_history.user_name
+                        title_195 = str(check_history.createtime.year) + "/" + str(check_history.createtime.month) + "/" \
+                                    + str(check_history.createtime.day)
+                        title_196 = str(check_history.createtime.hour) + ":" + str(
+                            check_history.createtime.minute) + ":" \
+                                    + str(check_history.createtime.second)
+                        html_body.format(
+                            title_0, title_1, title_2, title_3, title_4, title_5, title_6, title_7, title_8, title_9,
+                            title_10, title_11, title_12, title_13, title_14, title_15, title_16, title_17, title_18,
+                            title_19, title_20, title_21, title_22, title_23, title_24, title_25, title_26, title_27,
+                            title_28, title_29, title_30, title_31, title_32, title_33, title_34, title_35, title_36,
+                            title_37, title_38, title_39, title_40, title_41, title_42, title_43, title_44, title_45,
+                            title_46, title_47, title_48, title_49, title_50, title_51, title_52, title_53, title_54,
+                            title_55, title_56, title_57, title_58, title_59, title_60, title_61, title_62, title_63,
+                            title_64, title_65, title_66, title_67, title_68, title_69, title_70, title_71, title_72,
+                            title_73, title_74, title_75, title_76, title_77, title_78, title_79, title_80, title_81,
+                            title_82, title_83, title_84, title_85, title_86, title_87, title_88, title_89, title_90,
+                            title_91, title_92, title_93, title_94, title_95, title_96, title_97, title_98, title_99,
+                            title_100, title_101, title_102, title_103, title_104, title_105, title_106, title_107,
+                            title_108, title_109, title_110, title_111, title_112, title_113, title_114, title_115,
+                            title_116, title_117, title_118, title_119, title_120, title_121, title_122, title_123,
+                            title_124, title_125, title_126, title_127, title_128, title_129, title_130, title_131,
+                            title_132, title_133, title_134, title_135, title_136, title_137, title_138, title_139,
+                            title_140, title_141, title_142, title_143, title_144, title_145, title_146, title_147,
+                            title_148, title_149, title_150, title_151, title_152, title_153, title_154, title_155,
+                            title_156, title_157, title_158, title_159, title_160, title_161, title_162, title_163,
+                            title_164, title_192, title_193, title_194, title_195, title_196
+                        )
+                    else:
+                        html_body = """
+                                    <!DOCTYPE html>
+                                    <html>
+                                       <head>
+                                          <meta charset="UTF-8">
+                                          <title>Shipper Demo</title>
+                                       </head>
+                                    </html>
+                                    """
+                    from FanstiBgs.config.secret import WK_HTML_TO_IMAGE, WindowsRoot
+                    path_wkhtmltopdf_image = WK_HTML_TO_IMAGE
+                    import imgkit, platform
+                    config_img = imgkit.config(wkhtmltoimage=path_wkhtmltopdf_image)
+                    from FanstiBgs.config.secret import LinuxRoot, LinuxImgs, WindowsImgs, WindowsRoot
+                    if platform.system() == "Windows":
+                        rootdir = WindowsRoot + WindowsImgs
+                        pic_name = "{0}-{1}.png".format(args.get("check_type"), str(uuid.uuid1()))
+                        outdir = rootdir + "\\check_item\\{0}".format(pic_name)
+                    else:
+                        rootdir = LinuxRoot + LinuxImgs
+                        pic_name = "{0}-{1}.png".format(args.get("check_type"), str(uuid.uuid1()))
+                        outdir = rootdir + "/check_item/{0}".format(pic_name)
+
+                    imgkit.from_string(html_body, output_path=outdir, config=config_img)
+
+                    picture_dict = {
+                        "id": str(uuid.uuid1()),
+                        "procedure_id": args.get("master_id"),
+                        "file_name": pic_name,
+                        "file_src": outdir,
+                        "user_id": user_id,
+                        "user_name": user_name,
+                        "createtime": datetime.datetime.now(),
+                        "type": "check_item"
+                    }
+                    picture_instance = an_procedure_picture.create(picture_dict)
+                    db.session.add(picture_instance)
             return Success(message="提交成功")
 
 

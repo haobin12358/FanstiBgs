@@ -1,16 +1,25 @@
 # -*- coding: utf-8 -*-
-import pdfkit, imgkit
+import pdfkit, imgkit, os
 
-body = """
-<html>
-  <head>
-  </head>
-  Hello World!
-</html>
-"""
-# path_wkhtmltopdf = r'D:\\wkhtmltopdf\\bin\\wkhtmltopdf.exe'
-path_wkhtmltopdf_image = r'D:\\wkhtmltopdf\\bin\\wkhtmltoimage.exe'
-# config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
+
+with open("./dry_ice.html", 'r', encoding='utf-8') as f:
+    body = f.read()
+print(body)
+print(type(body))
+print(body.format("2020", "2020", "2020", "2020", "2020", "2020", "2020", "2020", "2020", "2020",
+                  "2020", "2020", "2020", "2020", "2020", "2020", "2020", "2020", "2020", "2020",
+                  "2020", "2020", "2020", "2020", "2020", "2020", "2020", "2020", "2020", "2020",
+                  "2020", "2020", "2020", "2020", "2020", "2020", "2020", "2020", "2020", "2020",
+                  "2020", "2020", "2020", "2020", "2020", "2020", "2020", "2020", "2020", "2020",
+                  "2020", "2020", "2020", "2020", "2020", "2020", "2020", "2020", "2020", "2020",
+                  "2020", "2020"))
+from FanstiBgs.config.secret import WK_HTML_TO_IMAGE
+path_wkhtmltopdf_image = WK_HTML_TO_IMAGE
 config_img = imgkit.config(wkhtmltoimage=path_wkhtmltopdf_image)
-imgkit.from_string(body, output_path=r'D:\\auto.png', config=config_img)
-# pdfkit.from_string(body, r'D:\\test.pdf', configuration=config)
+imgkit.from_string(body.format("2020", "2020", "2020", "2020", "2020", "2020", "2020", "2020", "2020", "2020",
+                  "2020", "2020", "2020", "2020", "2020", "2020", "2020", "2020", "2020", "2020",
+                  "2020", "2020", "2020", "2020", "2020", "2020", "2020", "2020", "2020", "2020",
+                  "2020", "2020", "2020", "2020", "2020", "2020", "2020", "2020", "2020", "2020",
+                  "2020", "2020", "2020", "2020", "2020", "2020", "2020", "2020", "2020", "2020",
+                  "2020", "2020", "2020", "2020", "2020", "2020", "2020", "2020", "2020", "2020",
+                  "2020", "2020"), output_path=r'D:\\auto.png', config=config_img)

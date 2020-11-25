@@ -4,16 +4,10 @@
       <meta charset="UTF-8">
       <title>Shipper Demo</title>
    </head>
-   <style type="text/css">
-	   body{
-			width: 820px;
-			height: 1160px;
-	   }
-   </style>
-   <body>
+   <body style="width:820px;height:1160px">
    <table style="width:1213.5px" cellpadding="2" cellspacing="0" border="0" >
 	   <tr>
-		   <td style="text-align:center" colspan="3"><span>2020</span></td>
+		   <td style="text-align:center" colspan="3"><span>{0}</span></td>
 	   </tr>
 	   <tr>
 		   <td style="width:20%">
@@ -25,7 +19,7 @@
 				</span>
 		   </td>
 		   <td style="width:20%">
-		   		<span style="text-align:right">61<sup>th</sup>EDITION,1 JANUARY 2020</span>
+		   		<span style="text-align:right">{1}<sup>th</sup>EDITION,1 JANUARY {2}</span>
 		   </td>
 	   </tr>
 
@@ -33,11 +27,11 @@
    <table style="width:100%;" cellpadding="2" cellspacing="0" border="1">
 	   <tr>
 		   <td colspan="8">
-			   <span>Air Waybill___________________________________________________________</span>
+			   <span>Air Waybill:<u>{3}</u></span>
 			   <br/>
-			   <span>Origin_________________________________________________________________</span>
+			   <span>Origin:<u>{4}</u></span>
 			   <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-			   <span>Destination____________________________________________________________</span>
+			   <span>Destination:<u>{5}</u></span>
 			   <br/>
 			   <span>The recommended checklist appearing on the following pages is intended to verify shipments at origin.
 				   Copies of the checklist can be obtained from:</span>
@@ -82,25 +76,25 @@
 				   submitted electronically [10.8.1.2, 10.8.1.4; 8.1.1; 10.8.3.12.2]</span>
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {6}
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {7}
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {8}
 		   </td>
 		   <td style="width:35%">
 			   <span>29.Same number and type of packagings and overpacks delivered as shown on DGD</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {96}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {97}
 		   </td>
 		   <td style="width:5%" bgcolor="#808080">
-			   <br/>
+			   {98}
 		   </td>
 	   </tr>
 	   <tr>
@@ -108,13 +102,13 @@
 			   <span>30.Unbroken transportation seal [10.6.2.4.1.2] and package in proper condition for carriage [9.1.3; 9.1.4]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {99}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {100}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {101}
 		   </td>
 	   </tr>
 	   <tr>
@@ -122,13 +116,13 @@
 			   <span>2.Full name and address of Shipper and Consignee [8.1.6.1, 8.1.6.2]</span>
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {9}
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {10}
 		   </td>
 		   <td style="width:5%" rowspan="2" bgcolor="#808080">
-			   <br/>
+			   {11}
 		   </td>
 		   <td style="width:35%" colspan="4">
 			   <span><strong>Marks</strong></span>
@@ -140,13 +134,13 @@
 			   <span>31.UN number, preceded by prefix [10.7.1.3.1]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {102}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {103}
 		   </td>
 		   <td style="width:5%" bgcolor="#808080">
-			   <br/>
+			   {104}
 		   </td>
 	   </tr>
 	   <tr>
@@ -154,26 +148,26 @@
 			   <span>3.If the Air Waybill number is not shown, enter it. [10.8.3.3]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {12}
 		   </td>
 		   <td style="width:5%" bgcolor="#808080">
-			   <br/>
+			   {13}
 		   </td>
 		   <td style="width:5%" bgcolor="#808080">
-			   <br/>
+			   {14}
 		   </td>
 		   <td style="width:5%" rowspan="2">
 			   <span>32.The Proper Shipping Name and where Special Provision A78 applies,
 				   the supplementary information in brackets [10.7.1.3.1]</span>
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {105}
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {106}
 		   </td>
 		   <td style="width:5%" rowspan="2" bgcolor="#808080">
-			   <br/>
+			   {107}
 		   </td>
 	   </tr>
 	   <tr>
@@ -183,13 +177,13 @@
 				   Declaration data is submitted electronically [10.8.3.4]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {15}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {16}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {17}
 		   </td>
 
 	   </tr>
@@ -198,25 +192,25 @@
 			   <span>5.The non-applicable Aircraft Type deleted or not shown [10.8.3.5]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {18}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {19}
 		   </td>
 		   <td style="width:5%" bgcolor="#808080">
-			   <br/>
+			   {20}
 		   </td>
 		   <td style="width:35%">
 			   <span>33.The full name and address of the Shipper and Consignee [10.7.1.3.1]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {108}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {109}
 		   </td>
 		   <td style="width:5%" bgcolor="#808080">
-			   <br/>
+			   {110}
 		   </td>
 	   </tr>
 	   <tr>
@@ -224,25 +218,25 @@
 			   <span>6.If full name of Airport or City of Departure or Destination is not shown, enter it. [10.8.3.6 and 10.8.3.7]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {21}
 		   </td>
 		   <td style="width:5%" bgcolor="#808080">
-			   <br/>
+			   {22}
 		   </td>
 		   <td style="width:5%" bgcolor="#808080">
-			   <br/>
+			   {23}
 		   </td>
 		   <td style="width:35%">
 			   <span>34.The permissible gross weight if the gross weight of the package exceeds 50 kg [10.7.1.3.1]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {111}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {112}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {113}
 		   </td>
 	   </tr>
 	   <tr>
@@ -250,25 +244,25 @@
 			   <span>7.The word “Non-Radioactive” deleted or not shown [10.8.3.8]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {24}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {25}
 		   </td>
 		   <td style="width:5%" bgcolor="#808080">
-			   <br/>
+			   {26}
 		   </td>
 		   <td style="width:35%">
 			   <span>35.Type A packages, marked as per 10.7.1.3.4</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {114}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {115}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {116}
 		   </td>
 	   </tr>
 	   <tr>
@@ -279,13 +273,13 @@
 			   <span>36.Type B packages, marked as per 10.7.1.3.5</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {117}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {118}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {119}
 		   </td>
 	   </tr>
 	   <tr>
@@ -293,26 +287,26 @@
 			   <span>8.UN number, preceded by prefix “UN” [10.8.3.9.1, Step 1]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {27}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {28}
 		   </td>
 		   <td style="width:5%" bgcolor="#808080">
-			   <br/>
+			   {29}
 		   </td>
 		   <td style="width:35%" rowspan="2">
 			   <span>37.Type C packages, Industrial Packages and packages containing Fissile material marked as per 10.7.1.3.6,
 				   10.7.1.3.3 or 10.7.1.3.7</span>
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {120}
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {121}
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {122}
 		   </td>
 	   </tr>
 	   <tr>
@@ -320,13 +314,13 @@
 			   <span>9.Proper Shipping Name and where Special Provision A78 applies, the supplementary information in brackets [10.8.3.9.1, Step 2]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {30}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {31}
 		   </td>
 		   <td style="width:5%" bgcolor="#808080">
-			   <br/>
+			   {32}
 		   </td>
 	   </tr>
 	   <tr>
@@ -334,13 +328,13 @@
 			   <span>10.Class 7 [10.8.3.9.1, Step 3]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {33}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {34}
 		   </td>
 		   <td style="width:5%" bgcolor="#808080">
-			   <br/>
+			   {35}
 		   </td>
 		   <td style="width:35%" colspan="4">
 			   <span><strong>Labelling</strong></span>
@@ -352,21 +346,21 @@
 				   and Packing Group if required for Subsidiary hazard [10.8.3.9.1, Step 5]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {36}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {37}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {38}
 		   </td>
 		   <td style="width:35%">
 			   <span>38.Same category labels as per DGD properly affixed to two opposite sides of package. [10.7.4]</span>
 		   </td>
-		   <td style="width:5%">
+		   <td style="width:5%" bgcolor="#808080">
 			   <br/>
 		   </td>
-		   <td style="width:5%">
+		   <td style="width:5%" bgcolor="#808080">
 			   <br/>
 		   </td>
 		   <td style="width:5%" bgcolor="#808080">
@@ -381,13 +375,13 @@
 			   <span>-38.1 Symbol of radionuclide and/or LSA/SCO indicated as required. [10.7.3.3.1]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {123}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {124}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {125}
 		   </td>
 	   </tr>
 	   <tr>
@@ -395,26 +389,26 @@
 			   <span>12.Name or Symbol of Radionuclide(s) [10.8.3.9.2, Step 6 (a)]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {39}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {40}
 		   </td>
 		   <td style="width:5%" bgcolor="#808080">
-			   <br/>
+			   {41}
 		   </td>
 		   <td style="width:35%" rowspan="2">
 			   <span>-38.2 Activity in Bq (or multiples thereof). For Fissile material,
 				   the total mass in grams may be used instead [10.7.3.3.2]</span>
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {126}
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {127}
 		   </td>
 		   <td style="width:5%" rowspan="2" bgcolor="#808080">
-			   <br/>
+			   {128}
 		   </td>
 
 	   </tr>
@@ -423,13 +417,13 @@
 			   <span>13.A description of the physical and chemical form if in other form [10.8.3.9.2, Step 6 (b)]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {42}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {43}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {44}
 		   </td>
 	   </tr>
 	   <tr>
@@ -438,25 +432,25 @@
 				   [10.8.3.9.2, Step 6 (b)]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {45}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {46}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {47}
 		   </td>
 		   <td style="width:35%">
 			   <span>-38.3 For Category II & III, same TI as per DGD, rounded-up to one decimal place. [10.7.3.3.3]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {129}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {130}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {131}
 		   </td>
 	   </tr>
 	   <tr>
@@ -465,25 +459,25 @@
 				   For Fissile Material the total weight in grams or kilograms of fissile material may be shown in place of activity [10.8.3.9.2, Step 7]</span>
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {48}
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {49}
 		   </td>
 		   <td style="width:5%" rowspan="2" bgcolor="#808080">
-			   <br/>
+			   {50}
 		   </td>
 		   <td style="width:35%">
 			   <span>39.Applicable label(s) identifying the subsidiary hazard [10.7.3.2; 10.7.4.3]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {132}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {133}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {134}
 		   </td>
 	   </tr>
 	   <tr>
@@ -492,13 +486,13 @@
 				   the hazard labels [10.7.4.2.4; 10.7.4.3.1; 10.7.4.4.1]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {135}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {136}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {137}
 		   </td>
 	   </tr>
 	   <tr>
@@ -507,26 +501,26 @@
 				   the activity of each radionuclide and the words “All packed in one (type of package)” [10.8.3.9.2, Step 7]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {51}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {52}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {53}
 		   </td>
 		   <td style="width:35%">
 			   <span>41.For fissile materials, two correctly completed Criticality Safety Index (CSI) labels on
 				   the same surface as the hazard labels [10.7.3.3.4; 10.7.4.3.1]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {138}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {139}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {140}
 		   </td>
 	   </tr>
 	   <tr>
@@ -535,25 +529,25 @@
 				   or Type C (see attached competent authority certificate)</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {54}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {55}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {56}
 		   </td>
 		   <td style="width:35%" rowspan="2">
 			   <span>42.Any irrelevant marks and labels removed or obliterated [10.7.1.1; 10.7.2.1]</span>
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {141}
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {142}
 		   </td>
 		   <td style="width:5%" rowspan="2" bgcolor="#808080">
-			   <br/>
+			   {143}
 		   </td>
 	   </tr>
 	   <tr>
@@ -561,13 +555,13 @@
 			   <span>18.Words “Overpack Used” shown on the DGD [10.8.3.9.2, Step 8]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {57}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {58}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {59}
 		   </td>
 	   </tr>
 	   <tr>
@@ -585,25 +579,25 @@
 			   <span>19.Category of package(s) and overpack if applicable [10.5.15.1 (a), 10.8.3.9.3, Step 9 (a) and Table 10.5.C]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {60}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {61}
 		   </td>
 		   <td style="width:5%" bgcolor="#808080">
-			   <br/>
+			   {62}
 		   </td>
 		   <td style="width:35%">
 			   <span>43.Package use marks and labels clearly visible or reproduced on the outside of the overpack [10.7.1.4.1; 10.7.4.4]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {144}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {145}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {146}
 		   </td>
 	   </tr>
 	   <tr>
@@ -612,25 +606,25 @@
 				   Category II and Category III only [10.8.3.9.3, Step 9 (b) and (c)]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {63}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {64}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {65}
 		   </td>
 		   <td style="width:35%">
 			   <span>44.The word “Overpack” marked if marks and labels are not visible on packages within the overpack [10.7.1.4.1]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {147}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {148}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {149}
 		   </td>
 	   </tr>
 	   <tr>
@@ -640,25 +634,25 @@
 				   or the words “Fissile Excepted” [10.8.3.9.3, Step 9 (d)]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {66}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {67}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {68}
 		   </td>
 		   <td style="width:35%">
 			   <span>45.If more than one overpack is used, identification marks shown [10.7.1.4.3]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {150}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {151}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {152}
 		   </td>
 	   </tr>
 	   <tr>
@@ -669,13 +663,13 @@
 			   <span>46.Hazard labels reflect the content(s) and activity of each individual radionuclide and the TI of the overpack [10.7.3.4]</span>
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {153}
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {154}
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {155}
 		   </td>
 	   </tr>
 	   <tr>
@@ -703,25 +697,25 @@
 			   <span>22.1-Special Form approval certificate</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {69}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {70}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {71}
 		   </td>
 		   <td style="width:35%">
 			   <span>47.State and Operator variations complied with [2.8]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {156}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {157}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {158}
 		   </td>
 	   </tr>
 	   <tr>
@@ -729,25 +723,25 @@
 			   <span>22.2-Type B package design approval certificate</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {72}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {73}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {74}
 		   </td>
 		   <td style="width:35%" rowspan="2">
 			   <span>48.Cargo Aircraft Only shipments, a cargo aircraft operates on all sectors</span>
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {159}
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {160}
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {161}
 		   </td>
 	   </tr>
 	   <tr>
@@ -755,13 +749,13 @@
 			   <span>22.3-Other approval certificates as required</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {75}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {76}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {77}
 		   </td>
 	   </tr>
 	   <tr>
@@ -769,26 +763,26 @@
 			   <span>23.Additional Handling Information [10.8.3.11]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {78}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {79}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {80}
 		   </td>
 		   <td style="width:35%" rowspan="2">
 			   <span>49.Packages containing Carbon dioxide solid (dry ice), the marking,
 				   labelling and documentary requirements complied with [Packing Instruction 954; 7.1.4.1 (d); 7.2.3.9.1]</span>
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {162}
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {163}
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {164}
 		   </td>
 	   </tr>
 	   <tr>
@@ -796,13 +790,13 @@
 			   <span>24.Name of Signatory and Date indicated [10.8.3.13 and 10.8.3.14] and Signature of Shipper [10.8.3.15]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {81}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {82}
 		   </td>
 		   <td style="width:5%" bgcolor="#808080">
-			   <br/>
+			   {83}
 		   </td>
 	   </tr>
 	   <tr>
@@ -810,13 +804,13 @@
 			   <span>25.Amendment or alteration signed by Shipper [10.8.1.7]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {84}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {85}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {86}
 		   </td>
 		   <td style="width:50%" rowspan="5" colspan="4">
 			   <br/>
@@ -833,13 +827,13 @@
 				   “Dangerous Goods as perattached DGD” [10.8.8.1(a)]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {87}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {88}
 		   </td>
 		   <td style="width:5%" bgcolor="#808080">
-			   <br/>
+			   {89}
 		   </td>
 	   </tr>
 	   <tr>
@@ -847,13 +841,13 @@
 			   <span>27.“Cargo Aircraft Only” or CAO, if applicable [10.8.8.1(b)]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {90}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {91}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {92}
 		   </td>
 	   </tr>
 	   <tr>
@@ -861,13 +855,13 @@
 			   <span>28.Where non-dangerous goods are included, the number of pieces of dangerous goods shown [10.8.8.2]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {93}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {94}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {95}
 		   </td>
 	   </tr>
 	   <tr>
@@ -877,16 +871,16 @@
 	   </tr>
 	   <tr>
 		   <td style="width:40%" colspan="4">
-			   <span>Checked by____________________________________________________________________________</span>
+			   <span>Checked by:<u>{165}</u></span>
 			   <br/>
-			   <span>Place____________________________________________________________________________</span>
+			   <span>Place:<u>{166}</u></span>
 		   </td>
 		   <td style="width:60%" colspan="4">
-			   <span>Signature____________________________________________________________________________</span>
+			   <span>Signature:<u>{167}</u></span>
 			   <br/>
-			   <span>Date___________________________________</span>
+			   <span>Date:<u>{168}</u></span>
 			   <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-			   <span>Time___________________________________</span>
+			   <span>Time:<u>{169}</u></span>
 		   </td>
 	   </tr>
 	   <tr>

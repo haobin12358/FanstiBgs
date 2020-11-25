@@ -4,13 +4,7 @@
       <meta charset="UTF-8">
       <title>Shipper Demo</title>
    </head>
-   <style type="text/css">
-	   body{
-			width: 820px;
-			height: 1160px;
-	   }
-   </style>
-    <body>
+    <body style="width:820px;height:1160px">
         <table style="width:1213.5px" cellpadding="2" cellspacing="0" border="0" >
            <tr>
                <td style="text-align:center"><span><strong>ACCEPTANCE CHECKLIST FOR LITHIUM BATTERIES SECTION II</strong></span></td>
@@ -23,9 +17,9 @@
            </tr>
             <tr>
               <td>
-                  <span><strong>AWB-No.:</strong></span>
+                  <span><strong>AWB-No.:{0}</strong></span>
                   <br/>
-                  <span><strong>运单号:</strong></span>
+                  <span><strong>运单号:{1}</strong></span>
               </td>
            </tr>
 
@@ -84,13 +78,13 @@
                     <span>锂离子电池应有“符合包装说明PI9XX第II节规定的锂离子电池”</span>
                 </td>
                 <td style="width:5%">
-                    <br/>
+                    {2}
                 </td>
                 <td style="width:5%">
-                    <br/>
+                    {3}
                 </td>
                 <td style="width:5%" bgcolor="#808080">
-                    <br/>
+                    {4}
                 </td>
             </tr>
             <tr>
@@ -103,13 +97,13 @@
                     <span>锂金属电池应有“符合包装说明PI9XX第II节规定的锂金属电池”</span>
                 </td>
                 <td style="width:5%">
-                    <br/>
+                    {5}
                 </td>
                 <td style="width:5%">
-                    <br/>
+                    {6}
                 </td>
                 <td style="width:5%" bgcolor="#808080">
-                    <br/>
+                    {7}
                 </td>
             </tr>
             <tr>
@@ -122,13 +116,13 @@
                     <span>单独运输的锂电池（PI965或968）标明“CAO”或“仅限全货机”。</span>
                 </td>
                 <td style="width:5%">
-                    <br/>
+                    {8}
                 </td>
                 <td style="width:5%">
-                    <br/>
+                    {9}
                 </td>
                 <td style="width:5%">
-                    <br/>
+                    {10}
                 </td>
             </tr>
             <tr>
@@ -146,13 +140,13 @@
                     <span>包装足够坚固，没有破损迹象，适合运输。</span>
                 </td>
                 <td style="width:5%">
-                    <br/>
+                    {11}
                 </td>
                 <td style="width:5%">
-                    <br/>
+                    {12}
                 </td>
                 <td style="width:5%" bgcolor="#808080">
-                    <br/>
+                    {13}
                 </td>
             </tr>
             <tr>
@@ -165,13 +159,13 @@
                     <span>单独 运输的锂电池（PI965或968），一票货物中仅含有一件该类型的包装件或合成包装件</span>
                 </td>
                 <td style="width:5%">
-                    <br/>
+                    {14}
                 </td>
                 <td style="width:5%">
-                    <br/>
+                    {15}
                 </td>
                 <td style="width:5%">
-                    <br/>
+                    {16}
                 </td>
             </tr>
             <tr>
@@ -185,13 +179,13 @@
                     <span>单独运输的锂电池（PI965或968），一个合成包装件中仅含有一件该类型的包装件。</span>
                 </td>
                 <td style="width:5%">
-                    <br/>
+                    {17}
                 </td>
                 <td style="width:5%">
-                    <br/>
+                    {18}
                 </td>
                 <td style="width:5%">
-                    <br/>
+                    {19}
                 </td>
             </tr>
             <tr>
@@ -205,13 +199,13 @@
                     <span>单独运输的锂电池（PI965或968），与非限制性货物分开交运，且交运前不得装入集装器。</span>
                 </td>
                 <td style="width:5%">
-                    <br/>
+                    {20}
                 </td>
                 <td style="width:5%">
-                    <br/>
+                    {21}
                 </td>
                 <td style="width:5%">
-                    <br/>
+                    {22}
                 </td>
             </tr>
             <tr>
@@ -229,13 +223,13 @@
                     <span>锂电池标记被正确填写及粘贴。</span>
                 </td>
                 <td style="width:5%">
-                    <br/>
+                    {23}
                 </td>
                 <td style="width:5%">
-                    <br/>
+                    {24}
                 </td>
                 <td style="width:5%" bgcolor="#808080">
-                    <br/>
+                    {25}
                 </td>
             </tr>
             <tr>
@@ -248,13 +242,13 @@
                     <span>单独运输的锂电池（PI965或968）粘贴仅限全货机标签。</span>
                 </td>
                 <td style="width:5%">
-                    <br/>
+                    {26}
                 </td>
                 <td style="width:5%">
-                    <br/>
+                    {27}
                 </td>
                 <td style="width:5%">
-                    <br/>
+                    {28}
                 </td>
             </tr>
             <tr>
@@ -267,13 +261,13 @@
                     <span>无关标记标签已移除</span>
                 </td>
                 <td style="width:5%">
-                    <br/>
+                    {29}
                 </td>
                 <td style="width:5%">
-                    <br/>
+                    {30}
                 </td>
                 <td style="width:5%" bgcolor="#808080">
-                    <br/>
+                    {31}
                 </td>
             </tr>
             <tr>
@@ -291,13 +285,13 @@
                     <span>标记和标签必须清晰可见，否则需要重新书写或粘贴在overpack表面。</span>
                 </td>
                 <td style="width:5%">
-                    <br/>
+                    {32}
                 </td>
                 <td style="width:5%">
-                    <br/>
+                    {33}
                 </td>
                 <td style="width:5%">
-                    <br/>
+                    {34}
                 </td>
             </tr>
             <tr>
@@ -310,13 +304,13 @@
                     <span>如果所有标记和标签不可见，则需有“Overpack”字样。</span>
                 </td>
                 <td style="width:5%">
-                    <br/>
+                    {35}
                 </td>
                 <td style="width:5%">
-                    <br/>
+                    {36}
                 </td>
                 <td style="width:5%">
-                    <br/>
+                    {37}
                 </td>
             </tr>
             <tr>
@@ -334,13 +328,13 @@
                     <span>遵守国家和运营人差异条款。</span>
                 </td>
                 <td style="width:5%">
-                    <br/>
+                    {38}
                 </td>
                 <td style="width:5%">
-                    <br/>
+                    {39}
                 </td>
                 <td style="width:5%">
-                    <br/>
+                    {40}
                 </td>
             </tr>
             <tr>
@@ -353,19 +347,19 @@
                     <span>仅限全货机货物，在所有航段均使用货机运载。</span>
                 </td>
                 <td style="width:5%">
-                    <br/>
+                    {41}
                 </td>
                 <td style="width:5%">
-                    <br/>
+                    {42}
                 </td>
                 <td style="width:5%">
-                    <br/>
+                    {43}
                 </td>
             </tr>
 
             <tr>
                 <td colspan="5">
-                    <span>该票货物Comments：      接收Yes  □        不接收No  □</span>
+                    <span>该票货物Comments：      接收Yes  {44}        不接收No  {45}</span>
                     <br/>
                     <span><i>注：如果任何一项为“否”，请拒绝接收该票货物。</i></span>
                     <br/>
@@ -374,16 +368,16 @@
             </tr>
             <tr>
                 <td colspan="5">
-                    <span><strong>检查人Checked by:</strong></span>
+                    <span><strong>检查人Checked by:{46}</strong></span>
                     <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                    <span><strong>日期Date:</strong></span>
+                    <span><strong>日期Date:{47}</strong></span>
                 </td>
             </tr>
             <tr>
                 <td colspan="5">
-                    <span><strong>签字Signature：</strong></span>
+                    <span><strong>签字Signature：{48}</strong></span>
                     <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                    <span><strong>时间Time：</strong></span>
+                    <span><strong>时间Time：{49}</strong></span>
                 </td>
             </tr>
             <tr>
