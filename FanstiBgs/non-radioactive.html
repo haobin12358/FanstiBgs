@@ -4,16 +4,10 @@
       <meta charset="UTF-8">
       <title>Shipper Demo</title>
    </head>
-   <style type="text/css">
-	   body{
-			width: 820px;
-			height: 1160px;
-	   }
-   </style>
-   <body>
+   <body style="width:820px;height:1160px">
    <table style="width:1213.5px" cellpadding="2" cellspacing="0" border="0" >
 	   <tr>
-		   <td style="text-align:center" colspan="3"><span>2020</span></td>
+		   <td style="text-align:center" colspan="3"><span>{0}</span></td>
 	   </tr>
 	   <tr>
 		   <td style="width:20%">
@@ -25,7 +19,7 @@
 				</span>
 		   </td>
 		   <td style="width:20%">
-		   		<span style="text-align:right">61<sup>th</sup>EDITION,1 JANUARY 2020</span>
+		   		<span style="text-align:right">{1}<sup>th</sup>EDITION,1 JANUARY {2}</span>
 		   </td>
 	   </tr>
 
@@ -33,11 +27,11 @@
    <table style="width:100%;" cellpadding="2" cellspacing="0" border="1">
 	   <tr>
 		   <td colspan="8">
-			   <span>Air Waybill___________________________________________________________</span>
+			   <span>Air Waybill:<u>{3}</u></span>
 			   <br/>
-			   <span>Origin_________________________________________________________________</span>
+			   <span>Origin:<u>{4}</u></span>
 			   <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-			   <span>Destination____________________________________________________________</span>
+			   <span>Destination:<u>{5}</u></span>
 			   <br/>
 			   <span>The recommended checklist appearing on the following pages is intended to verify shipments at origin.
 				   Copies of the checklist can be obtained from:</span>
@@ -81,25 +75,25 @@
 				   [8.0.2.1, 8.1.1, 8.1.2, 8.1.6.12]</span>
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {6}
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {7}
 		   </td>
 		   <td style="width:5%" rowspan="2" bgcolor="#808080">
-			   <br/>
+			   {8}
 		   </td>
 		   <td style="width:35%">
 			   <span>28.Packaging free from damage and leakage [9.1.3 (i)]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {102}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {103}
 		   </td>
 		   <td style="width:5%" bgcolor="#808080">
-			   <br/>
+			   {104}
 		   </td>
 	   </tr>
 	   <tr>
@@ -107,13 +101,13 @@
 			   <span>29.Packaging conforms with packing instruction</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {105}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {106}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {107}
 		   </td>
 	   </tr>
 	   <tr>
@@ -121,25 +115,25 @@
 			   <span>2.Full name and address of Shipper and Consignee [8.1.6.1, 8.1.6.2]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {9}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {10}
 		   </td>
 		   <td style="width:5%" bgcolor="#808080">
-			   <br/>
+			   {11}
 		   </td>
 		   <td style="width:35%" rowspan="2">
 			   <span>30.Same number and type of packagings and overpacks delivered as shown on DGD [9.1.3]</span>
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {108}
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {109}
 		   </td>
 		   <td style="width:5%" rowspan="2" bgcolor="#808080">
-			   <br/>
+			   {110}
 		   </td>
 	   </tr>
 	   <tr>
@@ -147,13 +141,13 @@
 			   <span>3.If the Air Waybill number is not shown, enter it. [8.1.6.3]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {12}
 		   </td>
 		   <td style="width:5%" bgcolor="#808080">
-			   <br/>
+			   {13}
 		   </td>
 		   <td style="width:5%" bgcolor="#808080">
-			   <br/>
+			   {14}
 		   </td>
 	   </tr>
 	   <tr>
@@ -161,13 +155,13 @@
 			   <span>4.The number of pages shown[8.1.6.4]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {15}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {16}
 		   </td>
 		   <td style="width:5%" bgcolor="#808080">
-			   <br/>
+			   {17}
 		   </td>
 		   <td style="width:5%" colspan="4">
 			   <span><strong>Marks</strong></span>
@@ -178,13 +172,13 @@
 			   <span>5.The non-applicable Aircraft Type deleted or not shown [8.1.6.5]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {18}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {19}
 		   </td>
 		   <td style="width:5%" bgcolor="#808080">
-			   <br/>
+			   {20}
 		   </td>
 		   <td style="width:35%" rowspan="2">
 			   <span>31.UN Specification Packaging, marked according to 6.0.4 and 6.0.5:</span>
@@ -204,13 +198,13 @@
 			   <span>6.If full name of Airport or City of Departure or Destination is not shown, enter it. [8.1.6.6 and 8.1.6.7]</span>
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {21}
 		   </td>
 		   <td style="width:5%" rowspan="2" bgcolor="#808080">
-			   <br/>
+			   {22}
 		   </td>
 		   <td style="width:5%" rowspan="2" bgcolor="#808080">
-			   <br/>
+			   {23}
 		   </td>
 	   </tr>
 	   <tr>
@@ -218,13 +212,13 @@
 			   <span>31.1- Symbol and Specification Code [6.0.4.2.1 (a), (b)]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {111}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {112}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {113}
 		   </td>
 	   </tr>
 	   <tr>
@@ -232,25 +226,25 @@
 			   <span>7.The word “Radioactive” deleted or not shown [8.1.6.8]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {24}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {25}
 		   </td>
 		   <td style="width:5%" bgcolor="#808080">
-			   <br/>
+			   {26}
 		   </td>
 		   <td style="width:35%" rowspan="2">
 			   <span>31.2- X, Y or Z meets or exceeds Packing Group/Packing Instruction requirements [6.0.4.2.1 (c)]</span>
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {114}
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {115}
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {116}
 		   </td>
 	   </tr>
 	   <tr>
@@ -263,25 +257,25 @@
 			   <span>8.UN or ID number(s), preceded by prefix [8.1.6.9.1, Step 1]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {27}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {28}
 		   </td>
 		   <td style="width:5%" bgcolor="#808080">
-			   <br/>
+			   {29}
 		   </td>
 		   <td style="width:35%" rowspan="2">
 			   <span>31.3- Gross Weight within limits (Solids, Inner Packagings or IBCs [SP A179, 6.0.4.2.1 (d)]</span>
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {117}
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {118}
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {119}
 		   </td>
 	   </tr>
 	   <tr>
@@ -289,13 +283,13 @@
 			   <span>9.Proper Shipping Name and the technical name in brackets for entries with   [8.1.6.9.1, Step 2]</span>
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {30}
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {31}
 		   </td>
 		   <td style="width:5%" rowspan="2" bgcolor="#808080">
-			   <br/>
+			   {32}
 		   </td>
 	   </tr>
 	   <tr>
@@ -303,13 +297,13 @@
 			   <span>31.4- Plastic drums, jerricans and IBCs within permitted period of use [5.0.2.15]</span>
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {120}
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {121}
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {122}
 		   </td>
 	   </tr>
 	   <tr>
@@ -317,13 +311,13 @@
 			   <span>10.Class or Division and for Class 1, the Compatibility Group, [8.1.6.9.1, Step 3]</span>
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {33}
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {34}
 		   </td>
 		   <td style="width:5%" rowspan="2" bgcolor="#808080">
-			   <br/>
+			   {35}
 		   </td>
 	   </tr>
 	   <tr>
@@ -331,13 +325,13 @@
 			   <span>31.5- Infectious substance package mark [6.5.3.1]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {123}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {124}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {125}
 		   </td>
 	   </tr>
 	   <tr>
@@ -345,25 +339,25 @@
 			   <span>11.Subsidiary hazard, in brackets, immediately following Class or Division [8.1.6.9.1, Step 4]</span>
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {36}
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {37}
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {38}
 		   </td>
 		   <td style="width:35%">
 			   <span>32.UN or ID number(s), preceded by prefix [7.1.4.1(a)]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {126}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {127}
 		   </td>
 		   <td style="width:5%" bgcolor="#808080">
-			   <br/>
+			   {128}
 		   </td>
 	   </tr>
 	   <tr>
@@ -371,13 +365,13 @@
 			   <span>33.The Proper Shipping Name(s) including technical name where required [7.1.4.1(a)]</span>
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {129}
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {130}
 		   </td>
 		   <td style="width:5%" rowspan="2" bgcolor="#808080">
-			   <br/>
+			   {131}
 		   </td>
 	   </tr>
 	   <tr>
@@ -385,13 +379,13 @@
 			   <span>12.Packing Group [8.1.6.9.1, Step 5]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {39}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {40}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {41}
 		   </td>
 	   </tr>
 	   <tr>
@@ -402,13 +396,13 @@
 			   <span>34.The full name and address of Shipper and Consignee [7.1.4.1(b)]</span>
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {132}
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {133}
 		   </td>
 		   <td style="width:5%" rowspan="2" bgcolor="#808080">
-			   <br/>
+			   {134}
 		   </td>
 	   </tr>
 	   <tr>
@@ -416,13 +410,13 @@
 			   <span>13.Number and Type of Packages [8.1.6.9.2, Step 6]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {42}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {43}
 		   </td>
 		   <td style="width:5%" bgcolor="#808080">
-			   <br/>
+			   {44}
 		   </td>
 	   </tr>
 	   <tr>
@@ -431,13 +425,13 @@
 				   as applicable) within per package limit [8.1.6.9.2, Step 6]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {45}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {46}
 		   </td>
 		   <td style="width:5%" bgcolor="#808080">
-			   <br/>
+			   {47}
 		   </td>
 		   <td style="width:35%" rowspan="2">
 			   <span>35.For consignments of more than one package of all classes (except ID 8000 and Class 7) the net quantity,
@@ -445,13 +439,13 @@
 				   marked on the packages [7.1.4.1(c)]</span>
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {135}
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {136}
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {137}
 		   </td>
 	   </tr>
 	   <tr>
@@ -460,13 +454,13 @@
 				   followed by unit of measurement [8.1.6.9.2, Step 6]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {48}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {49}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {50}
 		   </td>
 	   </tr>
 	   <tr>
@@ -487,13 +481,13 @@
 			   <span>36.Carbon Dioxide, Solid (Dry Ice), the net weight marked on the packages [7.1.4.1(d)]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {138}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {139}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {140}
 		   </td>
 	   </tr>
 	   <tr>
@@ -501,26 +495,26 @@
 			   <span>16.1- Compatible according to Table 9.3.A</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {51}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {52}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {53}
 		   </td>
 		   <td style="width:35%" rowspan="2">
 			   <span>37.The Name and Telephone Number of a responsible person for Division 6.2
 				   Infectious Substances shipment [7.1.4.1(e)]</span>
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {141}
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {142}
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {143}
 		   </td>
 	   </tr>
 	   <tr>
@@ -528,13 +522,13 @@
 			   <span>16.2- Conditions met for UN packages containing Division 6.2 [5.0.2.11(c)]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {54}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {55}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {56}
 		   </td>
 	   </tr>
 	   <tr>
@@ -542,25 +536,25 @@
 			   <span>16.3- Wording “All packed in one (type of packaging)” [8.1.6.9.2, Step 6(f)]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {57}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {58}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {59}
 		   </td>
 		   <td style="width:35%">
 			   <span>38.The Special Marking requirements shown for Packing Instruction 202 [7.1.4.1(f)]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {144}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {145}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {146}
 		   </td>
 	   </tr>
 	   <tr>
@@ -568,25 +562,25 @@
 			   <span>16.4- Calculation of “Q” value which must not exceed 1 [5.0.2.11 (g) & (h); 2.7.5.6; 8.1.6.9.2, Step 6(g)]</span>
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {60}
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {61}
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {62}
 		   </td>
 		   <td style="width:35%">
 			   <span>39.Limited Quantities mark [7.1.4.2]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {147}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {148}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {149}
 		   </td>
 	   </tr>
 	   <tr>
@@ -594,13 +588,13 @@
 			   <span>40.Environmentally Hazardous Substance mark [7.1.5.3]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {150}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {151}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {152}
 		   </td>
 	   </tr>
 	   <tr>
@@ -620,13 +614,13 @@
 			   <span>41.Lithium Battery mark [7.1.5.5]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {153}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {154}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {155}
 		   </td>
 	   </tr>
 	   <tr>
@@ -634,13 +628,13 @@
 			   <span>17.1- Compatible according to Table 9.3.A</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {63}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {64}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {65}
 		   </td>
 		   <td style="width:35%" colspan="4">
 			   <span><strong>Labelling</strong></span>
@@ -651,25 +645,25 @@
 			   <span>17.2- Wording “Overpack Used” [8.1.6.9.2, Step 7]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {66}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {67}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {68}
 		   </td>
 		   <td style="width:35%" rowspan="2">
 			   <span>42.The label(s) identifying the Primary hazard as per 4.2, Column D properly affixed [7.2.3.1; 7.2.6]</span>
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {156}
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {157}
 		   </td>
 		   <td style="width:5%" rowspan="2" bgcolor="#808080">
-			   <br/>
+			   {158}
 		   </td>
 	   </tr>
 	   <tr>
@@ -677,13 +671,13 @@
 			   <span>17.3- If more than one overpack is used, identification marks shown and total quantity of dangerous goods [8.1.6.9.2, Step 7]</span>
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {69}
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {70}
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {71}
 		   </td>
 	   </tr>
 	   <tr>
@@ -691,13 +685,13 @@
 			   <span>43.The label(s) identifying the Subsidiary hazard, as per 4.2, Column D properly affixed [7.2.3.1; 7.2.6.2.3]</span>
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {159}
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {160}
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {161}
 		   </td>
 	   </tr>
 	   <tr>
@@ -710,25 +704,25 @@
 			   <span>18.Packing Instruction Number [8.1.6.9.3, Step 8]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {72}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {73}
 		   </td>
 		   <td style="width:5%" bgcolor="#808080">
-			   <br/>
+			   {74}
 		   </td>
 		   <td style="width:35%">
 			   <span>44.“Cargo Aircraft Only” label [7.2.4.2; 7.2.6.3]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {162}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {163}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {164}
 		   </td>
 	   </tr>
 	   <tr>
@@ -737,25 +731,25 @@
 				   “IB” follows the packing instruction [8.1.6.9.3, Step 8]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {75}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {76}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {77}
 		   </td>
 		   <td style="width:35%">
 			   <span>45.“Orientation” labels on two opposite sides, if applicable [7.2.4.4]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {165}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {166}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {167}
 		   </td>
 	   </tr>
 	   <tr>
@@ -766,13 +760,13 @@
 			   <span>46.“Cryogenic Liquid” label, if applicable as per 4.2, Column D [7.2.4.3]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {168}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {169}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {170}
 		   </td>
 	   </tr>
 	   <tr>
@@ -782,25 +776,25 @@
 				   A202, A211, A212, A331 if used [8.1.6.9.4, Step 9]</span>
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {78}
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {79}
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {80}
 		   </td>
 		   <td style="width:35%">
 			   <span>47.“Keep Away From Heat” label, if applicable as per 4.2, Column D [7.2.4.5]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {171}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {172}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {173}
 		   </td>
 	   </tr>
 	   <tr>
@@ -808,13 +802,13 @@
 			   <span>48.Any irrelevant marks and labels removed or obliterated [7.1.1; 7.2.1]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {174}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {175}
 		   </td>
 		   <td style="width:5%" bgcolor="#808080">
-			   <br/>
+			   {176}
 		   </td>
 	   </tr>
 	   <tr>
@@ -823,13 +817,13 @@
 				   including a copy in English and additional approvals for other items under [8.1.6.9.4, Step 9]</span>
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {81}
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {82}
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {83}
 		   </td>
 		   <td style="width:35%" colspan="4">
 			   <span><strong>For Overpacks</strong></span>
@@ -842,13 +836,13 @@
 				   [7.1.7.1, 7.1.7.2, 7.2.7]</span>
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {177}
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {178}
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {179}
 		   </td>
 	   </tr>
 	   <tr>
@@ -863,26 +857,26 @@
 				   fireworks (UN0336 & UN0337) and viscous flammable liquids [8.1.6.11]</span>
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {84}
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {85}
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {86}
 		   </td>
 		   <td style="width:35%">
 			   <span>50.The word “Overpack” marked if marks and labels are not visible on packages
 				   within the overpack [7.1.7.1]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {180}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {181}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {182}
 		   </td>
 	   </tr>
 	   <tr>
@@ -891,13 +885,13 @@
 				   shown and total quantity of dangerous goods [7.1.7.3]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {183}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {184}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {185}
 		   </td>
 	   </tr>
 	   <tr>
@@ -905,13 +899,13 @@
 			   <span>23.Name of Signatory and Date indicated and Signature of Shipper [8.1.6.13, 8.1.6.14 and 8.1.6.15]</span>
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {87}
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {88}
 		   </td>
 		   <td style="width:5%" rowspan="2" bgcolor="#808080">
-			   <br/>
+			   {89}
 		   </td>
 		   <td style="width:35%" colspan="4">
 			   <span><strong>GENERAL</strong></span>
@@ -922,13 +916,13 @@
 			   <span>52.State and Operator variations complied with [2.8]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {186}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {187}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {188}
 		   </td>
 	   </tr>
 	   <tr>
@@ -936,25 +930,25 @@
 			   <span>24.Amendment or alteration signed by Shipper [8.1.2.6]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {90}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {91}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {92}
 		   </td>
 		   <td style="width:35%" rowspan="2">
 			   <span>53.Cargo Aircraft Only shipments, a cargo aircraft operates on all sectors</span>
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {189}
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {190}
 		   </td>
 		   <td style="width:5%" rowspan="2">
-			   <br/>
+			   {191}
 		   </td>
 	   </tr>
 	   <tr>
@@ -968,13 +962,13 @@
 				   “Dangerous Goods as per attached DGD” [8.2.1(a)]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {93}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {94}
 		   </td>
 		   <td style="width:5%" bgcolor="#808080">
-			   <br/>
+			   {95}
 		   </td>
 		   <td style="width:35%" colspan="4" rowspan="3">
 			   <br/>
@@ -985,13 +979,13 @@
 			   <span>26.“Cargo Aircraft Only” or “CAO”, if applicable [8.2.1(b)]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {96}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {97}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {98}
 		   </td>
 	   </tr>
 	   <tr>
@@ -999,13 +993,13 @@
 			   <span>27.Where non-dangerous goods are included, the number of pieces of dangerous goods shown [8.2.2]</span>
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {99}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {100}
 		   </td>
 		   <td style="width:5%">
-			   <br/>
+			   {101}
 		   </td>
 	   </tr>
 	   <tr>
@@ -1015,16 +1009,16 @@
 	   </tr>
 	   <tr>
 		   <td style="width:40%" colspan="4">
-			   <span>Checked by____________________________________________________________________________</span>
+			   <span>Checked by:<u>{192}</u></span>
 			   <br/>
-			   <span>Place____________________________________________________________________________</span>
+			   <span>Place:<u>{193}</u></span>
 		   </td>
 		   <td style="width:60%" colspan="4">
-			   <span>Signature____________________________________________________________________________</span>
+			   <span>Signature:<u>{194}</u></span>
 			   <br/>
-			   <span>Date___________________________________</span>
+			   <span>Date:<u>{195}</u></span>
 			   <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-			   <span>Time___________________________________</span>
+			   <span>Time:<u>{196}</u></span>
 		   </td>
 	   </tr>
 	   <tr>

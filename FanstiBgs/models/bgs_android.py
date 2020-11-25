@@ -74,7 +74,7 @@ class an_procedure_picture(Base):
     user_id = Column(String(40), comment="用户id")
     user_name = Column(String(50), comment="用户名")
     createtime = Column(DateTime, comment="创建时间")
-    type = Column(String(255), comment="图片类型stork入库shipping_front正面shipping_diaforward斜前shipping_diaback斜后shipping_back后面whole整体")
+    type = Column(String(255), comment="图片类型stork入库shipping_front正面shipping_diaforward斜前shipping_diaback斜后shipping_back后面whole整体check_item检查单")
 
 class an_area(Base):
     """

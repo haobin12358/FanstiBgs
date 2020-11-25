@@ -106,7 +106,7 @@ class t_bgs_un_pack(Base):
     status = Column(String(255), comment="打包状态")
     packInfo = Column(String(255), comment="打包信息")
     Qnumber = Column(Integer)
-    meterial = Column(String(255))
+    material = Column(String(255))
     introduceX = Column(String(255))
     packNumber = Column(String(255))
     unit = Column(String(255), comment="单位")
