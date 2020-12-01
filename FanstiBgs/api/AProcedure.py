@@ -21,7 +21,8 @@ class AProcedure(Resource):
         apis = {
             "stork_in": self.cprocedure.stork_in,
             "stork_out": self.cprocedure.stork_out,
-            "stork_repeat": self.cprocedure.stork_repeat
+            "stork_repeat": self.cprocedure.stork_repeat,
+            "update_procedure": self.cprocedure.update_procedure
         }
 
         return apis

@@ -4,18 +4,16 @@ create user: haobin12358
 last update time: 2020-09-09
 """
 
-import hashlib, datetime, requests, uuid
-from flask import request, current_app
+import datetime, uuid
+from flask import request
 
 from FanstiBgs.extensions.params_validates import parameter_required
-from FanstiBgs.extensions.error_response import ParamsError, AuthorityError, NoPreservationError
-from FanstiBgs.extensions.request_handler import token_to_user_
-from FanstiBgs.extensions.token_handler import usid_to_token
+from FanstiBgs.extensions.error_response import ParamsError, NoPreservationError
 from FanstiBgs.extensions.register_ext import db
 from FanstiBgs.extensions.success_response import Success
 from FanstiBgs.models.bgs_android import an_user, an_area, an_storing_location, an_preservation_type, \
     an_procedure, an_procedure_picture
-from FanstiBgs.models.bgs_cloud import t_bgs_main_single_number, t_bgs_un
+from FanstiBgs.models.bgs_cloud import t_bgs_main_single_number
 
 class CProcedure:
 
@@ -64,6 +62,18 @@ class CProcedure:
             procedure = an_procedure.query.filter(an_procedure.procedure_type == args.get("procedure_type"),
                                                   an_procedure.id == args.get("id"))\
                 .first_("未找到该单据")
+            if procedure.freight_type == "PASSENGER AND CARGO AIRCRAFT":
+                procedure.fill("freight_type_ch", "客货均可")
+            elif procedure.freight_type == "CARGO AIRCRAFT ONLY":
+                procedure.fill("freight_type_ch", "仅限货机")
+            else:
+                procedure.fill("freight_type_ch", None)
+            if procedure.type_of_shipping == "NON-RADIOACTIVE":
+                procedure.fill("type_of_shipping_ch", "非放射性")
+            elif procedure.type_of_shipping == "RADIOACTIVE":
+                procedure.fill("type_of_shipping_ch", "放射性")
+            else:
+                procedure.fill("type_of_shipping_ch", None)
             history_list = self._get_history_list(procedure)
             procedure_picture_list = an_procedure_picture.query.filter(
                 an_procedure_picture.procedure_id == args.get("id")).all()
@@ -87,6 +97,9 @@ class CProcedure:
             if main_port:
                 procedure_dict["port_of_departure"] = main_port.port_of_departure
                 procedure_dict["destination_port"] = main_port.destination_port
+                # 2020/12/1 增加字段
+                procedure_dict["type_of_shipping"] = main_port.type_of_shipping
+                procedure_dict["freight_type"] = main_port.freight_type
                 # TODO 数量需要等甲方确认逻辑
                 procedure_dict["product_number"] = 0
             with db.auto_commit():
@@ -107,55 +120,55 @@ class CProcedure:
             history_dict = {}
             user = an_user.query.filter(an_user.user_id == procedure.handover_inputer_id).first()
             history_dict["procedure_status"] = "已入库"
-            history_dict["area_name"] = procedure.preservation_area
-            history_dict["storing_name"] = procedure.storing_location
+            history_dict["area_name"] = "区域：" + procedure.preservation_area or ""
+            history_dict["storing_name"] = "仓位：" + procedure.storing_location or ""
             if procedure.storing_location in ["大货区", "锂电池暂存区", "ETV区", "Stacker区"]:
                 history_dict["preservation_type_name"] = None
-                history_dict["board_no"] = procedure.board_no
+                history_dict["board_no"] = "板号：" + procedure.board_no or ""
             else:
-                history_dict["preservation_type_name"] = procedure.preservation_type
+                history_dict["preservation_type_name"] = "类别：" + procedure.preservation_type or ""
                 history_dict["board_no"] = None
-            history_dict["product_number"] = procedure.product_number
-            history_dict["weight"] = procedure.weight
-            history_dict["inputer_time"] = procedure.handover_time
-            history_dict["inputer_name"] = user.user_truename
-            history_dict["inputer_card_no"] = user.cardno
+            history_dict["product_number"] = "件数：" + str(procedure.product_number or "")
+            history_dict["weight"] = "重量：" + str(procedure.weight or "")
+            history_dict["inputer_time"] = "操作时间：" + procedure.handover_time.strftime("%Y-%m-%d %H:%M") or ""
+            history_dict["inputer_name"] = "操作人：" + user.user_truename or ""
+            history_dict["inputer_card_no"] = "操作人身份证号：" + user.cardno or ""
             history_list.append(history_dict)
         if procedure.delivery_inputer_id:
             history_dict = {}
             user = an_user.query.filter(an_user.user_id == procedure.delivery_inputer_id).first()
             history_dict["procedure_status"] = "已出库"
-            history_dict["area_name"] = procedure.preservation_area
-            history_dict["storing_name"] = procedure.storing_location
+            history_dict["area_name"] = "区域：" + procedure.preservation_area or ""
+            history_dict["storing_name"] = "仓位：" + procedure.storing_location or ""
             if procedure.storing_location in ["大货区", "锂电池暂存区", "ETV区", "Stacker区"]:
                 history_dict["preservation_type_name"] = None
-                history_dict["board_no"] = procedure.board_no
+                history_dict["board_no"] = "板号：" + procedure.board_no or ""
             else:
-                history_dict["preservation_type_name"] = procedure.preservation_type
+                history_dict["preservation_type_name"] = "类别：" + procedure.preservation_type or ""
                 history_dict["board_no"] = None
-            history_dict["product_number"] = procedure.product_number
-            history_dict["weight"] = procedure.weight
-            history_dict["inputer_time"] = procedure.delivery_time
-            history_dict["inputer_name"] = user.user_truename
-            history_dict["inputer_card_no"] = user.cardno
+            history_dict["product_number"] = "件数：" + str(procedure.product_number or "")
+            history_dict["weight"] = "重量：" + str(procedure.weight or "")
+            history_dict["inputer_time"] = "操作时间：" + procedure.handover_time.strftime("%Y-%m-%d %H:%M") or ""
+            history_dict["inputer_name"] = "操作人：" + user.user_truename or ""
+            history_dict["inputer_card_no"] = "操作人身份证号：" + user.cardno or ""
             history_list.append(history_dict)
         if procedure.repeat_warehousing_inputer_id:
             history_dict = {}
             user = an_user.query.filter(an_user.user_id == procedure.repeat_warehousing_inputer_id).first()
             history_dict["procedure_status"] = "已重新入库"
-            history_dict["area_name"] = procedure.preservation_area
-            history_dict["storing_name"] = procedure.storing_location
+            history_dict["area_name"] = "区域：" + procedure.preservation_area or ""
+            history_dict["storing_name"] = "仓位：" + procedure.storing_location or ""
             if procedure.storing_location in ["大货区", "锂电池暂存区", "ETV区", "Stacker区"]:
                 history_dict["preservation_type_name"] = None
-                history_dict["board_no"] = procedure.board_no
+                history_dict["board_no"] = "板号：" + procedure.board_no or ""
             else:
-                history_dict["preservation_type_name"] = procedure.preservation_type
+                history_dict["preservation_type_name"] = "类别：" + procedure.preservation_type or ""
                 history_dict["board_no"] = None
-            history_dict["product_number"] = procedure.product_number
-            history_dict["weight"] = procedure.weight
-            history_dict["inputer_time"] = procedure.repeat_warehousing_time
-            history_dict["inputer_name"] = user.user_truename
-            history_dict["inputer_card_no"] = user.cardno
+            history_dict["product_number"] = "件数：" + str(procedure.product_number or "")
+            history_dict["weight"] = "重量：" + str(procedure.weight or "")
+            history_dict["inputer_time"] = "操作时间：" + procedure.handover_time.strftime("%Y-%m-%d %H:%M") or ""
+            history_dict["inputer_name"] = "操作人：" + user.user_truename or ""
+            history_dict["inputer_card_no"] = "操作人身份证号：" + user.cardno or ""
             history_list.append(history_dict)
 
         return history_list
@@ -270,9 +283,7 @@ class CProcedure:
             procedure_dict["remarks"] = data.get("remarks")
 
         procedure_dict["preservation"] = "in"
-
         # TODO 图片上传
-
         if data.get("picture_list"):
             for row in data.get("picture_list"):
                 url_instance = an_procedure_picture.query.filter(an_procedure_picture.file_url == row)\
@@ -341,3 +352,40 @@ class CProcedure:
         for row in procedure:
             master_dict.append(row.master_number)
         return Success(data=master_dict)
+
+    def update_procedure(self):
+        """
+        更新目的港/货运类型/运输方式
+        """
+        data = parameter_required(("destination_port", "type_of_shipping", "freight_type"))
+        if data.get("type_of_shipping") not in ["PASSENGER AND CARGO AIRCRAFT", "CARGO AIRCRAFT ONLY"]:
+            return {
+                "status": 405,
+                "status_code": 405202,
+                "message": "运输方式请填写‘PASSENGER AND CARGO AIRCRAFT’或者‘CARGO AIRCRAFT ONLY’"
+            }
+        if data.get("freight_type") not in ["RADIOACTIVE", "NON-RADIOACTIVE"]:
+            return {
+                "status": 405,
+                "status_code": 405202,
+                "message": "货运类型请填写‘RADIOACTIVE’或‘NON-RADIOACTIVE’"
+            }
+
+        args = request.args.to_dict()
+        if "procedure_id" not in args:
+            return {
+                "status": 405,
+                "status_code": 405202,
+                "message": "procedure_id参数缺失"
+            }
+        procedure = an_procedure.query.filter(an_procedure.id == args.get("procedure_id")).first_("未找到数据")
+        with db.auto_commit():
+            procedure_dict = {
+                "id": args.get("procedure_id"),
+                "type_of_shipping": data.get("type_of_shipping"),
+                "freight_type": data.get("freight_type"),
+                "destination_port": data.get("destination_port")
+            }
+            procedure_instance = procedure.update(procedure_dict, null="not")
+            db.session.add(procedure_instance)
+        return Success("编辑成功")

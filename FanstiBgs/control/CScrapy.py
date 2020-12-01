@@ -153,7 +153,7 @@ class CScrapy():
     def get_dgr(self):
         args = parameter_required(("token", "dgr_name"))
         args['dgr_name'] = str(args.get("dgr_name"))
-        dgr = t_bgs_un_dictionaries.query.filter(t_bgs_un_dictionaries.ProperShippingNameB == args["dgr_name"])\
+        dgr = t_bgs_un_dictionaries.query.filter(t_bgs_un_dictionaries.UNNumberA == args["dgr_name"])\
             .first_("未找到")
 
         return Success(data=dgr)

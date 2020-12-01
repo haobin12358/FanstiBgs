@@ -101,32 +101,148 @@ class CShipping:
             if un.odd_number and un.odd_number not in odd_number_list:
                 odd_number_list.append(un.odd_number)
         part_port = []
-        for odd_number in odd_number_list:
+        if odd_number_list:
+            for odd_number in odd_number_list:
+                odd_dict = {}
+                odd_name_dict = t_bgs_odd_number.query.filter(t_bgs_odd_number.id == odd_number).first_("分单号信息未找到")
+                odd_dict["odd_number"] = odd_name_dict.odd_number
+                un_list_by_odd_master = t_bgs_un.query.filter(t_bgs_un.master_number == args.get("id"),
+                                                              t_bgs_un.odd_number == odd_number).all()
+                for un_dict in un_list_by_odd_master:
+                    un_pack_list = t_bgs_un_pack.query.filter(t_bgs_un_pack.oddNumberId == odd_number,
+                                                              t_bgs_un_pack.unNumberId == un_dict.id).all()
+                    un_pack = ""
+                    for un_pack_dict in un_pack_list:
+                        if un_pack_dict.status == "Overpack":
+                            un_pack += "<strong>Proper Shipping Name</strong><br/>{0}".format(un_pack_dict.product_name)
+                            if un_dict.MAIN_DANGEROUS_ID:
+                                if un_pack:
+                                    un_pack += "<br/>"
+                                un_pack += "<strong>Class or Division(Subsidiary Risk)</strong><br/>{0}".format(un_dict.MAIN_DANGEROUS_ID)
+                                if un_dict.SECOND_DANGEROUS_IDA:
+                                    un_pack += "({0})".format(un_dict.SECOND_DANGEROUS_IDA)
+                            if un_dict.packaging_grade:
+                                if un_pack:
+                                    un_pack += "<br/>"
+                                un_pack += "<strong>Packing Group</strong><br/>{0}".format(un_dict.packaging_grade)
+                            if un_pack:
+                                un_pack += "<br/>"
+                            un_pack += "<strong>Quantity and type of packing</strong><br/>"
+                            if un_pack_dict.packNumber and un_pack_dict.unit:
+                                un_pack += un_pack_dict.packNumber + un_pack_dict.unit
+                                if un_pack_dict.packInfo:
+                                    un_pack += "({0})".format(un_pack_dict.packInfo)
+                            elif un_pack_dict.packInfo:
+                                un_pack += un_pack_dict.packInfo
+                            if un_dict.packaging_instruction:
+                                if un_pack:
+                                    un_pack += "<br/>"
+                                un_pack += "<strong>Packing Inst.</strong><br/>{0}".format(un_dict.packaging_instruction)
+                        elif un_pack_dict.status == "All Packed In One1":
+                            un_pack += "<strong>Proper Shipping Name</strong><br/>{0}".format(un_pack_dict.product_name)
+                            if un_dict.MAIN_DANGEROUS_ID:
+                                if un_pack:
+                                    un_pack += "<br/>"
+                                un_pack += "<strong>Class or Division(Subsidiary Risk)</strong><br/>{0}".format(un_dict.MAIN_DANGEROUS_ID)
+                                if un_dict.SECOND_DANGEROUS_IDA:
+                                    un_pack += "({0})".format(un_dict.SECOND_DANGEROUS_IDA)
+                            if un_dict.packaging_grade:
+                                if un_pack:
+                                    un_pack += "<br/>"
+                                un_pack += "<strong>Packing Group</strong><br/>{0}".format(un_dict.packaging_grade)
+                            if un_pack:
+                                un_pack += "<br/>"
+                            un_pack += "<strong>Quantity and type of packing</strong><br/>"
+                            if un_pack_dict.packNumber and un_pack_dict.unit:
+                                un_pack += un_pack_dict.packNumber + un_pack_dict.unit
+                                if un_pack_dict.packInfo:
+                                    un_pack += "({0})".format(un_pack_dict.packInfo)
+                            elif un_pack_dict.packInfo:
+                                un_pack += un_pack_dict.packInfo
+                            if un_dict.packaging_instruction:
+                                if un_pack:
+                                    un_pack += "<br/>"
+                                un_pack += "<strong>Packing Inst.</strong><br/>{0}".format(un_dict.packaging_instruction)
+                        elif un_pack_dict.status == "Not Operated":
+                            un_pack += "<strong>Proper Shipping Name</strong><br/>{0}".format(un_pack_dict.product_name)
+                            if un_dict.MAIN_DANGEROUS_ID:
+                                if un_pack:
+                                    un_pack += "<br/>"
+                                un_pack += "<strong>Class or Division(Subsidiary Risk)</strong><br/>{0}".format(un_dict.MAIN_DANGEROUS_ID)
+                                if un_dict.SECOND_DANGEROUS_IDA:
+                                    un_pack += "({0})".format(un_dict.SECOND_DANGEROUS_IDA)
+                            if un_dict.packaging_grade:
+                                if un_pack:
+                                    un_pack += "<br/>"
+                                un_pack += "<strong>Packing Group</strong><br/>{0}".format(un_dict.packaging_grade)
+                            if un_pack:
+                                un_pack += "<br/>"
+                            un_pack += "<strong>Quantity and type of packing</strong><br/>"
+                            if un_dict.packNumber and un_dict.unit:
+                                un_pack += un_dict.packNumber + un_dict.unit
+                            if un_dict.packaging_instruction:
+                                if un_pack:
+                                    un_pack += "<br/>"
+                                un_pack += "Packing Inst.</strong><br/>{0}".format(un_dict.packaging_instruction)
+
+                    if not un_pack:
+                        shipping_name = un_dict.product_Name
+                        division = un_dict.MAIN_DANGEROUS_ID
+                        if un_dict.SECOND_DANGEROUS_IDA:
+                            division += "({0})".format(un_dict.SECOND_DANGEROUS_IDA)
+                        packing_group = un_dict.packaging_grade
+                        quantity = un_dict.packNumber + un_dict.unit
+                        packing_inst = un_dict.packaging_instruction
+                        if shipping_name:
+                            un_pack += "<strong>Proper Shipping Name</strong><br/>{0}<br/>".format(shipping_name)
+                        else:
+                            un_pack += "<strong>Proper Shipping Name</strong><br/>{0}<br/>".format("None")
+                        if division:
+                            un_pack += "<strong>Class or Division(Subsidiary Risk)</strong><br/>{0}<br/>".format(
+                                division)
+                        else:
+                            un_pack += "<strong>Class or Division(Subsidiary Risk)</strong><br/>{0}<br/>".format("None")
+                        if packing_group:
+                            un_pack += "<strong>Packing Group</strong><br/>{0}<br/>".format(packing_group)
+                        else:
+                            un_pack += "<strong>Packing Group</strong><br/>{0}<br/>".format("None")
+                        if quantity:
+                            un_pack += "<strong>Quantity and type of packing</strong><br/>{0}<br/>".format(quantity)
+                        else:
+                            un_pack += "<strong>Quantity and type of packing</strong><br/>{0}<br/>".format("None")
+                        if packing_inst:
+                            un_pack += "<strong>Packing Inst.</strong><br/>{0}".format(packing_inst)
+                        else:
+                            un_pack += "<strong>Packing Inst.</strong><br/>{0}".format("None")
+                    un_dict.fill("un_pack", un_pack)
+
+                odd_dict["un_list"] = un_list_by_odd_master
+                odd_dict["length"] = len(un_list_by_odd_master)
+                part_port.append(odd_dict)
+        else:
             odd_dict = {}
-            odd_name_dict = t_bgs_odd_number.query.filter(t_bgs_odd_number.id == odd_number).first_("分单号信息未找到")
-            odd_dict["odd_number"] = odd_name_dict.odd_number
-            un_list_by_odd_master = t_bgs_un.query.filter(t_bgs_un.master_number == args.get("id"),
-                                                          t_bgs_un.odd_number == odd_number).all()
+            odd_dict["odd_number"] = "No separate order"
+            un_list_by_odd_master = t_bgs_un.query.filter(t_bgs_un.master_number == args.get("id")).all()
             for un_dict in un_list_by_odd_master:
-                un_pack_list = t_bgs_un_pack.query.filter(t_bgs_un_pack.oddNumberId == odd_number,
-                                                          t_bgs_un_pack.unNumberId == un_dict.id).all()
+                un_pack_list = t_bgs_un_pack.query.filter(t_bgs_un_pack.unNumberId == un_dict.id).all()
                 un_pack = ""
                 for un_pack_dict in un_pack_list:
                     if un_pack_dict.status == "Overpack":
-                        un_pack += "Proper Shipping Name<br/>{0}".format(un_pack_dict.product_name)
+                        un_pack += "<strong>Proper Shipping Name</strong><br/>{0}".format(un_pack_dict.product_name)
                         if un_dict.MAIN_DANGEROUS_ID:
                             if un_pack:
                                 un_pack += "<br/>"
-                            un_pack += "Class or Division(Subsidiary Risk)<br/>{0}".format(un_dict.MAIN_DANGEROUS_ID)
+                            un_pack += "<strong>Class or Division(Subsidiary Risk)</strong><br/>{0}".format(un_dict.MAIN_DANGEROUS_ID)
                             if un_dict.SECOND_DANGEROUS_IDA:
                                 un_pack += "({0})".format(un_dict.SECOND_DANGEROUS_IDA)
                         if un_dict.packaging_grade:
                             if un_pack:
                                 un_pack += "<br/>"
-                            un_pack += "Packing Group<br/>{0}".format(un_dict.packaging_grade)
+                            un_pack += "<strong>Packing Group</strong><br/>{0}".format(un_dict.packaging_grade)
+
                         if un_pack:
                             un_pack += "<br/>"
-                        un_pack += "Quantity and type of packing<br/>"
+                        un_pack += "<strong>Quantity and type of packing</strong><br/>"
                         if un_pack_dict.packNumber and un_pack_dict.unit:
                             un_pack += un_pack_dict.packNumber + un_pack_dict.unit
                             if un_pack_dict.packInfo:
@@ -136,22 +252,22 @@ class CShipping:
                         if un_dict.packaging_instruction:
                             if un_pack:
                                 un_pack += "<br/>"
-                            un_pack += "Packing Inst.<br/>{0}".format(un_dict.packaging_instruction)
+                            un_pack += "<strong>Packing Inst.</strong><br/>{0}".format(un_dict.packaging_instruction)
                     elif un_pack_dict.status == "All Packed In One1":
-                        un_pack += "Proper Shipping Name<br/>{0}".format(un_pack_dict.product_name)
+                        un_pack += "<strong>Proper Shipping Name</strong><br/>{0}".format(un_pack_dict.product_name)
                         if un_dict.MAIN_DANGEROUS_ID:
                             if un_pack:
                                 un_pack += "<br/>"
-                            un_pack += "Class or Division(Subsidiary Risk)<br/>{0}".format(un_dict.MAIN_DANGEROUS_ID)
+                            un_pack += "<strong>Class or Division(Subsidiary Risk)</strong><br/>{0}".format(un_dict.MAIN_DANGEROUS_ID)
                             if un_dict.SECOND_DANGEROUS_IDA:
                                 un_pack += "({0})".format(un_dict.SECOND_DANGEROUS_IDA)
                         if un_dict.packaging_grade:
                             if un_pack:
                                 un_pack += "<br/>"
-                            un_pack += "Packing Group<br/>{0}".format(un_dict.packaging_grade)
+                            un_pack += "<strong>Packing Group</strong><br/>{0}".format(un_dict.packaging_grade)
                         if un_pack:
                             un_pack += "<br/>"
-                        un_pack += "Quantity and type of packing<br/>"
+                        un_pack += "<strong>Quantity and type of packing</strong><br/>"
                         if un_pack_dict.packNumber and un_pack_dict.unit:
                             un_pack += un_pack_dict.packNumber + un_pack_dict.unit
                             if un_pack_dict.packInfo:
@@ -161,28 +277,56 @@ class CShipping:
                         if un_dict.packaging_instruction:
                             if un_pack:
                                 un_pack += "<br/>"
-                            un_pack += "Packing Inst.<br/>{0}".format(un_dict.packaging_instruction)
+                            un_pack += "<strong>Packing Inst.</strong><br/>{0}".format(un_dict.packaging_instruction)
                     elif un_pack_dict.status == "Not Operated":
-                        un_pack += "Proper Shipping Name<br/>{0}".format(un_pack_dict.product_name)
+                        un_pack += "<strong>Proper Shipping Name</strong><br/>{0}".format(un_pack_dict.product_name)
                         if un_dict.MAIN_DANGEROUS_ID:
                             if un_pack:
                                 un_pack += "<br/>"
-                            un_pack += "Class or Division(Subsidiary Risk)<br/>{0}".format(un_dict.MAIN_DANGEROUS_ID)
+                            un_pack += "<strong>Class or Division(Subsidiary Risk)</strong><br/>{0}".format(un_dict.MAIN_DANGEROUS_ID)
                             if un_dict.SECOND_DANGEROUS_IDA:
                                 un_pack += "({0})".format(un_dict.SECOND_DANGEROUS_IDA)
                         if un_dict.packaging_grade:
                             if un_pack:
                                 un_pack += "<br/>"
-                            un_pack += "Packing Group<br/>{0}".format(un_dict.packaging_grade)
+                            un_pack += "<strong>Packing Group</strong><br/>{0}".format(un_dict.packaging_grade)
                         if un_pack:
                             un_pack += "<br/>"
-                        un_pack += "Quantity and type of packing<br/>"
+                        un_pack += "<strong>Quantity and type of packing</strong><br/>"
                         if un_dict.packNumber and un_dict.unit:
                             un_pack += un_dict.packNumber + un_dict.unit
                         if un_dict.packaging_instruction:
                             if un_pack:
                                 un_pack += "<br/>"
-                            un_pack += "Packing Inst.<br/>{0}".format(un_dict.packaging_instruction)
+                            un_pack += "<strong>Packing Inst.</strong><br/>{0}".format(un_dict.packaging_instruction)
+                if not un_pack:
+                    shipping_name = un_dict.product_Name
+                    division = un_dict.MAIN_DANGEROUS_ID
+                    if un_dict.SECOND_DANGEROUS_IDA:
+                        division += "({0})".format(un_dict.SECOND_DANGEROUS_IDA)
+                    packing_group = un_dict.packaging_grade
+                    quantity = un_dict.packNumber + un_dict.unit
+                    packing_inst = un_dict.packaging_instruction
+                    if shipping_name:
+                        un_pack += "<strong>Proper Shipping Name</strong><br/>{0}<br/>".format(shipping_name)
+                    else:
+                        un_pack += "<strong>Proper Shipping Name</strong><br/>{0}<br/>".format("None")
+                    if division:
+                        un_pack += "<strong>Class or Division(Subsidiary Risk)</strong><br/>{0}<br/>".format(division)
+                    else:
+                        un_pack += "<strong>Class or Division(Subsidiary Risk)</strong><br/>{0}<br/>".format("None")
+                    if packing_group:
+                        un_pack += "<strong>Packing Group</strong><br/>{0}<br/>".format(packing_group)
+                    else:
+                        un_pack += "<strong>Packing Group</strong><br/>{0}<br/>".format("None")
+                    if quantity:
+                        un_pack += "<strong>Quantity and type of packing</strong><br/>{0}<br/>".format(quantity)
+                    else:
+                        un_pack += "<strong>Quantity and type of packing</strong><br/>{0}<br/>".format("None")
+                    if packing_inst:
+                        un_pack += "<strong>Packing Inst.</strong><br/>{0}".format(packing_inst)
+                    else:
+                        un_pack += "<strong>Packing Inst.</strong><br/>{0}".format("None")
                 un_dict.fill("un_pack", un_pack)
 
             odd_dict["un_list"] = un_list_by_odd_master
@@ -200,38 +344,38 @@ class CShipping:
 
         receiver = ""
         if receiver_dict.country:
-            receiver += "Country：{0}".format(receiver_dict.country)
+            receiver += "<strong>Country：</strong>{0}".format(receiver_dict.country)
         if receiver_dict.city:
-            receiver += "<br/>City：{0}".format(receiver_dict.city)
+            receiver += "<br/><strong>City：</strong>{0}".format(receiver_dict.city)
         if receiver_dict.company_name:
-            receiver += "<br/>Company Name：{0}".format(receiver_dict.company_name)
+            receiver += "<br/><strong>Company Name：</strong>{0}".format(receiver_dict.company_name)
         if receiver_dict.company_address:
-            receiver += "<br/>Company Address：{0}".format(receiver_dict.company_address)
+            receiver += "<br/><strong>Company Address：</strong>{0}".format(receiver_dict.company_address)
         if receiver_dict.name:
-            receiver += "<br/>Name：{0}".format(receiver_dict.name)
+            receiver += "<br/><strong>Name：</strong>{0}".format(receiver_dict.name)
         if receiver_dict.mailbox:
-            receiver += "<br/>Email：{0}".format(receiver_dict.mailbox)
+            receiver += "<br/><strong>Email：</strong>{0}".format(receiver_dict.mailbox)
         if receiver_dict.fax:
-            receiver += "<br/>Fox：{0}".format(receiver_dict.fax)
+            receiver += "<br/><strong>Fox：</strong>{0}".format(receiver_dict.fax)
         if receiver_dict.phone:
-            receiver += "<br/>Tel.：{0}".format(receiver_dict.phone)
+            receiver += "<br/><strong>Tel.：</strong>{0}".format(receiver_dict.phone)
         sender = ""
         if sender_dict.country:
-            sender += "Country：{0}".format(sender_dict.country)
+            sender += "<strong>Country：</strong>{0}".format(sender_dict.country)
         if sender_dict.city:
-            sender += "<br/>City：{0}".format(sender_dict.city)
+            sender += "<br/><strong>City：</strong>{0}".format(sender_dict.city)
         if sender_dict.company_name:
-            sender += "<br/>Company Name：{0}".format(sender_dict.company_name)
+            sender += "<br/><strong>Company Name：</strong>{0}".format(sender_dict.company_name)
         if sender_dict.company_address:
-            sender += "<br/>Company Address：{0}".format(sender_dict.company_address)
+            sender += "<br/><strong>Company Address：</strong>{0}".format(sender_dict.company_address)
         if sender_dict.name:
-            sender += "<br/>Name：{0}".format(sender_dict.name)
+            sender += "<br/><strong>Name：</strong>{0}".format(sender_dict.name)
         if sender_dict.mailbox:
-            sender += "<br/>Email：{0}".format(sender_dict.mailbox)
+            sender += "<br/><strong>Email：</strong>{0}".format(sender_dict.mailbox)
         if sender_dict.fax:
-            sender += "<br/>Fox：{0}".format(sender_dict.fax)
+            sender += "<br/><strong>Fox：</strong>{0}".format(sender_dict.fax)
         if sender_dict.phone:
-            sender += "<br/>Tel.：{0}".format(sender_dict.phone)
+            sender += "<br/><strong>Tel.：</strong>{0}".format(sender_dict.phone)
 
         main_port.fill("receiver", receiver)
         main_port.fill("sender", sender)
@@ -369,16 +513,16 @@ class CShipping:
 
         data = [
             {
-                "type": "radioactivity",
+                "type": "Radioactivity",
                 "is_next": 1,
                 "next": ["radioactive", "nonradiative"]
             },
             {
-                "type": "dry ice",
+                "type": "Dry ice",
                 "is_next": 0
             },
             {
-                "type": "lithium cell",
+                "type": "Lithium cell",
                 "is_next": 0
             }
         ]
@@ -430,7 +574,7 @@ class CShipping:
 
 
         for item in items:
-            item.fill("check_topic", "【{0}】{1}".format(item.check_genre, item.check_item))
+            item.fill("check_topic", "【{0}】\r\n{1}".format(item.check_genre, item.check_item))
             check_type = item.check_type
             check_no = item.check_no
             if str(check_no).split(".")[-1] == "0":
@@ -537,6 +681,9 @@ class CShipping:
                     }
                 history_instance = an_check_history.create(history_dict)
                 db.session.add(history_instance)
+
+            # TODO 切换正式环境后修改
+            return Success(message="提交成功")
             with db.auto_commit():
                 if times == "second":
                     # TODO 替换正常格式的html_body
@@ -2923,6 +3070,7 @@ class CShipping:
                     }
                     picture_instance = an_procedure_picture.create(picture_dict)
                     db.session.add(picture_instance)
+
             return Success(message="提交成功")
 
 
