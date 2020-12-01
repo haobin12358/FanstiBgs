@@ -64,6 +64,18 @@ class CProcedure:
             procedure = an_procedure.query.filter(an_procedure.procedure_type == args.get("procedure_type"),
                                                   an_procedure.id == args.get("id"))\
                 .first_("未找到该单据")
+            if procedure.freight_type == "PASSENGER AND CARGO AIRCRAFT":
+                procedure.fill("freight_type_ch", "客货均可")
+            elif procedure.freight_type == "CARGO AIRCRAFT ONLY":
+                procedure.fill("freight_type_ch", "仅限货机")
+            else:
+                procedure.fill("freight_type_ch", None)
+            if procedure.type_of_shipping == "NON-RADIOACTIVE":
+                procedure.fill("type_of_shipping_ch", "非放射性")
+            elif procedure.type_of_shipping == "RADIOACTIVE":
+                procedure.fill("type_of_shipping_ch", "放射性")
+            else:
+                procedure.fill("type_of_shipping_ch", None)
             history_list = self._get_history_list(procedure)
             procedure_picture_list = an_procedure_picture.query.filter(
                 an_procedure_picture.procedure_id == args.get("id")).all()
@@ -87,6 +99,9 @@ class CProcedure:
             if main_port:
                 procedure_dict["port_of_departure"] = main_port.port_of_departure
                 procedure_dict["destination_port"] = main_port.destination_port
+                # 2020/12/1 增加字段
+                procedure_dict["type_of_shipping"] = main_port.type_of_shipping
+                procedure_dict["freight_type"] = main_port.freight_type
                 # TODO 数量需要等甲方确认逻辑
                 procedure_dict["product_number"] = 0
             with db.auto_commit():

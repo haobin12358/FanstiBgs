@@ -32,6 +32,8 @@ class an_procedure(Base):
     master_number = Column(String(40), nullable=False, comment="运单号")
     port_of_departure = Column(String(255), comment="起运港")
     destination_port = Column(String(255), comment="目的港")
+    type_of_shipping = Column(String(255), comment="运输方式")
+    freight_type = Column(String(255), comment="货运类型")
     product_number = Column(Integer, comment="件数")
     preservation_area = Column(String(128), comment="区域")
     storing_location = Column(String(128), comment="仓位")

@@ -200,38 +200,38 @@ class CShipping:
 
         receiver = ""
         if receiver_dict.country:
-            receiver += "Country：{0}".format(receiver_dict.country)
+            receiver += "<strong>Country：</strong>{0}".format(receiver_dict.country)
         if receiver_dict.city:
-            receiver += "<br/>City：{0}".format(receiver_dict.city)
+            receiver += "<br/><strong>City：</strong>{0}".format(receiver_dict.city)
         if receiver_dict.company_name:
-            receiver += "<br/>Company Name：{0}".format(receiver_dict.company_name)
+            receiver += "<br/><strong>Company Name：</strong>{0}".format(receiver_dict.company_name)
         if receiver_dict.company_address:
-            receiver += "<br/>Company Address：{0}".format(receiver_dict.company_address)
+            receiver += "<br/><strong>Company Address：</strong>{0}".format(receiver_dict.company_address)
         if receiver_dict.name:
-            receiver += "<br/>Name：{0}".format(receiver_dict.name)
+            receiver += "<br/><strong>Name：</strong>{0}".format(receiver_dict.name)
         if receiver_dict.mailbox:
-            receiver += "<br/>Email：{0}".format(receiver_dict.mailbox)
+            receiver += "<br/><strong>Email：</strong>{0}".format(receiver_dict.mailbox)
         if receiver_dict.fax:
-            receiver += "<br/>Fox：{0}".format(receiver_dict.fax)
+            receiver += "<br/><strong>Fox：</strong>{0}".format(receiver_dict.fax)
         if receiver_dict.phone:
-            receiver += "<br/>Tel.：{0}".format(receiver_dict.phone)
+            receiver += "<br/><strong>Tel.：</strong>{0}".format(receiver_dict.phone)
         sender = ""
         if sender_dict.country:
-            sender += "Country：{0}".format(sender_dict.country)
+            sender += "<strong>Country：</strong>{0}".format(sender_dict.country)
         if sender_dict.city:
-            sender += "<br/>City：{0}".format(sender_dict.city)
+            sender += "<br/><strong>City：</strong>{0}".format(sender_dict.city)
         if sender_dict.company_name:
-            sender += "<br/>Company Name：{0}".format(sender_dict.company_name)
+            sender += "<br/><strong>Company Name：</strong>{0}".format(sender_dict.company_name)
         if sender_dict.company_address:
-            sender += "<br/>Company Address：{0}".format(sender_dict.company_address)
+            sender += "<br/><strong>Company Address：</strong>{0}".format(sender_dict.company_address)
         if sender_dict.name:
-            sender += "<br/>Name：{0}".format(sender_dict.name)
+            sender += "<br/><strong>Name：</strong>{0}".format(sender_dict.name)
         if sender_dict.mailbox:
-            sender += "<br/>Email：{0}".format(sender_dict.mailbox)
+            sender += "<br/><strong>Email：</strong>{0}".format(sender_dict.mailbox)
         if sender_dict.fax:
-            sender += "<br/>Fox：{0}".format(sender_dict.fax)
+            sender += "<br/><strong>Fox：</strong>{0}".format(sender_dict.fax)
         if sender_dict.phone:
-            sender += "<br/>Tel.：{0}".format(sender_dict.phone)
+            sender += "<br/><strong>Tel.：</strong>{0}".format(sender_dict.phone)
 
         main_port.fill("receiver", receiver)
         main_port.fill("sender", sender)
@@ -369,16 +369,16 @@ class CShipping:
 
         data = [
             {
-                "type": "radioactivity",
+                "type": "Radioactivity",
                 "is_next": 1,
                 "next": ["radioactive", "nonradiative"]
             },
             {
-                "type": "dry ice",
+                "type": "Dry ice",
                 "is_next": 0
             },
             {
-                "type": "lithium cell",
+                "type": "Lithium cell",
                 "is_next": 0
             }
         ]
@@ -537,6 +537,9 @@ class CShipping:
                     }
                 history_instance = an_check_history.create(history_dict)
                 db.session.add(history_instance)
+
+            # TODO 切换正式环境后修改
+            return Success(message="提交成功")
             with db.auto_commit():
                 if times == "second":
                     # TODO 替换正常格式的html_body
@@ -2923,6 +2926,7 @@ class CShipping:
                     }
                     picture_instance = an_procedure_picture.create(picture_dict)
                     db.session.add(picture_instance)
+
             return Success(message="提交成功")
 
 
