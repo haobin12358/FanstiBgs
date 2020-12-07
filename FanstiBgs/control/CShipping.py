@@ -485,12 +485,12 @@ class CShipping:
         main_port.fill("sender", sender)
 
         count = 0
-        first_check = an_check_history.query.filter(an_check_history.master_id == args.get("master_id"),
+        first_check = an_check_history.query.filter(an_check_history.master_id == args.get("id"),
                                                     an_check_history.times == "first").first()
         if first_check:
             count += 1
 
-        second_check = an_check_history.query.filter(an_check_history.master_id == args.get("master_id"),
+        second_check = an_check_history.query.filter(an_check_history.master_id == args.get("id"),
                                                      an_check_history.times == "second").first()
         if second_check:
             count += 1
@@ -716,7 +716,13 @@ class CShipping:
             else:
                 item.fill("second_answer", None)
 
-        return Success(data=items)
+        return {
+            "status": 200,
+            "message": "获取检查单题目成功",
+            "data": items,
+            "total_page": 1,
+            "total_count": len(items)
+        }
 
     def make_checklist_history(self):
         """

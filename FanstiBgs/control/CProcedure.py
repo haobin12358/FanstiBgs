@@ -8,6 +8,7 @@ import datetime, uuid
 from flask import request
 
 from FanstiBgs.extensions.params_validates import parameter_required
+from FanstiBgs.extensions.interface.user_interface import token_required
 from FanstiBgs.extensions.error_response import ParamsError, NoPreservationError
 from FanstiBgs.extensions.register_ext import db
 from FanstiBgs.extensions.success_response import Success
@@ -49,6 +50,7 @@ class CProcedure:
         preservation_type = an_preservation_type.query.filter(*filter_args).all()
         return Success(data=preservation_type)
 
+    @token_required
     def get(self):
         """
         获取详情
@@ -243,6 +245,7 @@ class CProcedure:
 
         return Success(data=procedure_list)
 
+    @token_required
     def stork_in(self):
         """
         入库
@@ -310,6 +313,7 @@ class CProcedure:
 
         return Success(message="入库成功")
 
+    @token_required
     def stork_out(self):
         """
         出库
@@ -330,6 +334,7 @@ class CProcedure:
 
         return Success(message="出库成功")
 
+    @token_required
     def stork_repeat(self):
         """
         重新入库
