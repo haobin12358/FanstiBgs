@@ -8,6 +8,7 @@ import datetime, uuid
 from flask import request
 
 from FanstiBgs.extensions.params_validates import parameter_required
+from FanstiBgs.extensions.interface.user_interface import token_required
 from FanstiBgs.extensions.error_response import ParamsError, NoPreservationError
 from FanstiBgs.extensions.register_ext import db
 from FanstiBgs.extensions.success_response import Success
@@ -49,6 +50,7 @@ class CProcedure:
         preservation_type = an_preservation_type.query.filter(*filter_args).all()
         return Success(data=preservation_type)
 
+    @token_required
     def get(self):
         """
         获取详情
@@ -120,55 +122,64 @@ class CProcedure:
             history_dict = {}
             user = an_user.query.filter(an_user.user_id == procedure.handover_inputer_id).first()
             history_dict["procedure_status"] = "已入库"
-            history_dict["area_name"] = "区域：" + procedure.preservation_area or ""
-            history_dict["storing_name"] = "仓位：" + procedure.storing_location or ""
+            history_dict["area_name"] = "区域：" + (procedure.preservation_area or "")
+            history_dict["storing_name"] = "仓位：" + (procedure.storing_location or "")
             if procedure.storing_location in ["大货区", "锂电池暂存区", "ETV区", "Stacker区"]:
                 history_dict["preservation_type_name"] = None
-                history_dict["board_no"] = "板号：" + procedure.board_no or ""
+                history_dict["board_no"] = "板号：" + (procedure.board_no or "")
             else:
                 history_dict["preservation_type_name"] = "类别：" + procedure.preservation_type or ""
                 history_dict["board_no"] = None
             history_dict["product_number"] = "件数：" + str(procedure.product_number or "")
             history_dict["weight"] = "重量：" + str(procedure.weight or "")
-            history_dict["inputer_time"] = "操作时间：" + procedure.handover_time.strftime("%Y-%m-%d %H:%M") or ""
-            history_dict["inputer_name"] = "操作人：" + user.user_truename or ""
-            history_dict["inputer_card_no"] = "操作人身份证号：" + user.cardno or ""
+            if procedure.create_time:
+                history_dict["inputer_time"] = "操作时间：" + procedure.create_time.strftime("%Y-%m-%d %H:%M") or ""
+            else:
+                history_dict["inputer_time"] = "操作时间：" + ""
+            history_dict["inputer_name"] = "操作人：" + (user.user_truename or "")
+            history_dict["inputer_card_no"] = "操作人身份证号：" + (user.cardno or "")
             history_list.append(history_dict)
         if procedure.delivery_inputer_id:
             history_dict = {}
             user = an_user.query.filter(an_user.user_id == procedure.delivery_inputer_id).first()
             history_dict["procedure_status"] = "已出库"
-            history_dict["area_name"] = "区域：" + procedure.preservation_area or ""
-            history_dict["storing_name"] = "仓位：" + procedure.storing_location or ""
+            history_dict["area_name"] = "区域：" + (procedure.preservation_area or "")
+            history_dict["storing_name"] = "仓位：" + (procedure.storing_location or "")
             if procedure.storing_location in ["大货区", "锂电池暂存区", "ETV区", "Stacker区"]:
                 history_dict["preservation_type_name"] = None
-                history_dict["board_no"] = "板号：" + procedure.board_no or ""
+                history_dict["board_no"] = "板号：" + (procedure.board_no or "")
             else:
-                history_dict["preservation_type_name"] = "类别：" + procedure.preservation_type or ""
+                history_dict["preservation_type_name"] = "类别：" + (procedure.preservation_type or "")
                 history_dict["board_no"] = None
             history_dict["product_number"] = "件数：" + str(procedure.product_number or "")
             history_dict["weight"] = "重量：" + str(procedure.weight or "")
-            history_dict["inputer_time"] = "操作时间：" + procedure.handover_time.strftime("%Y-%m-%d %H:%M") or ""
-            history_dict["inputer_name"] = "操作人：" + user.user_truename or ""
-            history_dict["inputer_card_no"] = "操作人身份证号：" + user.cardno or ""
+            if procedure.delivery_time:
+                history_dict["inputer_time"] = "操作时间：" + procedure.delivery_time.strftime("%Y-%m-%d %H:%M") or ""
+            else:
+                history_dict["inputer_time"] = "操作时间：" + ""
+            history_dict["inputer_name"] = "操作人：" + (user.user_truename or "")
+            history_dict["inputer_card_no"] = "操作人身份证号：" + (user.cardno or "")
             history_list.append(history_dict)
         if procedure.repeat_warehousing_inputer_id:
             history_dict = {}
             user = an_user.query.filter(an_user.user_id == procedure.repeat_warehousing_inputer_id).first()
             history_dict["procedure_status"] = "已重新入库"
-            history_dict["area_name"] = "区域：" + procedure.preservation_area or ""
-            history_dict["storing_name"] = "仓位：" + procedure.storing_location or ""
+            history_dict["area_name"] = "区域：" + (procedure.preservation_area or "")
+            history_dict["storing_name"] = "仓位：" + (procedure.storing_location or "")
             if procedure.storing_location in ["大货区", "锂电池暂存区", "ETV区", "Stacker区"]:
                 history_dict["preservation_type_name"] = None
-                history_dict["board_no"] = "板号：" + procedure.board_no or ""
+                history_dict["board_no"] = "板号：" + (procedure.board_no or "")
             else:
-                history_dict["preservation_type_name"] = "类别：" + procedure.preservation_type or ""
+                history_dict["preservation_type_name"] = "类别：" + (procedure.preservation_type or "")
                 history_dict["board_no"] = None
             history_dict["product_number"] = "件数：" + str(procedure.product_number or "")
             history_dict["weight"] = "重量：" + str(procedure.weight or "")
-            history_dict["inputer_time"] = "操作时间：" + procedure.handover_time.strftime("%Y-%m-%d %H:%M") or ""
-            history_dict["inputer_name"] = "操作人：" + user.user_truename or ""
-            history_dict["inputer_card_no"] = "操作人身份证号：" + user.cardno or ""
+            if procedure.repeat_warehousing_time:
+                history_dict["inputer_time"] = "操作时间：" + procedure.repeat_warehousing_time.strftime("%Y-%m-%d %H:%M") or ""
+            else:
+                history_dict["inputer_time"] = "操作时间：" + ""
+            history_dict["inputer_name"] = "操作人：" + (user.user_truename or "")
+            history_dict["inputer_card_no"] = "操作人身份证号：" + (user.cardno or "")
             history_list.append(history_dict)
 
         return history_list
@@ -234,6 +245,7 @@ class CProcedure:
 
         return Success(data=procedure_list)
 
+    @token_required
     def stork_in(self):
         """
         入库
@@ -301,6 +313,7 @@ class CProcedure:
 
         return Success(message="入库成功")
 
+    @token_required
     def stork_out(self):
         """
         出库
@@ -321,6 +334,7 @@ class CProcedure:
 
         return Success(message="出库成功")
 
+    @token_required
     def stork_repeat(self):
         """
         重新入库
