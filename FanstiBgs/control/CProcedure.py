@@ -100,8 +100,8 @@ class CProcedure:
                 # 2020/12/1 增加字段
                 procedure_dict["type_of_shipping"] = main_port.type_of_shipping
                 procedure_dict["freight_type"] = main_port.freight_type
-                # TODO 数量需要等甲方确认逻辑
-                procedure_dict["product_number"] = 0
+                # 数量用来填写
+                procedure_dict["product_number"] = None
             with db.auto_commit():
                 procedure_instance = an_procedure.create(procedure_dict)
                 db.session.add(procedure_instance)

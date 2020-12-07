@@ -110,6 +110,7 @@ class t_bgs_un_pack(Base):
     introduceX = Column(String(255))
     packNumber = Column(String(255))
     unit = Column(String(255), comment="单位")
+    weight = Column(String(255), comment="重量")
     oddNumberId = Column(String(255), comment="分单号id")
     oddNumber = Column(String(255), comment="分单号")
     masterNumber = Column(String(255), comment="主单号id")

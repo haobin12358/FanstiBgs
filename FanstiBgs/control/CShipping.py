@@ -114,7 +114,9 @@ class CShipping:
                     un_pack = ""
                     for un_pack_dict in un_pack_list:
                         if un_pack_dict.status == "Overpack":
-                            un_pack += "<strong>Proper Shipping Name</strong><br/>{0}".format(un_pack_dict.product_name)
+                            un_pack += "<strong>Proper Shipping Name</strong><br/>{0} {1} {2} {3}"\
+                                .format(un_pack_dict.product_name or " ", un_pack_dict.TechnicalName or " ",
+                                        un_pack_dict.productNameSelect or " ", un_pack_dict.difference or " ")
                             if un_dict.MAIN_DANGEROUS_ID:
                                 if un_pack:
                                     un_pack += "<br/>"
@@ -129,7 +131,16 @@ class CShipping:
                                 un_pack += "<br/>"
                             un_pack += "<strong>Quantity and type of packing</strong><br/>"
                             if un_pack_dict.packNumber and un_pack_dict.unit:
-                                un_pack += un_pack_dict.packNumber + un_pack_dict.unit
+                                un_pack += un_pack_dict.packNumber
+                                if un_pack_dict.material:
+                                    un_pack += " "
+                                    un_pack += un_pack_dict.material
+                                if un_pack_dict.weight:
+                                    un_pack += " "
+                                    un_pack += un_pack_dict.weight
+                                if un_pack_dict.unit:
+                                    un_pack += " "
+                                    un_pack += un_pack_dict.unit
                                 if un_pack_dict.packInfo:
                                     un_pack += "({0})".format(un_pack_dict.packInfo)
                             elif un_pack_dict.packInfo:
@@ -139,7 +150,9 @@ class CShipping:
                                     un_pack += "<br/>"
                                 un_pack += "<strong>Packing Inst.</strong><br/>{0}".format(un_dict.packaging_instruction)
                         elif un_pack_dict.status == "All Packed In One1":
-                            un_pack += "<strong>Proper Shipping Name</strong><br/>{0}".format(un_pack_dict.product_name)
+                            un_pack += "<strong>Proper Shipping Name</strong><br/>{0} {1} {2} {3}" \
+                                .format(un_pack_dict.product_name or " ", un_pack_dict.TechnicalName or " ",
+                                        un_pack_dict.productNameSelect or " ", un_pack_dict.difference or " ")
                             if un_dict.MAIN_DANGEROUS_ID:
                                 if un_pack:
                                     un_pack += "<br/>"
@@ -154,7 +167,16 @@ class CShipping:
                                 un_pack += "<br/>"
                             un_pack += "<strong>Quantity and type of packing</strong><br/>"
                             if un_pack_dict.packNumber and un_pack_dict.unit:
-                                un_pack += un_pack_dict.packNumber + un_pack_dict.unit
+                                un_pack += un_pack_dict.packNumber
+                                if un_pack_dict.material:
+                                    un_pack += " "
+                                    un_pack += un_pack_dict.material
+                                if un_pack_dict.weight:
+                                    un_pack += " "
+                                    un_pack += un_pack_dict.weight
+                                if un_pack_dict.unit:
+                                    un_pack += " "
+                                    un_pack += un_pack_dict.unit
                                 if un_pack_dict.packInfo:
                                     un_pack += "({0})".format(un_pack_dict.packInfo)
                             elif un_pack_dict.packInfo:
@@ -164,7 +186,9 @@ class CShipping:
                                     un_pack += "<br/>"
                                 un_pack += "<strong>Packing Inst.</strong><br/>{0}".format(un_dict.packaging_instruction)
                         elif un_pack_dict.status == "Not Operated":
-                            un_pack += "<strong>Proper Shipping Name</strong><br/>{0}".format(un_pack_dict.product_name)
+                            un_pack += "<strong>Proper Shipping Name</strong><br/>{0} {1} {2} {3}" \
+                                .format(un_pack_dict.product_name or " ", un_pack_dict.TechnicalName or " ",
+                                        un_pack_dict.productNameSelect or " ", un_pack_dict.difference or " ")
                             if un_dict.MAIN_DANGEROUS_ID:
                                 if un_pack:
                                     un_pack += "<br/>"
@@ -179,7 +203,16 @@ class CShipping:
                                 un_pack += "<br/>"
                             un_pack += "<strong>Quantity and type of packing</strong><br/>"
                             if un_dict.packNumber and un_dict.unit:
-                                un_pack += un_dict.packNumber + un_dict.unit
+                                un_pack += un_dict.packNumber
+                                if un_dict.material:
+                                    un_pack += " "
+                                    un_pack += un_dict.material
+                                if un_dict.weight:
+                                    un_pack += " "
+                                    un_pack += un_dict.weight
+                                if un_dict.unit:
+                                    un_pack += " "
+                                    un_pack += un_dict.unit
                             if un_dict.packaging_instruction:
                                 if un_pack:
                                     un_pack += "<br/>"
@@ -187,11 +220,29 @@ class CShipping:
 
                     if not un_pack:
                         shipping_name = un_dict.product_Name
+                        if un_dict.TechnicalName:
+                            shipping_name += " "
+                            shipping_name += un_dict.TechnicalName
+                        if un_dict.productNameSelect:
+                            shipping_name += " "
+                            shipping_name += un_dict.productNameSelect
+                        if un_dict.difference:
+                            shipping_name += " "
+                            shipping_name += un_dict.difference
                         division = un_dict.MAIN_DANGEROUS_ID
                         if un_dict.SECOND_DANGEROUS_IDA:
                             division += "({0})".format(un_dict.SECOND_DANGEROUS_IDA)
                         packing_group = un_dict.packaging_grade
-                        quantity = un_dict.packNumber + un_dict.unit
+                        quantity = un_dict.packNumber
+                        if un_dict.material:
+                            quantity += " "
+                            quantity += un_dict.material
+                        if un_dict.weight:
+                            quantity += " "
+                            quantity += un_dict.weight
+                        if un_dict.unit:
+                            quantity += " "
+                            quantity += un_dict.unit
                         packing_inst = un_dict.packaging_instruction
                         if shipping_name:
                             un_pack += "<strong>Proper Shipping Name</strong><br/>{0}<br/>".format(shipping_name)
@@ -227,8 +278,12 @@ class CShipping:
                 un_pack_list = t_bgs_un_pack.query.filter(t_bgs_un_pack.unNumberId == un_dict.id).all()
                 un_pack = ""
                 for un_pack_dict in un_pack_list:
+                    if un_pack:
+                        un_pack += "<br/>"
                     if un_pack_dict.status == "Overpack":
-                        un_pack += "<strong>Proper Shipping Name</strong><br/>{0}".format(un_pack_dict.product_name)
+                        un_pack += "<strong>Proper Shipping Name</strong><br/>{0} {1} {2} {3}" \
+                            .format(un_pack_dict.product_name or " ", un_pack_dict.TechnicalName or " ",
+                                    un_pack_dict.productNameSelect or " ", un_pack_dict.difference or " ")
                         if un_dict.MAIN_DANGEROUS_ID:
                             if un_pack:
                                 un_pack += "<br/>"
@@ -244,7 +299,16 @@ class CShipping:
                             un_pack += "<br/>"
                         un_pack += "<strong>Quantity and type of packing</strong><br/>"
                         if un_pack_dict.packNumber and un_pack_dict.unit:
-                            un_pack += un_pack_dict.packNumber + un_pack_dict.unit
+                            un_pack += un_pack_dict.packNumber
+                            if un_pack_dict.material:
+                                un_pack += " "
+                                un_pack += un_pack_dict.material
+                            if un_pack_dict.weight:
+                                un_pack += " "
+                                un_pack += un_pack_dict.weight
+                            if un_pack_dict.unit:
+                                un_pack += " "
+                                un_pack += un_pack_dict.unit
                             if un_pack_dict.packInfo:
                                 un_pack += "({0})".format(un_pack_dict.packInfo)
                         elif un_pack_dict.packInfo:
@@ -254,7 +318,9 @@ class CShipping:
                                 un_pack += "<br/>"
                             un_pack += "<strong>Packing Inst.</strong><br/>{0}".format(un_dict.packaging_instruction)
                     elif un_pack_dict.status == "All Packed In One1":
-                        un_pack += "<strong>Proper Shipping Name</strong><br/>{0}".format(un_pack_dict.product_name)
+                        un_pack += "<strong>Proper Shipping Name</strong><br/>{0} {1} {2} {3}" \
+                            .format(un_pack_dict.product_name or " ", un_pack_dict.TechnicalName or " ",
+                                    un_pack_dict.productNameSelect or " ", un_pack_dict.difference or " ")
                         if un_dict.MAIN_DANGEROUS_ID:
                             if un_pack:
                                 un_pack += "<br/>"
@@ -269,7 +335,16 @@ class CShipping:
                             un_pack += "<br/>"
                         un_pack += "<strong>Quantity and type of packing</strong><br/>"
                         if un_pack_dict.packNumber and un_pack_dict.unit:
-                            un_pack += un_pack_dict.packNumber + un_pack_dict.unit
+                            un_pack += un_pack_dict.packNumber
+                            if un_pack_dict.material:
+                                un_pack += " "
+                                un_pack += un_pack_dict.material
+                            if un_pack_dict.weight:
+                                un_pack += " "
+                                un_pack += un_pack_dict.weight
+                            if un_pack_dict.unit:
+                                un_pack += " "
+                                un_pack += un_pack_dict.unit
                             if un_pack_dict.packInfo:
                                 un_pack += "({0})".format(un_pack_dict.packInfo)
                         elif un_pack_dict.packInfo:
@@ -279,7 +354,9 @@ class CShipping:
                                 un_pack += "<br/>"
                             un_pack += "<strong>Packing Inst.</strong><br/>{0}".format(un_dict.packaging_instruction)
                     elif un_pack_dict.status == "Not Operated":
-                        un_pack += "<strong>Proper Shipping Name</strong><br/>{0}".format(un_pack_dict.product_name)
+                        un_pack += "<strong>Proper Shipping Name</strong><br/>{0} {1} {2} {3}" \
+                            .format(un_pack_dict.product_name or " ", un_pack_dict.TechnicalName or " ",
+                                    un_pack_dict.productNameSelect or " ", un_pack_dict.difference or " ")
                         if un_dict.MAIN_DANGEROUS_ID:
                             if un_pack:
                                 un_pack += "<br/>"
@@ -294,18 +371,45 @@ class CShipping:
                             un_pack += "<br/>"
                         un_pack += "<strong>Quantity and type of packing</strong><br/>"
                         if un_dict.packNumber and un_dict.unit:
-                            un_pack += un_dict.packNumber + un_dict.unit
+                            un_pack += un_dict.packNumber
+                            if un_dict.material:
+                                un_pack += " "
+                                un_pack += un_dict.material
+                            if un_dict.weight:
+                                un_pack += " "
+                                un_pack += un_dict.weight
+                            if un_dict.unit:
+                                un_pack += " "
+                                un_pack += un_dict.unit
                         if un_dict.packaging_instruction:
                             if un_pack:
                                 un_pack += "<br/>"
                             un_pack += "<strong>Packing Inst.</strong><br/>{0}".format(un_dict.packaging_instruction)
                 if not un_pack:
                     shipping_name = un_dict.product_Name
+                    if un_dict.TechnicalName:
+                        shipping_name += " "
+                        shipping_name += un_dict.TechnicalName
+                    if un_dict.productNameSelect:
+                        shipping_name += " "
+                        shipping_name += un_dict.productNameSelect
+                    if un_dict.difference:
+                        shipping_name += " "
+                        shipping_name += un_dict.difference
                     division = un_dict.MAIN_DANGEROUS_ID
                     if un_dict.SECOND_DANGEROUS_IDA:
                         division += "({0})".format(un_dict.SECOND_DANGEROUS_IDA)
                     packing_group = un_dict.packaging_grade
-                    quantity = un_dict.packNumber + un_dict.unit
+                    quantity = un_dict.packNumber
+                    if un_dict.material:
+                        quantity += " "
+                        quantity += un_dict.material
+                    if un_dict.weight:
+                        quantity += " "
+                        quantity += un_dict.weight
+                    if un_dict.unit:
+                        quantity += " "
+                        quantity += un_dict.unit
                     packing_inst = un_dict.packaging_instruction
                     if shipping_name:
                         un_pack += "<strong>Proper Shipping Name</strong><br/>{0}<br/>".format(shipping_name)
@@ -515,7 +619,7 @@ class CShipping:
             {
                 "type": "Radioactivity",
                 "is_next": 1,
-                "next": ["radioactive", "nonradiative"]
+                "next": ["Radioactive", "Nonradiative"]
             },
             {
                 "type": "Dry ice",
@@ -600,6 +704,7 @@ class CShipping:
                     an_check_history_item.check_id == item.id)\
                     .first()
                 item.fill("first_answer", first_check_item.check_answer)
+                item.answer = first_check_item.check_answer
             else:
                 item.fill("first_answer", None)
             if second_check_id:
