@@ -6,6 +6,7 @@ last update time: 2020-09-09
 
 import hashlib, datetime, requests, uuid, json
 from flask import request, current_app
+from ast import literal_eval
 
 from FanstiBgs.extensions.params_validates import parameter_required
 from FanstiBgs.extensions.request_handler import token_to_user_
@@ -134,7 +135,7 @@ class CShipping:
                                 un_pack += un_pack_dict.packNumber
                                 if un_pack_dict.material:
                                     un_pack += " "
-                                    un_pack += un_pack_dict.material
+                                    un_pack += literal_eval(un_pack_dict.material)[1]
                                 if un_pack_dict.weight:
                                     un_pack += " "
                                     un_pack += un_pack_dict.weight
@@ -170,7 +171,7 @@ class CShipping:
                                 un_pack += un_pack_dict.packNumber
                                 if un_pack_dict.material:
                                     un_pack += " "
-                                    un_pack += un_pack_dict.material
+                                    un_pack += literal_eval(un_pack_dict.material)[1]
                                 if un_pack_dict.weight:
                                     un_pack += " "
                                     un_pack += un_pack_dict.weight
@@ -206,7 +207,7 @@ class CShipping:
                                 un_pack += un_dict.packNumber
                                 if un_dict.material:
                                     un_pack += " "
-                                    un_pack += un_dict.material
+                                    un_pack += literal_eval(un_dict.material)[1]
                                 if un_dict.weight:
                                     un_pack += " "
                                     un_pack += un_dict.weight
@@ -236,7 +237,7 @@ class CShipping:
                         quantity = un_dict.packNumber
                         if un_dict.material:
                             quantity += " "
-                            quantity += un_dict.material
+                            quantity += literal_eval(un_dict.material)[1]
                         if un_dict.weight:
                             quantity += " "
                             quantity += un_dict.weight
@@ -302,7 +303,7 @@ class CShipping:
                             un_pack += un_pack_dict.packNumber
                             if un_pack_dict.material:
                                 un_pack += " "
-                                un_pack += un_pack_dict.material
+                                un_pack += literal_eval(un_pack_dict.material)[1]
                             if un_pack_dict.weight:
                                 un_pack += " "
                                 un_pack += un_pack_dict.weight
@@ -338,7 +339,7 @@ class CShipping:
                             un_pack += un_pack_dict.packNumber
                             if un_pack_dict.material:
                                 un_pack += " "
-                                un_pack += un_pack_dict.material
+                                un_pack += literal_eval(un_pack_dict.material)[1]
                             if un_pack_dict.weight:
                                 un_pack += " "
                                 un_pack += un_pack_dict.weight
@@ -374,7 +375,7 @@ class CShipping:
                             un_pack += un_dict.packNumber
                             if un_dict.material:
                                 un_pack += " "
-                                un_pack += un_dict.material
+                                un_pack += literal_eval(un_dict.material)[1]
                             if un_dict.weight:
                                 un_pack += " "
                                 un_pack += un_dict.weight
@@ -403,7 +404,7 @@ class CShipping:
                     quantity = un_dict.packNumber
                     if un_dict.material:
                         quantity += " "
-                        quantity += un_dict.material
+                        quantity += literal_eval(un_dict.material)[1]
                     if un_dict.weight:
                         quantity += " "
                         quantity += un_dict.weight
@@ -650,7 +651,7 @@ class CShipping:
             if args.get("check_type") != first_check.check_type:
                 return {
                     "status": 405,
-                    "status_code": 405007,
+                    "status_code": 405009,
                     "message": "请选择和第一次提交相同的检查单类型"
                 }
         else:
@@ -658,12 +659,22 @@ class CShipping:
 
         second_check = an_check_history.query.filter(an_check_history.master_id == args.get("master_id"),
                                                     an_check_history.times == "second").first()
+        check_items = []
+        error_number = 0
+        total_page = 1
+        total_count = 0
         if first_check and second_check:
             second_check_id = second_check.id
-            check_items = an_checklist.query.filter(an_checklist.check_type == args.get("check_type"))\
+            items = an_checklist.query.filter(an_checklist.check_type == args.get("check_type"))\
                 .order_by(an_checklist.check_no.asc()).all()
-            items = []
-            for item in check_items:
+            page_num = int(args.get("page_num")) or 1
+            page_size = int(args.get("page_size")) or 15
+            if len(items) % page_size == 0:
+                total_page = len(items) / page_size
+            else:
+                total_page = int(len(items) / page_size) + 1
+            total_count = len(items)
+            for item in items:
                 check_id = item.id
                 first_item = an_check_history_item.query.filter(an_check_history_item.check_id == check_id,
                                                                 an_check_history_item.history_id == first_check_id)\
@@ -672,10 +683,13 @@ class CShipping:
                                                                 an_check_history_item.history_id == second_check_id) \
                     .first()
                 if first_item.check_answer != second_item.check_answer:
-                    items.append(item)
+                    check_items.append(item)
+            error_number = len(check_items)
         else:
             second_check_id = None
 
+        items = an_checklist.query.filter(an_checklist.check_type == args.get("check_type")) \
+            .order_by(an_checklist.check_no.asc()).all_with_page()
 
         for item in items:
             item.fill("check_topic", "【{0}】\r\n{1}".format(item.check_genre, item.check_item))
@@ -693,36 +707,42 @@ class CShipping:
                 item.fill("answer", check_message_dict["result"])
             else:
                 item.fill("answer", None)
+            if first_check_id:
+                first_check_item = an_check_history_item.query.filter(
+                    an_check_history_item.history_id == first_check_id,
+                    an_check_history_item.check_id == item.id) \
+                    .first()
+                item.answer = first_check_item.check_answer
+                item.fill("first_answer", first_check_item.check_answer)
+            else:
+                item.fill("first_answer", None)
+
             if check_message_dict["message"]:
                 item.fill("show_message", "301")
             else:
                 item.fill("show_message", "302")
 
-            if first_check_id:
-                first_check_item = an_check_history_item.query.filter(
-                    an_check_history_item.history_id == first_check_id,
-                    an_check_history_item.check_id == item.id)\
-                    .first()
-                item.fill("first_answer", first_check_item.check_answer)
-                item.answer = first_check_item.check_answer
-            else:
-                item.fill("first_answer", None)
             if second_check_id:
                 second_check_item = an_check_history_item.query.filter(
-                    an_check_history_item.history_id == first_check_id,
+                    an_check_history_item.history_id == second_check_id,
                     an_check_history_item.check_id == item.id)\
                     .first()
                 item.fill("second_answer", second_check_item.check_answer)
             else:
                 item.fill("second_answer", None)
 
-        return {
-            "status": 200,
-            "message": "获取检查单题目成功",
-            "data": items,
-            "total_page": 1,
-            "total_count": len(items)
-        }
+        if first_check and second_check:
+
+            return {
+                "status": 200,
+                "message": "获取检查单题目成功",
+                "data": items,
+                "total_page": total_page,
+                "total_count": total_count,
+                "error_count": error_number
+            }
+        else:
+            return Success(data=items)
 
     def make_checklist_history(self):
         """
@@ -799,7 +819,7 @@ class CShipping:
                 if times == "second":
                     # TODO 替换正常格式的html_body
                     html_body = ""
-                    if args.get("check_type") == "nonradiative":
+                    if args.get("check_type") == "Nonradiative":
                         with open("../non-radioactive.html", 'r', encoding='utf-8') as f:
                             html_body = f.read()
                         check_history = an_check_history.query.filter(
@@ -3207,7 +3227,7 @@ class CShipping:
         """
         基于各种信息获取检查单详情
         """
-        if check_type in ["nonradiative", "radioactive"]:
+        if check_type in ["Nonradiative", "Radioactive"]:
             if check_no == "1":
                 return {
                     "result": "YES",

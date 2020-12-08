@@ -53,8 +53,8 @@ class CMechandis:
         获取可盘库的列表
         """
         args = parameter_required(("token", ))
-        page_size = args.get("page_size") or 15
-        page_num = args.get("page_num") or 1
+        page_size = int(args.get("page_size")) or 15
+        page_num = int(args.get("page_num")) or 1
         time_zones_dict = self._get_time_zones()
         mechandise_inventory_part = an_mechandise_inventory_part.query.filter(
             an_mechandise_inventory_part.createtime > time_zones_dict["time_start"],
@@ -106,7 +106,11 @@ class CMechandis:
         if args.get("master_number"):
             filter_args.append(an_procedure.master_number.like("%{0}%".format(args.get("master_number"))))
 
-        master_list = an_procedure.query.filter(*filter_args).all_with_page()
+        master_list = an_procedure.query.filter(*filter_args).order_by(an_procedure.create_time.desc()).all_with_page()
+        port_no = 1 + page_size * (page_num - 1)
+        for master_dict in master_list:
+            master_dict.fill("port_no", port_no)
+            port_no += 1
 
         return Success(data=master_list)
 
@@ -183,11 +187,15 @@ class CMechandis:
         else:
             total_page = int(total_count / page_size) + 1
 
+        port_no = 1 + page_size * (page_num - 1)
         merchandise_inventory_main = []
         for master_id in master_id_page:
             merchandise_inventory_main_dict = an_merchandise_inventory_main.query.filter(
                 an_merchandise_inventory_main.id == master_id).first()
-            merchandise_inventory_main.append(merchandise_inventory_main_dict)
+            if merchandise_inventory_main_dict:
+                merchandise_inventory_main_dict.fill("port_no", port_no)
+                merchandise_inventory_main.append(merchandise_inventory_main_dict)
+                port_no += 1
 
         return {
             "status": 200,
