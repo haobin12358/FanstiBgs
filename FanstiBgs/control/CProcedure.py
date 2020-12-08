@@ -234,7 +234,7 @@ class CProcedure:
         page_size = args.get("page_size") or 15
         page_num = args.get("page_num") or 1
 
-        procedure_list = an_procedure.query.filter(*filter_args).all_with_page()
+        procedure_list = an_procedure.query.filter(*filter_args).order_by(an_procedure.create_time.desc()).all_with_page()
 
         i = 1
         for procedure in procedure_list:
