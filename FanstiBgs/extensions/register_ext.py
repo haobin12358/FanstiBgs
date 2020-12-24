@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 import os
-import redis
+# import redis
 from contextlib import contextmanager
-from flask_celery import Celery
+# from flask_celery import Celery
 from flask_sqlalchemy import SQLAlchemy as _SQLAlchemy
 from FanstiBgs.extensions.aliyunoss.storage import AliyunOss
 from FanstiBgs.extensions.weixin import WeixinPay
@@ -40,12 +40,12 @@ wx_server = WeixinMP(SERVICE_APPID, SERVICE_APPSECRET,
 
 ali_oss = AliyunOss(ACCESS_KEY_ID, ACCESS_KEY_SECRET, ALIOSS_BUCKET_NAME, ALIOSS_ENDPOINT)
 
-celery = Celery()
+# celery = Celery()
 
-conn = redis.Redis(host='localhost', port=6379, db=1)
+# conn = redis.Redis(host='localhost', port=6379, db=1)
 
 
-def register_ext(app, logger_file='/tmp/fanstibgs/'):
+def register_ext(app, logger_file='E:\\fanstibgs\\'):
     db.init_app(app)
-    celery.init_app(app)
+    # celery.init_app(app)
     LoggerHandler(app, file=logger_file).error_handler()

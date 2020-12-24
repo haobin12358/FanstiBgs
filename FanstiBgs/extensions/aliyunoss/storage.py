@@ -1,4 +1,4 @@
-import oss2
+# import oss2
 
 
 class AliyunOss(object):
