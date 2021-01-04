@@ -14,7 +14,7 @@ server = HTTPServer(WSGIContainer(fansti), ssl_options={
 server.listen(443)
 IOLoop.instance().start()
 """
-from Fansti.flaskr import fansti as app
+from flaskrun import app as app
 
 import sys 
 from tornado.wsgi import WSGIContainer 
@@ -24,7 +24,7 @@ from tornado.ioloop import IOLoop
 if len(sys.argv) == 2: 
 	port = sys.argv[1] 
 else: 
-    port = 8001
+    port = 8002
 
 http_server = HTTPServer(WSGIContainer(app)) 
 http_server.listen(port) 

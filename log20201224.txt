@@ -1,2 +1,244 @@
 2020-12-24 15:40:59,738 - flask.app - INFO - >>>>>>>>>>>>>>>>>>start success<<<<<<<<<<<<<<<<<<<
 2020-12-24 15:41:02,719 - flask.app - INFO - >>>>>>>>>>>>>>>>>>start success<<<<<<<<<<<<<<<<<<<
+2020-12-24 15:49:05,071 - flask.app - INFO - >>>>>>>>>>>>>>>>>>start success<<<<<<<<<<<<<<<<<<<
+2020-12-24 15:51:34,437 - flask.app - INFO - >>>>>>>>>>>>>>>>>>start success<<<<<<<<<<<<<<<<<<<
+2020-12-24 15:53:13,933 - flask.app - INFO - >>>>>>>>
+>>>>>>>>before request<<<<<<<<
+<<<<<<<<<<
+2020-12-24 15:53:13,964 - flask.app - INFO - {'path': '/api/hello/get', 'method': 'GET', 'data': b'', 'query': {}, 'address': '::1'}
+2020-12-24 15:53:14,432 - flask.app - INFO - >>>>>>>>
+>>>>>>>>before request<<<<<<<<
+<<<<<<<<<<
+2020-12-24 15:53:14,434 - flask.app - INFO - {'path': '/favicon.ico', 'method': 'GET', 'data': b'', 'query': {}, 'address': '::1'}
+2020-12-24 15:53:14,599 - flask.app - ERROR - Traceback (most recent call last):
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\flask\app.py", line 1791, in dispatch_request
+    self.raise_routing_exception(req)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\flask\app.py", line 1774, in raise_routing_exception
+    raise request.routing_exception
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\flask\ctx.py", line 336, in match_request
+    self.url_adapter.match(return_rule=True)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\werkzeug\routing.py", line 1581, in match
+    raise NotFound()
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server.  If you entered the URL manually please check your spelling and try again.
+
+2020-12-24 15:53:47,650 - flask.app - INFO - >>>>>>>>
+>>>>>>>>before request<<<<<<<<
+<<<<<<<<<<
+2020-12-24 15:53:47,653 - flask.app - INFO - {'path': '/favicon.ico', 'method': 'GET', 'data': b'', 'query': {}, 'address': '::1'}
+2020-12-24 15:53:47,656 - flask.app - ERROR - Traceback (most recent call last):
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\flask\app.py", line 1791, in dispatch_request
+    self.raise_routing_exception(req)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\flask\app.py", line 1774, in raise_routing_exception
+    raise request.routing_exception
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\flask\ctx.py", line 336, in match_request
+    self.url_adapter.match(return_rule=True)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\werkzeug\routing.py", line 1581, in match
+    raise NotFound()
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server.  If you entered the URL manually please check your spelling and try again.
+
+2020-12-24 15:55:26,891 - flask.app - INFO - >>>>>>>>
+>>>>>>>>before request<<<<<<<<
+<<<<<<<<<<
+2020-12-24 15:55:26,896 - flask.app - INFO - {'path': '/api/hello/get', 'method': 'GET', 'data': b'', 'query': {}, 'address': '::1'}
+2020-12-24 15:55:26,979 - flask.app - INFO - >>>>>>>>
+>>>>>>>>before request<<<<<<<<
+<<<<<<<<<<
+2020-12-24 15:55:26,992 - flask.app - INFO - {'path': '/favicon.ico', 'method': 'GET', 'data': b'', 'query': {}, 'address': '::1'}
+2020-12-24 15:55:26,995 - flask.app - ERROR - Traceback (most recent call last):
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\flask\app.py", line 1791, in dispatch_request
+    self.raise_routing_exception(req)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\flask\app.py", line 1774, in raise_routing_exception
+    raise request.routing_exception
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\flask\ctx.py", line 336, in match_request
+    self.url_adapter.match(return_rule=True)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\werkzeug\routing.py", line 1581, in match
+    raise NotFound()
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server.  If you entered the URL manually please check your spelling and try again.
+
+2020-12-24 15:58:20,490 - flask.app - INFO - >>>>>>>>>>>>>>>>>>start success<<<<<<<<<<<<<<<<<<<
+2020-12-24 15:58:23,159 - flask.app - INFO - >>>>>>>>>>>>>>>>>>start success<<<<<<<<<<<<<<<<<<<
+2020-12-24 15:58:31,539 - flask.app - INFO - >>>>>>>>
+>>>>>>>>before request<<<<<<<<
+<<<<<<<<<<
+2020-12-24 15:58:31,545 - flask.app - INFO - {'path': '/api/hello/get', 'method': 'GET', 'data': b'', 'query': {}, 'address': '127.0.0.1'}
+2020-12-24 15:58:31,633 - flask.app - INFO - >>>>>>>>
+>>>>>>>>before request<<<<<<<<
+<<<<<<<<<<
+2020-12-24 15:58:31,641 - flask.app - INFO - {'path': '/favicon.ico', 'method': 'GET', 'data': b'', 'query': {}, 'address': '127.0.0.1'}
+2020-12-24 15:58:31,648 - flask.app - ERROR - Traceback (most recent call last):
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\flask\app.py", line 1791, in dispatch_request
+    self.raise_routing_exception(req)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\flask\app.py", line 1774, in raise_routing_exception
+    raise request.routing_exception
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\flask\ctx.py", line 336, in match_request
+    self.url_adapter.match(return_rule=True)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\werkzeug\routing.py", line 1581, in match
+    raise NotFound()
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server.  If you entered the URL manually please check your spelling and try again.
+
+2020-12-24 16:02:24,732 - flask.app - INFO - >>>>>>>>
+>>>>>>>>before request<<<<<<<<
+<<<<<<<<<<
+2020-12-24 16:02:24,733 - flask.app - INFO - {'path': '/api/hello/get', 'method': 'GET', 'data': b'', 'query': {}, 'address': '117.147.76.86'}
+2020-12-24 16:03:24,720 - flask.app - INFO - >>>>>>>>
+>>>>>>>>before request<<<<<<<<
+<<<<<<<<<<
+2020-12-24 16:03:24,721 - flask.app - INFO - {'path': '/api/user/user_login', 'method': 'POST', 'data': b'{\n    "user_name": "ceshi",\n    "user_password": "123456"\n}', 'query': {}, 'address': '117.147.76.86'}
+2020-12-24 16:03:25,274 - flask.app - ERROR - Traceback (most recent call last):
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\sqlalchemy\util\_collections.py", line 999, in __call__
+    return self.registry[key]
+KeyError: <greenlet.greenlet object at 0x0000000004F1FCC0>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\flask\views.py", line 88, in view
+    return self.dispatch_request(*args, **kwargs)
+  File "E:\FanstiBgs\FanstiBgs\extensions\base_resource.py", line 23, in dispatch_request
+    data = apis[kwarg]()
+  File "E:\FanstiBgs\FanstiBgs\control\CUser.py", line 22, in user_login
+    user = an_user.query.filter(an_user.isdelete == 0,
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\flask_sqlalchemy\__init__.py", line 514, in __get__
+    return type.query_class(mapper, session=self.sa.session())
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\sqlalchemy\orm\scoping.py", line 74, in __call__
+    return self.registry()
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\sqlalchemy\util\_collections.py", line 1001, in __call__
+    return self.registry.setdefault(key, self.createfunc())
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\sqlalchemy\orm\session.py", line 2950, in __call__
+    return self.class_(**local_kw)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\flask_sqlalchemy\__init__.py", line 138, in __init__
+    bind = options.pop('bind', None) or db.engine
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\flask_sqlalchemy\__init__.py", line 943, in engine
+    return self.get_engine()
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\flask_sqlalchemy\__init__.py", line 962, in get_engine
+    return connector.get_engine()
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\flask_sqlalchemy\__init__.py", line 556, in get_engine
+    self._engine = rv = self._sa.create_engine(sa_url, options)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\flask_sqlalchemy\__init__.py", line 972, in create_engine
+    return sqlalchemy.create_engine(sa_url, **engine_opts)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\sqlalchemy\engine\__init__.py", line 424, in create_engine
+    return strategy.create(*args, **kwargs)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\sqlalchemy\engine\strategies.py", line 81, in create
+    dbapi = dialect_cls.dbapi(**dbapi_args)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\sqlalchemy\dialects\mysql\pymysql.py", line 62, in dbapi
+    return __import__('pymysql')
+ModuleNotFoundError: No module named 'pymysql'
+
+2020-12-24 16:04:25,892 - flask.app - INFO - >>>>>>>>
+>>>>>>>>before request<<<<<<<<
+<<<<<<<<<<
+2020-12-24 16:04:25,893 - flask.app - INFO - {'path': '/api/user/user_login', 'method': 'POST', 'data': b'{\n    "user_name": "ceshi",\n    "user_password": "123456"\n}', 'query': {}, 'address': '117.147.76.86'}
+2020-12-24 16:04:53,411 - flask.app - INFO - >>>>>>>>
+>>>>>>>>before request<<<<<<<<
+<<<<<<<<<<
+2020-12-24 16:04:53,413 - flask.app - INFO - {'path': '/api/scrapy/get_cas', 'method': 'GET', 'data': b'', 'query': {'cas_name': '7664-93-9', 'token': 'eyJhbGciOiJIUzUxMiIsImlhdCI6MTYwMDY5NTM3NiwiZXhwIjoxNjAxMzAwMTc2fQ.eyJ1c2VybmFtZSI6IumDneaWjCIsImlkIjoiNWI0NmYyNjItZjBkOS0xMWVhLWFiMGUtNGNlZGZiNzk1OGEyIiwibW9kZWwiOiJVc2VyIiwibGV2ZWwiOiIwIn0.l_VM7k1EW0Owg9voN9ws0oZYmGa01DDD9YWoCKqq3dGHfZYkZMFhJu0SFxZI3tE7PCN438R8qjUNeLGvMJkuhQ'}, 'address': '117.147.76.86'}
+2020-12-24 16:04:54,387 - flask.app - ERROR - Traceback (most recent call last):
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\flask\views.py", line 88, in view
+    return self.dispatch_request(*args, **kwargs)
+  File "E:\FanstiBgs\FanstiBgs\extensions\base_resource.py", line 26, in dispatch_request
+    return jsonify(data)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\flask\json\__init__.py", line 321, in jsonify
+    dumps(data, indent=indent, separators=separators) + '\n',
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\flask\json\__init__.py", line 179, in dumps
+    rv = _json.dumps(obj, **kwargs)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\json\encoder.py", line 201, in encode
+    chunks = list(chunks)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\json\encoder.py", line 437, in _iterencode
+    o = _default(o)
+  File "E:\FanstiBgs\FanstiBgs\extensions\base_jsonencoder.py", line 25, in default
+    raise o
+FanstiBgs.extensions.error_response.ErrorGetNetwork: 200 OK: None
+
+2020-12-24 16:08:46,946 - flask.app - INFO - >>>>>>>>>>>>>>>>>>start success<<<<<<<<<<<<<<<<<<<
+2020-12-24 16:09:04,156 - flask.app - INFO - >>>>>>>>
+>>>>>>>>before request<<<<<<<<
+<<<<<<<<<<
+2020-12-24 16:09:04,156 - flask.app - INFO - {'path': '/api/scrapy/get_cas', 'method': 'GET', 'data': b'', 'query': {'cas_name': '7664-93-9', 'token': 'eyJhbGciOiJIUzUxMiIsImlhdCI6MTYwMDY5NTM3NiwiZXhwIjoxNjAxMzAwMTc2fQ.eyJ1c2VybmFtZSI6IumDneaWjCIsImlkIjoiNWI0NmYyNjItZjBkOS0xMWVhLWFiMGUtNGNlZGZiNzk1OGEyIiwibW9kZWwiOiJVc2VyIiwibGV2ZWwiOiIwIn0.l_VM7k1EW0Owg9voN9ws0oZYmGa01DDD9YWoCKqq3dGHfZYkZMFhJu0SFxZI3tE7PCN438R8qjUNeLGvMJkuhQ'}, 'address': '117.147.76.86'}
+2020-12-24 16:09:04,282 - flask.app - ERROR - Traceback (most recent call last):
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\flask\views.py", line 88, in view
+    return self.dispatch_request(*args, **kwargs)
+  File "E:\FanstiBgs\FanstiBgs\extensions\base_resource.py", line 26, in dispatch_request
+    return jsonify(data)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\flask\json\__init__.py", line 321, in jsonify
+    dumps(data, indent=indent, separators=separators) + '\n',
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\flask\json\__init__.py", line 179, in dumps
+    rv = _json.dumps(obj, **kwargs)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\json\encoder.py", line 201, in encode
+    chunks = list(chunks)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\json\encoder.py", line 437, in _iterencode
+    o = _default(o)
+  File "E:\FanstiBgs\FanstiBgs\extensions\base_jsonencoder.py", line 25, in default
+    raise o
+FanstiBgs.extensions.error_response.ErrorGetNetwork: 200 OK: None
+
+2020-12-24 16:09:14,756 - flask.app - INFO - >>>>>>>>>>>>>>>>>>start success<<<<<<<<<<<<<<<<<<<
+2020-12-24 16:09:34,039 - flask.app - INFO - >>>>>>>>>>>>>>>>>>start success<<<<<<<<<<<<<<<<<<<
+2020-12-24 16:09:36,929 - flask.app - INFO - >>>>>>>>>>>>>>>>>>start success<<<<<<<<<<<<<<<<<<<
+2020-12-24 16:09:54,758 - flask.app - INFO - >>>>>>>>
+>>>>>>>>before request<<<<<<<<
+<<<<<<<<<<
+2020-12-24 16:09:54,758 - flask.app - INFO - {'path': '/api/scrapy/get_cas', 'method': 'GET', 'data': b'', 'query': {'cas_name': '7664-93-9', 'token': 'eyJhbGciOiJIUzUxMiIsImlhdCI6MTYwMDY5NTM3NiwiZXhwIjoxNjAxMzAwMTc2fQ.eyJ1c2VybmFtZSI6IumDneaWjCIsImlkIjoiNWI0NmYyNjItZjBkOS0xMWVhLWFiMGUtNGNlZGZiNzk1OGEyIiwibW9kZWwiOiJVc2VyIiwibGV2ZWwiOiIwIn0.l_VM7k1EW0Owg9voN9ws0oZYmGa01DDD9YWoCKqq3dGHfZYkZMFhJu0SFxZI3tE7PCN438R8qjUNeLGvMJkuhQ'}, 'address': '117.147.76.86'}
+2020-12-24 16:09:54,883 - flask.app - ERROR - Traceback (most recent call last):
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\flask\views.py", line 88, in view
+    return self.dispatch_request(*args, **kwargs)
+  File "E:\FanstiBgs\FanstiBgs\extensions\base_resource.py", line 26, in dispatch_request
+    return jsonify(data)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\flask\json\__init__.py", line 321, in jsonify
+    dumps(data, indent=indent, separators=separators) + '\n',
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\site-packages\flask\json\__init__.py", line 179, in dumps
+    rv = _json.dumps(obj, **kwargs)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\json\encoder.py", line 201, in encode
+    chunks = list(chunks)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python36\lib\json\encoder.py", line 437, in _iterencode
+    o = _default(o)
+  File "E:\FanstiBgs\FanstiBgs\extensions\base_jsonencoder.py", line 25, in default
+    raise o
+FanstiBgs.extensions.error_response.ErrorGetNetwork: 200 OK: None
+
+2020-12-24 16:10:09,820 - flask.app - INFO - >>>>>>>>>>>>>>>>>>start success<<<<<<<<<<<<<<<<<<<
+2020-12-24 16:10:23,262 - flask.app - INFO - >>>>>>>>
+>>>>>>>>before request<<<<<<<<
+<<<<<<<<<<
+2020-12-24 16:10:23,262 - flask.app - INFO - {'path': '/api/scrapy/get_cas', 'method': 'GET', 'data': b'', 'query': {'cas_name': '7664-93-9', 'token': 'eyJhbGciOiJIUzUxMiIsImlhdCI6MTYwMDY5NTM3NiwiZXhwIjoxNjAxMzAwMTc2fQ.eyJ1c2VybmFtZSI6IumDneaWjCIsImlkIjoiNWI0NmYyNjItZjBkOS0xMWVhLWFiMGUtNGNlZGZiNzk1OGEyIiwibW9kZWwiOiJVc2VyIiwibGV2ZWwiOiIwIn0.l_VM7k1EW0Owg9voN9ws0oZYmGa01DDD9YWoCKqq3dGHfZYkZMFhJu0SFxZI3tE7PCN438R8qjUNeLGvMJkuhQ'}, 'address': '117.147.76.86'}
+2020-12-24 16:10:23,955 - flask.app - INFO - >>>>>>>>>>>make info:基本信息
+2020-12-24 16:10:23,955 - flask.app - INFO - >>>>>>>>>>data:[{'key': '基本信息', 'value': [{'name': '中文名:', 'value': ['11324', '硫酸;', '浓硫酸']}, {'name': '英文名:', 'value': ['81501', 'Sulfuricacid']}, {'name': '别名:', 'value': ['BOV;', 'Brimstoneacid;', 'Contactacid;', 'Dihydrogensulfate;', 'Dippingacid;', 'NSC248648;', 'NSC38965;', 'Oilofvitriol;', 'Ridolene123;', 'Sulphuricacid;', 'Vitriolbrownoil']}, {'name': '分子结构:', 'value': ['1', '2', 'mainfun("movePic1",200000)']}, {'name': '分子式:', 'value': ['H', '2', 'O', '4', 'S']}, {'name': '分子量:', 'value': ['98.08']}, {'name': 'CAS登录号', 'value': ['7664-93-9']}, {'name': 'EINECS登录号:', 'value': ['231-639-5']}]}, {'key': '物理化学性质', 'value': []}, {'key': '安全信息', 'value': []}, {'key': '其他信息', 'value': []}]
+2020-12-24 16:10:24,011 - flask.app - INFO - >>>>>>>>>>>>>>>>>>>>give me five>>>>>>>>>>>>>
+2020-12-24 16:11:14,015 - flask.app - INFO - >>>>>>>>
+>>>>>>>>before request<<<<<<<<
+<<<<<<<<<<
+2020-12-24 16:11:14,015 - flask.app - INFO - {'path': '/api/scrapy/get_cas', 'method': 'GET', 'data': b'', 'query': {'cas_name': '7664-93-9', 'token': 'eyJhbGciOiJIUzUxMiIsImlhdCI6MTYwMDY5NTM3NiwiZXhwIjoxNjAxMzAwMTc2fQ.eyJ1c2VybmFtZSI6IumDneaWjCIsImlkIjoiNWI0NmYyNjItZjBkOS0xMWVhLWFiMGUtNGNlZGZiNzk1OGEyIiwibW9kZWwiOiJVc2VyIiwibGV2ZWwiOiIwIn0.l_VM7k1EW0Owg9voN9ws0oZYmGa01DDD9YWoCKqq3dGHfZYkZMFhJu0SFxZI3tE7PCN438R8qjUNeLGvMJkuhQ'}, 'address': '117.147.76.86'}
+2020-12-24 16:11:14,655 - flask.app - INFO - >>>>>>>>>>>make info:基本信息
+2020-12-24 16:11:14,671 - flask.app - INFO - >>>>>>>>>>data:[{'key': '基本信息', 'value': [{'name': '中文名:', 'value': ['79779', '硫酸;', '浓硫酸']}, {'name': '英文名:', 'value': ['59955', 'Sulfuricacid']}, {'name': '别名:', 'value': ['BOV;', 'Brimstoneacid;', 'Contactacid;', 'Dihydrogensulfate;', 'Dippingacid;', 'NSC248648;', 'NSC38965;', 'Oilofvitriol;', 'Ridolene123;', 'Sulphuricacid;', 'Vitriolbrownoil']}, {'name': '分子结构:', 'value': ['1', '2', 'mainfun("movePic1",200000)']}, {'name': '分子式:', 'value': ['H', '2', 'O', '4', 'S']}, {'name': '分子量:', 'value': ['98.08']}, {'name': 'CAS登录号', 'value': ['7664-93-9']}, {'name': 'EINECS登录号:', 'value': ['231-639-5']}]}, {'key': '物理化学性质', 'value': []}, {'key': '安全信息', 'value': []}, {'key': '其他信息', 'value': []}]
+2020-12-24 16:11:14,703 - flask.app - INFO - >>>>>>>>>>>>>>>>>>>>give me five>>>>>>>>>>>>>
+2020-12-24 16:20:12,289 - flask.app - INFO - >>>>>>>>>>>>>>>>>>start success<<<<<<<<<<<<<<<<<<<
+2020-12-24 16:20:15,484 - flask.app - INFO - >>>>>>>>>>>>>>>>>>start success<<<<<<<<<<<<<<<<<<<

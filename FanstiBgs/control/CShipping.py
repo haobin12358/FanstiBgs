@@ -814,13 +814,13 @@ class CShipping:
                 db.session.add(history_instance)
 
             # TODO 切换正式环境后修改
-            return Success(message="提交成功")
+            # return Success(message="提交成功")
             with db.auto_commit():
                 if times == "second":
                     # TODO 替换正常格式的html_body
                     html_body = ""
                     if args.get("check_type") == "Nonradiative":
-                        with open("../non-radioactive.html", 'r', encoding='utf-8') as f:
+                        with open("E:\\FanstiBgs\\FanstiBgs\\non-radioactive.html", 'r', encoding='utf-8') as f:
                             html_body = f.read()
                         check_history = an_check_history.query.filter(
                             an_check_history.master_id == args.get("master_id"),
@@ -1795,8 +1795,8 @@ class CShipping:
                             title_180, title_181, title_182, title_183, title_184, title_185, title_186, title_187, title_188, title_189,
                             title_190, title_191, title_192, title_193, title_194, title_195, title_196
                         )
-                    elif args.get("check_type") == "lithium cell":
-                        with open("../lithium.html", 'r', encoding='utf-8') as f:
+                    elif args.get("check_type") == "Lithium cell":
+                        with open("E:\\FanstiBgs\\FanstiBgs\\lithium.html", 'r', encoding='utf-8') as f:
                             html_body = f.read()
                         check_history = an_check_history.query.filter(
                             an_check_history.master_id == args.get("master_id"),
@@ -2040,8 +2040,8 @@ class CShipping:
                                                      title_32, title_33, title_34, title_35, title_36, title_37,
                                                      title_38, title_39, title_40, title_41, title_42, title_55,
                                                      title_56, title_58, title_59, title_60, title_61)
-                    elif args.get("check_type") == "dry ice":
-                        with open("../dry_ice.html", 'r', encoding='utf-8') as f:
+                    elif args.get("check_type") == "Dry ice":
+                        with open("E:\\FanstiBgs\\FanstiBgs\\dry_ice.html", 'r', encoding='utf-8') as f:
                             html_body = f.read()
                         check_history = an_check_history.query.filter(an_check_history.master_id == args.get("master_id"),
                                                                       an_check_history.times == "second")\
@@ -2320,8 +2320,8 @@ class CShipping:
                                                      title_44, title_45, title_46, title_47, title_48, title_49,
                                                      title_50, title_51, title_52, title_53, title_54, title_55,
                                                      title_56, title_57, title_58, title_59, title_60, title_61)
-                    elif args.get("check_type") == "radioactive":
-                        with open("../radioactive.html", 'r', encoding='utf-8') as f:
+                    elif args.get("check_type") == "Radioactive":
+                        with open("E:\\FanstiBgs\\FanstiBgs\\radioactive.html", 'r', encoding='utf-8') as f:
                             html_body = f.read()
 
                         check_history = an_check_history.query.filter(
@@ -3175,19 +3175,24 @@ class CShipping:
                                     """
                     from FanstiBgs.config.secret import WK_HTML_TO_IMAGE, WindowsRoot
                     path_wkhtmltopdf_image = WK_HTML_TO_IMAGE
-                    import imgkit, platform
+                    import imgkit, platform, os
                     config_img = imgkit.config(wkhtmltoimage=path_wkhtmltopdf_image)
                     from FanstiBgs.config.secret import LinuxRoot, LinuxImgs, WindowsImgs, WindowsRoot
                     if platform.system() == "Windows":
-                        rootdir = WindowsRoot + WindowsImgs
-                        pic_name = "{0}-{1}.png".format(args.get("check_type"), str(uuid.uuid1()))
+                        rootdir = WindowsRoot
+                        pic_name = "{0}.png".format(str(uuid.uuid1()))
                         outdir = rootdir + "\\check_item\\{0}".format(pic_name)
+                        if not os.path.exists(outdir):
+                            os.makedirs(outdir)
                     else:
                         rootdir = LinuxRoot + LinuxImgs
                         pic_name = "{0}-{1}.png".format(args.get("check_type"), str(uuid.uuid1()))
                         outdir = rootdir + "/check_item/{0}".format(pic_name)
-
-                    imgkit.from_string(html_body, output_path=outdir, config=config_img)
+                        if not os.path.exists(outdir):
+                            os.makedirs(outdir)
+                    current_app.logger.info(str(html_body))
+                    current_app.logger.info(">>>>>>>>>>>>>>>>outdir:" + str(outdir))
+                    imgkit.from_string(str(html_body), output_path=outdir, config=config_img)
 
                     picture_dict = {
                         "id": str(uuid.uuid1()),

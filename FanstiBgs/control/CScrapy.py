@@ -47,11 +47,11 @@ class CScrapy():
         try:
             url = "http://www.ichemistry.cn/chemistry/{0}.htm".format(args["cas_name"])
             headers = {'Content-Type': 'application/xml'}
-            req = requests.get(url)
-            req.encoding = "utf-8"
-            strResult = req.text
+            import urllib.request
+            req = urllib.request.urlopen(url)
+            strResult = req.read()
             parser = MyHTMLParser()
-            parser.feed(strResult)
+            parser.feed(strResult.decode('gbk', 'ignore'))
             length = len(parser.text)
             while length >= 0:
                 parser.text[length - 1] = parser.text[length - 1].replace(" ", "").replace("\t", "").replace("\r","").replace("\n", "").replace("   ", "")
