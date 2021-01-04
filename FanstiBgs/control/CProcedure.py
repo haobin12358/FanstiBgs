@@ -4,7 +4,7 @@ create user: haobin12358
 last update time: 2020-09-09
 """
 
-import datetime, uuid
+import datetime, uuid, json
 from flask import request
 
 from FanstiBgs.extensions.params_validates import parameter_required
@@ -371,19 +371,26 @@ class CProcedure:
         """
         更新目的港/货运类型/运输方式
         """
-        data = parameter_required(("destination_port", "type_of_shipping", "freight_type"))
-        if data.get("type_of_shipping") not in ["PASSENGER AND CARGO AIRCRAFT", "CARGO AIRCRAFT ONLY"]:
-            return {
-                "status": 405,
-                "status_code": 405202,
-                "message": "运输方式请填写‘PASSENGER AND CARGO AIRCRAFT’或者‘CARGO AIRCRAFT ONLY’"
-            }
-        if data.get("freight_type") not in ["RADIOACTIVE", "NON-RADIOACTIVE"]:
-            return {
-                "status": 405,
-                "status_code": 405202,
-                "message": "货运类型请填写‘RADIOACTIVE’或‘NON-RADIOACTIVE’"
-            }
+        data = json.loads(request.data)
+        if data.get("type_of_shipping"):
+            if data.get("type_of_shipping") not in ["PASSENGER AND CARGO AIRCRAFT", "CARGO AIRCRAFT ONLY"]:
+                return {
+                    "status": 405,
+                    "status_code": 405202,
+                    "message": "运输方式请填写‘PASSENGER AND CARGO AIRCRAFT’或者‘CARGO AIRCRAFT ONLY’"
+                }
+        else:
+            data["type_of_shipping"] = None
+        if data.get("freight_type"):
+            if data.get("freight_type") not in ["RADIOACTIVE", "NON-RADIOACTIVE"]:
+                return {
+                    "status": 405,
+                    "status_code": 405202,
+                    "message": "货运类型请填写‘RADIOACTIVE’或‘NON-RADIOACTIVE’"
+                }
+        else:
+            data["freight_type"] = None
+
 
         args = request.args.to_dict()
         if "procedure_id" not in args:
