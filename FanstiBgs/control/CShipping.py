@@ -2041,7 +2041,8 @@ class CShipping:
                                                      title_38, title_39, title_40, title_41, title_42, title_55,
                                                      title_56, title_58, title_59, title_60, title_61)
                     elif args.get("check_type") == "Dry ice":
-                        with open("E:\\FanstiBgs\\FanstiBgs\\dry_ice.html", 'r', encoding='utf-8') as f:
+                        # TODO 根据不同服务器进行实际调整
+                        with open("E:\\outpack\\FanstiBgs\\FanstiBgs\\dry_ice.html", 'r', encoding='utf-8') as f:
                             html_body = f.read()
                         check_history = an_check_history.query.filter(an_check_history.master_id == args.get("master_id"),
                                                                       an_check_history.times == "second")\
@@ -3174,9 +3175,9 @@ class CShipping:
                                     </html>
                                     """
                     from FanstiBgs.config.secret import WK_HTML_TO_IMAGE, WindowsRoot
-                    path_wkhtmltopdf_image = WK_HTML_TO_IMAGE
+                    # path_wkhtmltopdf_image = WK_HTML_TO_IMAGE
                     import imgkit, platform, os
-                    config_img = imgkit.config(wkhtmltoimage=path_wkhtmltopdf_image)
+                    # config_img = imgkit.config(wkhtmltoimage=path_wkhtmltopdf_image)
                     from FanstiBgs.config.secret import LinuxRoot, LinuxImgs, WindowsImgs, WindowsRoot
                     if platform.system() == "Windows":
                         rootdir = WindowsRoot
@@ -3192,13 +3193,51 @@ class CShipping:
                             os.makedirs(outdir)
                     current_app.logger.info(str(html_body))
                     current_app.logger.info(">>>>>>>>>>>>>>>>outdir:" + str(outdir))
-                    imgkit.from_string(str(html_body), output_path=outdir, config=config_img)
+                    if platform.system() == "Windows":
+                        rootdir = WindowsRoot
+                        pic_name = "{0}.html".format(uuid.uuid1())
+                        outdir = rootdir + "\\check_item\\{0}".format(pic_name)
+                        if not os.path.exists(outdir):
+                            os.makedirs(outdir)
+                    else:
+                        rootdir = LinuxRoot + LinuxImgs
+                        pic_name = "{0}-{1}.html".format(args.get("check_type"), str(uuid.uuid1()))
+                        outdir = rootdir + "/check_item/{0}".format(pic_name)
+                        if not os.path.exists(outdir):
+                            os.makedirs(outdir)
+                    inset_html = open("{0}".format(outdir), "w")
+                    inset_html.write("print()")
+                    inset_html.close()
+
+                    # imgkit.from_string(str(html_body), output_path=outdir, config=config_img)
+
+                    local_url = "file://E:/fstfile/check_item/{0}".format(pic_name)
+                    from selenium import webdriver
+                    pic_name = "{0}.png".format(str(uuid.uuid1()))
+                    save_fn = rootdir + "\\check_item\\{0}".format(pic_name)
+
+                    option = webdriver.ChromeOptions()
+                    option.add_argument('--headless')
+                    option.add_argument('--disable-gpu')
+                    option.add_argument("--window-size=1280,1024")
+                    option.add_argument("--hide-scrollbars")
+
+                    # TODO 对应环境替换路径
+                    driver = webdriver.Chrome(chrome_options=option, executable_path="F:/chromedriver")
+
+                    driver.get(local_url)
+
+                    scroll_width = driver.execute_script('return document.body.parentNode.scrollWidth')
+                    scroll_height = driver.execute_script('return document.body.parentNode.scrollHeight')
+                    driver.set_window_size(scroll_width, scroll_height)
+                    driver.save_screenshot(save_fn)
+                    driver.quit()
 
                     picture_dict = {
                         "id": str(uuid.uuid1()),
                         "procedure_id": args.get("master_id"),
                         "file_name": pic_name,
-                        "file_src": outdir,
+                        "file_src": save_fn,
                         "user_id": user_id,
                         "user_name": user_name,
                         "createtime": datetime.datetime.now(),
