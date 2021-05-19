@@ -231,6 +231,10 @@ class CProcedure:
         if args.get("master_number"):
             filter_args.append(an_procedure.master_number.like("%{0}%".format(args.get("master_number"))))
 
+        # TODO 2021/3/15 新增需求
+        if args.get("preservation"):
+            filter_args.append(an_procedure.preservation == args.get("preservation"))
+
         page_size = args.get("page_size") or 15
         page_num = args.get("page_num") or 1
 
@@ -369,7 +373,7 @@ class CProcedure:
 
     def update_procedure(self):
         """
-        更新目的港/货运类型/运输方式
+        更新目的港/货运类型/运输方式/单号
         """
         data = json.loads(request.data)
         if data.get("type_of_shipping"):
@@ -405,7 +409,8 @@ class CProcedure:
                 "id": args.get("procedure_id"),
                 "type_of_shipping": data.get("type_of_shipping"),
                 "freight_type": data.get("freight_type"),
-                "destination_port": data.get("destination_port")
+                "destination_port": data.get("destination_port"),
+                "master_number": data.get("master_number")
             }
             procedure_instance = procedure.update(procedure_dict, null="not")
             db.session.add(procedure_instance)
