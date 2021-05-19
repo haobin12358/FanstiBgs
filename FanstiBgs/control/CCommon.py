@@ -28,9 +28,10 @@ class CCommon:
         an_procedure_picture_dict["user_name"] = user.user_name
         an_procedure_picture_dict["createtime"] = datetime.datetime.now()
         import platform
-        from FanstiBgs.config.secret import LinuxRoot, LinuxImgs, WindowsImgs, WindowsRoot
+        from FanstiBgs.config.secret import LinuxRoot, LinuxImgs, WindowsImgs, WindowsRoot, WindowsRoot_wxp
         if platform.system() == "Windows":
-            rootdir = WindowsRoot + WindowsImgs
+            # TODO 正式环境
+            rootdir = WindowsRoot_wxp + WindowsImgs
         else:
             rootdir = LinuxRoot + LinuxImgs
         if not os.path.isdir(rootdir):

@@ -35,7 +35,8 @@ class CShipping:
         order_time = datetime.datetime(three_days_ago.year, three_days_ago.month, three_days_ago.day, 0, 0, 0)
         filter_args.append(t_bgs_main_single_number.order_time > order_time)
 
-        main_port = t_bgs_main_single_number.query.filter(*filter_args).all_with_page()
+        # TODO 2021/3/15需求调整
+        main_port = t_bgs_main_single_number.query.filter(*filter_args).order_by(t_bgs_main_single_number.order_time.desc()).all_with_page()
         page_num = int(request.args.get("page_num")) or 1
         page_size = int(request.args.get("page_size")) or 15
         i = 1
@@ -813,14 +814,12 @@ class CShipping:
                 history_instance = an_check_history.create(history_dict)
                 db.session.add(history_instance)
 
-            # TODO 切换正式环境后修改
-            # return Success(message="提交成功")
             with db.auto_commit():
                 if times == "second":
-                    # TODO 替换正常格式的html_body
                     html_body = ""
                     if args.get("check_type") == "Nonradiative":
-                        with open("E:\\FanstiBgs\\FanstiBgs\\non-radioactive.html", 'r', encoding='utf-8') as f:
+                        # TODO 正式服调整
+                        with open("E:\\BGSappserver\\FanstiBgs\\FanstiBgs\\non-radioactive.html", 'r', encoding='utf-8') as f:
                             html_body = f.read()
                         check_history = an_check_history.query.filter(
                             an_check_history.master_id == args.get("master_id"),
@@ -1796,7 +1795,8 @@ class CShipping:
                             title_190, title_191, title_192, title_193, title_194, title_195, title_196
                         )
                     elif args.get("check_type") == "Lithium cell":
-                        with open("E:\\FanstiBgs\\FanstiBgs\\lithium.html", 'r', encoding='utf-8') as f:
+                        # TODO 正式服调整
+                        with open("E:\\BGSappserver\\FanstiBgs\\FanstiBgs\\lithium.html", 'r', encoding='utf-8') as f:
                             html_body = f.read()
                         check_history = an_check_history.query.filter(
                             an_check_history.master_id == args.get("master_id"),
@@ -2041,8 +2041,8 @@ class CShipping:
                                                      title_38, title_39, title_40, title_41, title_42, title_55,
                                                      title_56, title_58, title_59, title_60, title_61)
                     elif args.get("check_type") == "Dry ice":
-                        # TODO 根据不同服务器进行实际调整
-                        with open("E:\\outpack\\FanstiBgs\\FanstiBgs\\dry_ice.html", 'r', encoding='utf-8') as f:
+                        # TODO 正式服调整
+                        with open("E:\\BGSappserver\\FanstiBgs\\FanstiBgs\\dry_ice.html", 'r', encoding='utf-8') as f:
                             html_body = f.read()
                         check_history = an_check_history.query.filter(an_check_history.master_id == args.get("master_id"),
                                                                       an_check_history.times == "second")\
@@ -2322,7 +2322,8 @@ class CShipping:
                                                      title_50, title_51, title_52, title_53, title_54, title_55,
                                                      title_56, title_57, title_58, title_59, title_60, title_61)
                     elif args.get("check_type") == "Radioactive":
-                        with open("E:\\FanstiBgs\\FanstiBgs\\radioactive.html", 'r', encoding='utf-8') as f:
+                        # TODO 正式服调整
+                        with open("E:\\BGSappserver\\FanstiBgs\\FanstiBgs\\radioactive.html", 'r', encoding='utf-8') as f:
                             html_body = f.read()
 
                         check_history = an_check_history.query.filter(
@@ -3174,29 +3175,14 @@ class CShipping:
                                        </head>
                                     </html>
                                     """
-                    from FanstiBgs.config.secret import WK_HTML_TO_IMAGE, WindowsRoot
-                    # path_wkhtmltopdf_image = WK_HTML_TO_IMAGE
-                    import imgkit, platform, os
-                    # config_img = imgkit.config(wkhtmltoimage=path_wkhtmltopdf_image)
-                    from FanstiBgs.config.secret import LinuxRoot, LinuxImgs, WindowsImgs, WindowsRoot
+                    import platform, os
+                    from FanstiBgs.config.secret import LinuxRoot, LinuxImgs, WindowsRoot, WindowsRoot_wxp, WindowsRoot_wxp_on
+
                     if platform.system() == "Windows":
-                        rootdir = WindowsRoot
-                        pic_name = "{0}.png".format(str(uuid.uuid1()))
-                        outdir = rootdir + "\\check_item\\{0}".format(pic_name)
-                        if not os.path.exists(outdir):
-                            os.makedirs(outdir)
-                    else:
-                        rootdir = LinuxRoot + LinuxImgs
-                        pic_name = "{0}-{1}.png".format(args.get("check_type"), str(uuid.uuid1()))
-                        outdir = rootdir + "/check_item/{0}".format(pic_name)
-                        if not os.path.exists(outdir):
-                            os.makedirs(outdir)
-                    current_app.logger.info(str(html_body))
-                    current_app.logger.info(">>>>>>>>>>>>>>>>outdir:" + str(outdir))
-                    if platform.system() == "Windows":
-                        rootdir = WindowsRoot
+                        # TODO 正式服切换
+                        rootdir = WindowsRoot_wxp
                         pic_name = "{0}.html".format(uuid.uuid1())
-                        outdir = rootdir + "\\check_item\\{0}".format(pic_name)
+                        outdir = rootdir + "/check_item/"
                         if not os.path.exists(outdir):
                             os.makedirs(outdir)
                     else:
@@ -3205,16 +3191,16 @@ class CShipping:
                         outdir = rootdir + "/check_item/{0}".format(pic_name)
                         if not os.path.exists(outdir):
                             os.makedirs(outdir)
-                    inset_html = open("{0}".format(outdir), "w")
-                    inset_html.write("print()")
+                    current_app.logger.info(">>>>>>>>>>>>>>>>outdir:" + str(outdir))
+                    inset_html = open("{0}/{1}".format(outdir, pic_name), "w", encoding="utf-8")
+                    inset_html.write(html_body)
                     inset_html.close()
 
-                    # imgkit.from_string(str(html_body), output_path=outdir, config=config_img)
-
-                    local_url = "file://E:/fstfile/check_item/{0}".format(pic_name)
+                    # TODO 文件路径
+                    local_url = WindowsRoot_wxp_on + "/check_item/{0}".format(pic_name)
                     from selenium import webdriver
                     pic_name = "{0}.png".format(str(uuid.uuid1()))
-                    save_fn = rootdir + "\\check_item\\{0}".format(pic_name)
+                    save_fn = rootdir + "/check_item/{0}".format(pic_name)
 
                     option = webdriver.ChromeOptions()
                     option.add_argument('--headless')
@@ -3223,7 +3209,7 @@ class CShipping:
                     option.add_argument("--hide-scrollbars")
 
                     # TODO 对应环境替换路径
-                    driver = webdriver.Chrome(chrome_options=option, executable_path="F:/chromedriver")
+                    driver = webdriver.Chrome(chrome_options=option, executable_path="E:/BGSappserver/chromedriver")
 
                     driver.get(local_url)
 
@@ -3233,11 +3219,12 @@ class CShipping:
                     driver.save_screenshot(save_fn)
                     driver.quit()
 
+                    save_use = "fstfile\\check_item\\" + pic_name
                     picture_dict = {
                         "id": str(uuid.uuid1()),
                         "procedure_id": args.get("master_id"),
                         "file_name": pic_name,
-                        "file_src": save_fn,
+                        "file_src": save_use,
                         "user_id": user_id,
                         "user_name": user_name,
                         "createtime": datetime.datetime.now(),

@@ -24,7 +24,7 @@ from tornado.ioloop import IOLoop
 if len(sys.argv) == 2: 
 	port = sys.argv[1] 
 else: 
-    port = 8002
+    port = 7444
 
 http_server = HTTPServer(WSGIContainer(app)) 
 http_server.listen(port) 
