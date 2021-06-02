@@ -5,7 +5,10 @@ import os
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
+with open("E:\\BGSappserver\\FanstiBgs\\FanstiBgs\\non-radioactive.html", 'r', encoding='utf-8') as f:
+    html_body = f.read()
 url = "file://E:/outpack/FanstiBgs/FanstiBgs/dry_ice.html"
+local_url = WindowsRoot_wxp_on + "/check_item/{0}".format(pic_name)
 save_fn = "buildNumResult.PNG"
 
 option = webdriver.ChromeOptions()

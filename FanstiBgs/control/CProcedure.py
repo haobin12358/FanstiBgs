@@ -94,6 +94,7 @@ class CProcedure:
             procedure_dict["preservation"] = "wait"
             id = str(uuid.uuid1())
             procedure_dict["id"] = id
+            procedure_dict["master_number_cut"] = str(args.get("master_number"))[-4:] or ""
             main_port = t_bgs_main_single_number.query.filter(
                 t_bgs_main_single_number.master_number == args.get("master_number")).first()
             if main_port:
@@ -409,8 +410,36 @@ class CProcedure:
                 "id": args.get("procedure_id"),
                 "type_of_shipping": data.get("type_of_shipping"),
                 "freight_type": data.get("freight_type"),
-                "destination_port": data.get("destination_port"),
-                "master_number": data.get("master_number")
+                "destination_port": data.get("destination_port")
+            }
+            procedure_instance = procedure.update(procedure_dict, null="not")
+            db.session.add(procedure_instance)
+        return Success("编辑成功")
+
+    def update_procedure_master_number(self):
+        """
+        更新单号
+        """
+        args = request.args.to_dict()
+        if "procedure_id" not in args:
+            return {
+                "status": 405,
+                "status_code": 405202,
+                "message": "procedure_id参数缺失"
+            }
+
+        data = json.loads(request.data)
+        if data.get("master_number"):
+            master_number_cut = str(data.get("master_number"))[-4:] or ""
+        else:
+            master_number_cut = ""
+
+        procedure = an_procedure.query.filter(an_procedure.id == args.get("procedure_id")).first_("未找到数据")
+        with db.auto_commit():
+            procedure_dict = {
+                "id": args.get("procedure_id"),
+                "master_number": data.get("master_number"),
+                "master_number_cut": master_number_cut
             }
             procedure_instance = procedure.update(procedure_dict, null="not")
             db.session.add(procedure_instance)

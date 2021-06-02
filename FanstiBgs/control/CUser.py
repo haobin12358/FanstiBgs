@@ -19,7 +19,7 @@ class CUser:
     def user_login(self):
         """用户登录"""
         data = parameter_required(("user_name", "user_password"))
-        user = an_user.query.filter(an_user.isdelete == 0,
+        user = an_user.query.filter(an_user.isdelete == "0",
                                     an_user.user_name == data.get("user_name"))\
             .first_("未找到该账号或该账号被禁用")
         hash_password = hashlib.md5(data.get("user_password").encode("utf-8"))
@@ -33,7 +33,7 @@ class CUser:
     def user_password_repeat(self):
         """用户修改密码"""
         data = parameter_required(("user_name", "user_password_old", "user_password_new", "user_password_repeat"))
-        user = an_user.query.filter(an_user.isdelete == 0,
+        user = an_user.query.filter(an_user.isdelete == "0",
                                     an_user.user_name == data.get("user_name")) \
             .first_("未找到该账号或该账号被禁用")
 
