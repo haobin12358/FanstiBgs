@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from sqlalchemy import Integer, String, Text, DateTime, orm, Boolean, Float
+from sqlalchemy import Integer, String, Text, DateTime, orm, Boolean, Float, DECIMAL
 from FanstiBgs.extensions.base_model import Base, Column
 import datetime
 
@@ -13,7 +13,7 @@ class an_user(Base):
     user_name = Column(String(255), nullable=False, comment="用户名")
     user_password = Column(String(128), nullable=False, comment="密码")
     user_mobile = Column(String(20), comment="手机号")
-    isdelete = Column(Boolean, default=False, comment="状态0可用1不可用")
+    isdelete = Column(String(4), default="0", comment="状态0可用1不可用")
     createtime = Column(DateTime, default=datetime.datetime.now(), nullable=False, comment="创建时间")
     updatetime = Column(DateTime, default=datetime.datetime.now(), nullable=False, comment="更新时间")
     cardno = Column(String(255), comment="证件号")
@@ -30,6 +30,7 @@ class an_procedure(Base):
     __tablename__ = "an_procedure"
     id = Column(String(40), primary_key=True)
     master_number = Column(String(40), nullable=False, comment="运单号")
+    master_number_cut = Column(String(4), nullable=False, comment="运单号后四位")
     port_of_departure = Column(String(255), comment="起运港")
     destination_port = Column(String(255), comment="目的港")
     type_of_shipping = Column(String(255), comment="运输方式")
@@ -137,6 +138,7 @@ class an_mechandise_inventory_part(Base):
     main_id = Column(String(40), comment="盘库记录主单id")
     master_id = Column(String(40), comment="进出港id")
     master_number = Column(String(40), comment="主单号")
+    master_number_cut = Column(String(4), comment="主单号后四位切片")
     createtime = Column(DateTime, default=datetime.datetime.now())
     preservation_area = Column(String(128), comment="区域")
     storing_location = Column(String(128), comment="仓位")
@@ -163,7 +165,7 @@ class an_checklist(Base):
     """
     __tablename__ = "an_checklist"
     id = Column(String(40), primary_key=True)
-    check_no = Column(Float, nullable=False, comment="题号")
+    check_no = Column(DECIMAL(precision=28, scale=1), nullable=False, comment="题号")
     check_item = Column(Text, nullable=False, comment="题目内容")
     check_genre = Column(String(200), nullable=False, comment="题目标签")
     check_type = Column(String(50), nullable=False, comment="检查单类型")
@@ -189,7 +191,7 @@ class an_check_history_item(Base):
     id = Column(String(40), primary_key=True)
     check_id = Column(String(40), comment="检查单题目id")
     history_id = Column(String(40), comment="检查历史id")
-    check_no = Column(Float, nullable=False, comment="题号")
+    check_no = Column(DECIMAL(precision=28, scale=1), nullable=False, comment="题号")
     check_item = Column(Text, nullable=False, comment="题目内容")
     check_genre = Column(String(200), nullable=False, comment="题目标签")
     check_answer = Column(String(10), comment="结果YES NO N/A")

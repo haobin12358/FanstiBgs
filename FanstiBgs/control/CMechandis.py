@@ -106,7 +106,11 @@ class CMechandis:
         if args.get("master_number"):
             filter_args.append(an_procedure.master_number.like("%{0}%".format(args.get("master_number"))))
 
-        master_list = an_procedure.query.filter(*filter_args).order_by(an_procedure.create_time.desc()).all_with_page()
+        # 20210518需求变更，根据危险品类别排序，再根据单号后四位排序
+        master_list = an_procedure.query.filter(*filter_args)\
+            .order_by(an_procedure.create_time.desc(),
+                      an_procedure.master_number_cut.asc())\
+            .all_with_page()
         port_no = 1 + page_size * (page_num - 1)
         for master_dict in master_list:
             master_dict.fill("port_no", port_no)
@@ -211,8 +215,11 @@ class CMechandis:
         获取盘库历史详情
         """
         args = parameter_required(('main_id', 'token'))
+
+        # 排序
         part_inventory = an_mechandise_inventory_part.query.filter(
-            an_mechandise_inventory_part.main_id == args.get("main_id")).all_with_page()
+            an_mechandise_inventory_part.main_id == args.get("main_id"))\
+            .order_by(an_mechandise_inventory_part.master_number_cut.desc()).all_with_page()
 
         for row in part_inventory:
             procedure = an_procedure.query.filter(an_procedure.id == row.master_id).first()
@@ -275,13 +282,17 @@ class CMechandis:
                     board_no = mechandise["board_no"]
                 else:
                     board_no = None
-                
+                if mechandise["master_number"]:
+                    master_number_cut = str(mechandise["master_number"])[-4:] or ""
+                else:
+                    master_number_cut = ""
                 mechandise_dict = {
                     "id": str(uuid.uuid1()),
                     "main_id": main_id,
                     "master_id": mechandise["id"],
                     "createtime": datetime.datetime.now(),
                     "master_number": mechandise["master_number"],
+                    "master_number_cut": master_number_cut,
                     "preservation_area": mechandise["preservation_area"],
                     "storing_location": mechandise["storing_location"],
                     "preservation_type": mechandise["preservation_type"],

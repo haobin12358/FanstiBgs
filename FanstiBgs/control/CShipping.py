@@ -84,8 +84,10 @@ class CShipping:
         # 签名图片改为url-2020/10/9逻辑
         name_picture_id = main_port.name_image_file
         bgs_file = t_bgs_file.query.filter(t_bgs_file.f_id == name_picture_id, t_bgs_file.file_class == "signature").first()
+        from FanstiBgs.config.http_config import IMAGE_HOST
         if bgs_file:
-            main_port.fill("statement_url", bgs_file.file_src)
+            bgs_url = IMAGE_HOST + bgs_file.file_src.replace("\\", "/")
+            main_port.fill("statement_url", bgs_url)
         else:
             main_port.fill("statement_url", "")
 
@@ -93,7 +95,8 @@ class CShipping:
         bgs_file2 = t_bgs_file.query.filter(t_bgs_file.f_id == name_picture_id,
                                            t_bgs_file.file_class == "performanceSheet").first()
         if bgs_file2:
-            main_port.fill("packaging_url", bgs_file.file_src)
+            bgs_url = IMAGE_HOST + bgs_file2.file_src.replace("\\", "/")
+            main_port.fill("packaging_url", bgs_url)
         else:
             main_port.fill("packaging_url", "")
 
@@ -772,6 +775,8 @@ class CShipping:
             "times": times
         }
         check_list_items = an_checklist.query.filter(an_checklist.check_type == args.get("check_type")).all()
+        current_app.logger.info(len(check_list_items))
+        current_app.logger.info(len(data))
         if len(check_list_items) != len(data):
             return {
                 "status": 405,
@@ -930,7 +935,7 @@ class CShipping:
                         if item_7.check_answer == "YES":
                             title_24 = "√"
                             title_25 = "<br/>"
-                            title_16 = "<br/>"
+                            title_26 = "<br/>"
                         elif item_7.check_answer == "NO":
                             title_24 = "<br/>"
                             title_25 = "√"
@@ -1772,7 +1777,7 @@ class CShipping:
                                     + str(check_history.createtime.day)
                         title_196 = str(check_history.createtime.hour) + ":" + str(check_history.createtime.minute) + ":" \
                                     + str(check_history.createtime.second)
-                        html_body.format(
+                        html_body = html_body.format(
                             title_0, title_1, title_2, title_3, title_4, title_5, title_6, title_7, title_8, title_9,
                             title_10, title_11, title_12, title_13, title_14, title_15, title_16, title_17, title_18, title_19,
                             title_20, title_21, title_22, title_23, title_24, title_25, title_26, title_27, title_28, title_29,
@@ -3143,7 +3148,7 @@ class CShipping:
                         title_196 = str(check_history.createtime.hour) + ":" + str(
                             check_history.createtime.minute) + ":" \
                                     + str(check_history.createtime.second)
-                        html_body.format(
+                        html_body = html_body.format(
                             title_0, title_1, title_2, title_3, title_4, title_5, title_6, title_7, title_8, title_9,
                             title_10, title_11, title_12, title_13, title_14, title_15, title_16, title_17, title_18,
                             title_19, title_20, title_21, title_22, title_23, title_24, title_25, title_26, title_27,
@@ -3485,7 +3490,7 @@ class CShipping:
                 }
             elif check_no == "15":
                 # 1类危险品展示 主次要危险品和商品名称，其他不展示
-                un_list = t_bgs_un.query.filter(t_bgs_un.MAIN_DANGEROUS_ID == "1", master_number == master_number).all()
+                un_list = t_bgs_un.query.filter(t_bgs_un.MAIN_DANGEROUS_ID == "1", t_bgs_un.master_number == master_number).all()
                 if un_list:
                     un_message = ""
                     for un in un_list:
@@ -3514,7 +3519,7 @@ class CShipping:
                 }
             elif check_no in ["16.1", "16.2", "16.3", "16.4", "17.1", "17.2", "17.3", "35", "36", "37", "38", "39",
                               "40", "41", "42", "43", "45", "46", "47", "49", "50", "51"]:
-                un_list = t_bgs_un.query.filter(master_number == master_number).all()
+                un_list = t_bgs_un.query.filter(t_bgs_un.master_number == master_number).all()
                 if un_list:
                     un_message = ""
                     for un in un_list:
@@ -3597,7 +3602,7 @@ class CShipping:
                     "message": None
                 }
             elif check_no == "22":
-                un_list = t_bgs_un.query.filter(master_number == master_number).all()
+                un_list = t_bgs_un.query.filter(t_bgs_un.master_number == master_number).all()
                 if un_list:
                     un_message = ""
                     for un in un_list:
