@@ -16,6 +16,7 @@ from FanstiBgs.models.bgs_android import an_procedure, an_procedure_picture, an_
     an_check_history_item
 from FanstiBgs.models.bgs_cloud import t_bgs_main_single_number, t_bgs_un, t_bgs_shipper_consignee_info, t_bgs_file, \
     t_bgs_odd_number, t_bgs_un_pack
+from FanstiBgs.config.secret import radioactivity_type, radioactivity_next, dryice_type, lithiumcell_type
 
 class CShipping:
 
@@ -91,8 +92,8 @@ class CShipping:
         else:
             main_port.fill("statement_url", "")
 
-        # 包装性能单改url-2020/10/10逻辑
-        bgs_file2 = t_bgs_file.query.filter(t_bgs_file.f_id == name_picture_id,
+        # 包装性能单改url-2020/10/10逻辑-2021/7/6改
+        bgs_file2 = t_bgs_file.query.filter(t_bgs_file.f_id == args.get("id"),
                                            t_bgs_file.file_class == "performanceSheet").first()
         if bgs_file2:
             bgs_url = IMAGE_HOST + bgs_file2.file_src.replace("\\", "/")
@@ -516,6 +517,7 @@ class CShipping:
                 url_instance.update({
                     "procedure_id": request.args.get("id")
                 }, null="not")
+                db.session.add(url_instance)
 
         for url in data.get("shipping_diaforward"):
             with db.auto_commit():
@@ -524,6 +526,7 @@ class CShipping:
                 url_instance.update({
                     "procedure_id": request.args.get("id")
                 }, null="not")
+                db.session.add(url_instance)
 
         for url in data.get("shipping_diaback"):
             with db.auto_commit():
@@ -532,6 +535,7 @@ class CShipping:
                 url_instance.update({
                     "procedure_id": request.args.get("id")
                 }, null="not")
+                db.session.add(url_instance)
 
         for url in data.get("shipping_back"):
             with db.auto_commit():
@@ -540,6 +544,7 @@ class CShipping:
                 url_instance.update({
                     "procedure_id": request.args.get("id")
                 }, null="not")
+                db.session.add(url_instance)
 
         for url in data.get("whole"):
             with db.auto_commit():
@@ -548,6 +553,7 @@ class CShipping:
                 url_instance.update({
                     "procedure_id": request.args.get("id")
                 }, null="not")
+                db.session.add(url_instance)
 
         return Success(message="上传成功")
 
@@ -622,16 +628,16 @@ class CShipping:
 
         data = [
             {
-                "type": "Radioactivity",
+                "type": radioactivity_type,
                 "is_next": 1,
-                "next": ["Radioactive", "Nonradiative"]
+                "next": radioactivity_next
             },
             {
-                "type": "Dry ice",
+                "type": dryice_type,
                 "is_next": 0
             },
             {
-                "type": "Lithium cell",
+                "type": lithiumcell_type,
                 "is_next": 0
             }
         ]
@@ -718,6 +724,7 @@ class CShipping:
                     .first()
                 item.answer = first_check_item.check_answer
                 item.fill("first_answer", first_check_item.check_answer)
+
             else:
                 item.fill("first_answer", None)
 

@@ -31,7 +31,7 @@ class CCommon:
         from FanstiBgs.config.secret import LinuxRoot, LinuxImgs, WindowsImgs, WindowsRoot, WindowsRoot_wxp
         if platform.system() == "Windows":
             # TODO 正式环境
-            rootdir = WindowsRoot_wxp + WindowsImgs
+            rootdir = WindowsRoot_wxp + "/photo"
         else:
             rootdir = LinuxRoot + LinuxImgs
         if not os.path.isdir(rootdir):

@@ -138,7 +138,7 @@ class CProcedure:
             else:
                 history_dict["inputer_time"] = "操作时间：" + ""
             history_dict["inputer_name"] = "操作人：" + (user.user_truename or "")
-            history_dict["inputer_card_no"] = "操作人身份证号：" + (user.cardno or "")
+            history_dict["inputer_card_no"] = "操作人员工号：" + (user.cardno or "")
             history_list.append(history_dict)
         if procedure.delivery_inputer_id:
             history_dict = {}
@@ -159,7 +159,7 @@ class CProcedure:
             else:
                 history_dict["inputer_time"] = "操作时间：" + ""
             history_dict["inputer_name"] = "操作人：" + (user.user_truename or "")
-            history_dict["inputer_card_no"] = "操作人身份证号：" + (user.cardno or "")
+            history_dict["inputer_card_no"] = "操作人员工号：" + (user.cardno or "")
             history_list.append(history_dict)
         if procedure.repeat_warehousing_inputer_id:
             history_dict = {}
@@ -180,7 +180,7 @@ class CProcedure:
             else:
                 history_dict["inputer_time"] = "操作时间：" + ""
             history_dict["inputer_name"] = "操作人：" + (user.user_truename or "")
-            history_dict["inputer_card_no"] = "操作人身份证号：" + (user.cardno or "")
+            history_dict["inputer_card_no"] = "操作人员工号：" + (user.cardno or "")
             history_list.append(history_dict)
 
         return history_list
@@ -347,8 +347,8 @@ class CProcedure:
         data = parameter_required(("repeat_warehousing_name", "repeat_warehousing_card_no", "procedure_id"))
         procedure_instance = an_procedure.query.filter(an_procedure.id == data.get("procedure_id")).first()
         procedure_dict = {}
-        procedure_dict["repeat_warehousing_name"] = data.get("delivery_name")
-        procedure_dict["repeat_warehousing_card_no"] = data.get("delivery_card_no")
+        procedure_dict["repeat_warehousing_name"] = data.get("repeat_warehousing_name")
+        procedure_dict["repeat_warehousing_card_no"] = data.get("repeat_warehousing_card_no")
         procedure_dict["repeat_warehousing_time"] = datetime.datetime.now()
         procedure_dict["preservation"] = "repeat"
         procedure_dict["repeat_warehousing_inputer_id"] = getattr(request, "user").id
