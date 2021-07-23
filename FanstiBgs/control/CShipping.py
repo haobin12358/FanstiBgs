@@ -829,7 +829,7 @@ class CShipping:
             with db.auto_commit():
                 if times == "second":
                     html_body = ""
-                    if args.get("check_type") == "Nonradiative":
+                    if args.get("check_type") == "NON-RADIOACTIVE":
                         # TODO 正式服调整
                         with open("E:\\BGSappserver\\FanstiBgs\\FanstiBgs\\non-radioactive.html", 'r', encoding='utf-8') as f:
                             html_body = f.read()
@@ -2333,7 +2333,7 @@ class CShipping:
                                                      title_44, title_45, title_46, title_47, title_48, title_49,
                                                      title_50, title_51, title_52, title_53, title_54, title_55,
                                                      title_56, title_57, title_58, title_59, title_60, title_61)
-                    elif args.get("check_type") == "Radioactive":
+                    elif args.get("check_type") == "RADIOACTIVE":
                         # TODO 正式服调整
                         with open("E:\\BGSappserver\\FanstiBgs\\FanstiBgs\\radioactive.html", 'r', encoding='utf-8') as f:
                             html_body = f.read()
@@ -3270,7 +3270,7 @@ class CShipping:
         """
         基于各种信息获取检查单详情
         """
-        if check_type in ["Nonradiative", "Radioactive"]:
+        if check_type in ["NON-RADIOACTIVE", "RADIOACTIVE"]:
             if check_no == "1":
                 return {
                     "result": "YES",
